@@ -6,19 +6,30 @@
     <div id="app">
       <h2> My-Aio</h2>
       <h3> Hello Bibii </h3>
-      <h3><input type ="text" name="username" id="rounded" /></h3>
+      <h3><input v-model="username" name="username" id="rounded" /></h3>
       <h4><input type ="password" name="password" id="rounded"/></h4>
-      <button>Login</button>
+      <login>Login</login>
+      <createUser>Create account</createUser>
+      <button v-on:click="login" id="login">Login</button>
+      <button v-on:click="createUser" id="createUser">Create account</button>
     </div>
   </body>
 </template>
 
 <script>
+import {login,createUser} from './datab.js'
 
 export default {
   name: 'app',
   components: 
   {
+    'login' : {
+      data : login({username},{password})
+    },
+    'createUser' : {
+      data : createUser({username},{password})
+    }
+
   }
 }
 
