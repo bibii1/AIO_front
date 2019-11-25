@@ -24,5 +24,6 @@ class User
         return `${this.adress}`;
     }
 }
+
 const John = new User("John","Doe","jdoe@gmail.com")
 console.log(John.getUsername());
