@@ -1,14 +1,19 @@
 class User
 {
-    constructor(username,email,adress)
+    constructor(lastName,firstName,email,adress,password)
     {
-        this.username = username;
+        this.lastName = lastName;
+        this.firstName=firstName;
         this.email = email;
         this.adress = adress;
+        this.password=password;
     }
-    getUsername()
+    getLastName()
     {
-        return `${this.username}`;
+        return `${this.lastName}`;
+    }
+    getFirstName(){
+        return `${this.firstName}`;
     }
     getEmail()
     {
@@ -19,5 +24,6 @@ class User
         return `${this.adress}`;
     }
 }
+
 const John = new User("John","Doe","jdoe@gmail.com")
 console.log(John.getUsername());
