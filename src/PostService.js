@@ -10,9 +10,9 @@ export default class PostService{
         return axios.get(`${apiBaseUrl}/user/${user.email}/${user.password}`);
     }
 
-    postUsers(user){
+    postUser(user){
         if(user.id){
             return axios.put(`${apiBaseUrl}/user/${user.id}`,user);
-        } else return axios.post(`${apiBaseUrl}/user/${user.email}/${user.password}`,user);
+        } else return axios.post(`${apiBaseUrl}/user`,user);
     }
 }

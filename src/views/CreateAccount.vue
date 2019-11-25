@@ -58,15 +58,13 @@ export default {
             const post={
                 first_name : this.fn,
                 last_name : this.ln,
-                password : this.password,
+                password : this.password1,
                 email :this.email
             };
-            postService.getCheckLogin(post)
+            postService.postUser(post)
             .then(res=>{
-                console.log(res.data);
-                if( res.data >= 1){
-                    router.push('/account');
-                }
+                console.log(res.status);
+                router.push('/account');
             })
             .catch(err=>console.log(err));
         }
