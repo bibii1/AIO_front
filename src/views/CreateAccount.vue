@@ -22,13 +22,13 @@
       <div class="row">
         <div class="input-field col s12">
           <input id="password1" type="password" v-model="password1" class="validate">
-          <label for="password1">mot de passe</label>
+          <label for="password1">Mot de passe</label>
         </div>
       </div>
       <div class="row">
         <div class="input-field col s12">
           <input id="password2" type="password" v-model="password2" class="validate">
-          <label for="password2">mot de passe</label>
+          <label for="password2">Confirmer mot de passe</label>
         </div>
       </div>
       <div class="row">
@@ -64,7 +64,7 @@ export default {
             postService.postUser(post)
             .then(res=>{
                 console.log(res.status);
-                router.push('/account');
+                router.push('/');
             })
             .catch(err=>console.log(err));
         }
