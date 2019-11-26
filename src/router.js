@@ -3,7 +3,7 @@ import Router from 'vue-router';
 
 import Home from './views/Home.vue';
 import Account from './views/Account.vue';
-import CreateAccount from './views/CreateAccount.vue';
+import CreateUser from './views/CreateUser.vue';
 
 //on stipule que Vue initialisé dans le main va utiliser Router pour naviguer entre les pages
 Vue.use(Router);
@@ -22,7 +22,7 @@ export default new Router({
         },
         {
             path:'/create',
-            component : CreateAccount
+            component : CreateUser
         }
     ]    
 })

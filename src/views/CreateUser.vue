@@ -62,11 +62,7 @@ export default {
                 email :this.email
             };
             postService.postUser(post)
-            .then(res=>{
-                console.log(res.status);
-                router.push('/');
-            })
-            .catch(err=>console.log(err));
+            router.push('/');
         }
     }
 }
