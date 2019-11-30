@@ -5,15 +5,15 @@ const apiBaseUrl = 'http://localhost:3000';
 // '/user' à la place de '/users'
 // '/contrat' à la place de '/contract'
 //pour voir les resultats de la console il faut faire sur mac pour chrome cmd+option+i 
-export default class PostService{
+export default class PostService {
     //on recupere tous les utilisateurs de la collection users
     getAllUser(){
-        return axios.get(`${apiBaseUrl}/users`);
+        return axios.get(`${apiBaseUrl}/users/all`);
     }
 
     //on renvoie l'utilisateur si authantification
     getCheckLogin(user){
-        return axios.get(`${apiBaseUrl}/users/${user.email}/${user.password}`);
+        return axios.post(`${apiBaseUrl}/users/login`,user)
     }
 
     //on crée un nouvel utilisateur
@@ -22,14 +22,13 @@ export default class PostService{
             //on verifie d'abord qu"il n'y a aucun utilisateur semblable avec le mail
             //la requete retourne uniquement le nombre d'users avec ce mail
             //elle ne retourne pas les infos de l'user
-            axios.get(`${apiBaseUrl}/users/${user.email}`)
+            axios.get(`${apiBaseUrl}/users/check/${user.email}`)
             .then(function(res){
                 if(res.data == 0){
-                    axios.post(`${apiBaseUrl}/users/`,user);
+                    axios.post(`${apiBaseUrl}/users`,user);
                 }
             })
-            .catch(err=>console.log(err));
-        };
+        }
     }
 
     initAccount(user){

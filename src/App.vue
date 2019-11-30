@@ -16,6 +16,11 @@ export default {
   name: 'app',
   components:{
     NavBar
+  },
+  updated () {
+    if (!localStorage.token && this.$route.path !== '/') {
+      this.$router.push('/?redirect=' + this.$route.path)
+    }
   }
 }
 </script>
