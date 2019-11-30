@@ -23,9 +23,9 @@
 
 <script>
 
-import PostService from '../PostService';
+//import PostService from '../PostService';
 
-const postService = new PostService();
+//const postService = new PostService();
 export default {
     name:"LoginForm",
     data(){
@@ -37,27 +37,13 @@ export default {
         }
     },
     methods:{
-      loginSuccessful (req) {
-      if (!req.data.token) {
-        this.loginFailed()
-        return
-      }
-      this.error = false
-      localStorage.token = req.data.token
-      this.$router.replace(this.$route.query.redirect || '/account')
-    },
-    loginFailed () {
-      this.error = 'Login failed!'
-      delete localStorage.token
-    },
-    onSubmit(){
-      const post = { email : this.email, password : this.password};
-      postService.getCheckLogin(post)
-      .then(res => {
-        console.log(res.data)
-        
-      }
-      )
+      onSubmit(){
+        /*this.$store.dispatch('retrieveToken',{
+          email : this.email,
+          password : this.password
+        })
+        */
+       //ca ne marche pas
     /*
       const post = { email : this.email, password : this.password};
       postService.getCheckLogin(post)
