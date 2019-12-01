@@ -7,8 +7,10 @@ import CreateUser from './views/CreateUser.vue';
 import About from './views/About.vue';
 import ErrorVue from './views/Error.vue';
 
-import PostService from './PostService';
-const postService = new PostService();
+import axios from 'axios';
+const apiBaseUrl = 'http://localhost:3000';
+//import PostService from './PostService';
+//const postService = new PostService();
 //on stipule que Vue initialisé dans le main va utiliser Router pour naviguer entre les pages
 Vue.use(Router);
 const router = new Router({
@@ -18,17 +20,38 @@ const router = new Router({
     routes : [
         {
             path:'/',
-            component : Home //on redirige la connection vers la page d'acceuil quand on tappe la page
+            component : Home, //on redirige la connection vers la page d'acceuil quand on tappe la page
+            beforeEnter: (to,from,next)=>{
+                const tokenTemp  = localStorage.getItem('acces_token')
+                const post  =  {
+                    token: tokenTemp
+                }
+              //le post est different de mon token initial
+                axios.post(`${apiBaseUrl}/users/checkToken/`,post)
+                //res = nombre de fois ou le token est present dans la bdd
+                .then(res=>{
+                    if(res.data==1){
+                        next('/account')
+                    }
+                    else{
+                        next()
+                    }
+                })
+                next()
+            }
         },
         {
             path:'/account',
             component : Account, //on redirige vers la page de l'utilisateur connecté ou l'on 
             beforeEnter: (to,from,next)=>{
-                const token  = localStorage.getItem('token')
-                console.log(token)
-                postService.getCheckToken(token)
+                const tokenTemp  = localStorage.getItem('acces_token')
+                const post  =  {
+                    token: tokenTemp
+                }
+                //le post est different de mon token initial
+                axios.post(`${apiBaseUrl}/users/checkToken/`,post)
+                //res = nombre de fois ou le token est present dans la bdd
                 .then(res=>{
-                    console.log(res.data)
                     if(res.data==1){
                         next('/account')
                     }
@@ -36,6 +59,7 @@ const router = new Router({
                         next('/error')
                     }
                 })
+                next()
             }
         },
         {

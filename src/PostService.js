@@ -1,5 +1,6 @@
 import axios from 'axios';
 const apiBaseUrl = 'http://localhost:3000';
+
 //dans cette classe il faut faire attention au lien de l'api qu'il correspond bien 
 //style d'erreur qui arrive :
 // '/user' à la place de '/users'
@@ -36,16 +37,43 @@ export default class PostService {
         }
     }
 
-    initAccount(user){
+    initAccount(folder){
         //on verifie d'abord qu'auncun compte n'existe avec ce num de folder
-        axios.get(`${apiBaseUrl}/account/${user.folder}`)
+        console.log(folder)
+        axios.get(`${apiBaseUrl}/account/${folder}`)
         .then(function(res){
             if(res.data == null){
                 //alors on peut en créer un en evitant les doublons
-                axios.post(`${apiBaseUrl}/account/${user.folder}`);
+                axios.post(`${apiBaseUrl}/account/${folder}`);
             }
         });
     }
+
+    logoutAccount(token){
+        const config = { headers :
+            {'Authorization' : token}
+        }
+        console.log(config)
+        return axios.post(`${apiBaseUrl}/users/me/logout`,{},config)
+    
+    }
+
+    logoutallAccount(token){
+        const config = { headers :
+            {'Authorization' : token}
+        }
+        console.log(config)
+        return axios.post(`${apiBaseUrl}/users/me/logoutall`,{},config)
+    }
+
+    deleteAll(folder){
+        //supp l'user
+        axios.delete(`${apiBaseUrl}/users/${folder}`)
+        //supp son account
+        axios.delete(`${apiBaseUrl}/account/${folder}`)
+    }
+
+
 
     
 

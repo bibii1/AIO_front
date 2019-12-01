@@ -43,6 +43,7 @@
 
 <script>
 import router from '../router.js';
+const uuidv4 = require('uuid/v4');
 
 import PostService from '../PostService';
 const postService = new PostService();
@@ -64,9 +65,15 @@ export default {
                 first_name : this.fn,
                 last_name : this.ln,
                 password : this.password1,
-                email :this.email
+                email :this.email,
+                folder : uuidv4()
             };
             postService.postUser(post)
+            localStorage.removeItem('acces-token');
+            localStorage.removeItem('folder_id');
+            postService.initAccount(post.folder)
+            //lorsque l'on crée un nouvel utilisateur on remove de localStorage les anciennes données
+            //num dossier + ancien acces_token
             router.push('/');
         }
     }

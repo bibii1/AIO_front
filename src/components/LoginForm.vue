@@ -45,34 +45,11 @@ export default {
         })
         .then(res =>{
           const token = res.data.token
-          localStorage.setItem('token',token)
+          const folder_id = res.data.userTemp.folder
+          localStorage.setItem('acces_token',token)
+          localStorage.setItem('folder_id',folder_id)
           router.push('/account')
         })
-
-        /*this.$store.dispatch('retrieveToken',{
-          email : this.email,
-          password : this.password
-        })
-        */
-       //ca ne marche pas
-    /*
-      const post = { email : this.email, password : this.password};
-      postService.getCheckLogin(post)
-      .then(res=>{
-        //si l'utilsateur est identifié la fonction renvoit dans l'objet res.data le numero de folder de l'utilisateur
-          if( res.data.folder != ""){
-              //on lance la fonction initialisation d'un account,
-              //la fonction va permettre de recuperer l'ensemble de infos du compte si deja existant
-              postService.initAccount(res.data);
-              router.push('/account');
-              //je crois j'ai trouvé la facon de faire pour utiliser des sessions genre que je ne puisse pas afficher 
-              //la page /account sans passer par une authentification réussie
-              //lien - https://router.vuejs.org/guide/advanced/navigation-guards.html#global-before-guards
-          }
-          else{
-            //il faudra ajouter un truc pour dire que le compte n'est pas valide etc..
-          }
-      });*/
     }
   }
 }
