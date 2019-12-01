@@ -1,4 +1,5 @@
 <template>
+<body>
   <div class="row">
     <form class="form" v-on:submit.prevent="onSubmit">
       <div class="row">
@@ -36,6 +37,7 @@
       </div>
     </form>
   </div>
+</body>
 </template>
 
 
@@ -48,9 +50,12 @@ export default {
     name:"create",
     data(){
         return{
-            email :"",
-            password: "",
-            count:""
+          fn : "",
+          ln : "",
+          email :"",
+          password1: "",
+          password2: "",
+          count:""
         }
     },
     methods:{
@@ -58,7 +63,7 @@ export default {
             const post={
                 first_name : this.fn,
                 last_name : this.ln,
-                password : this.password1,
+                password1 : this.password1,
                 email :this.email
             };
             postService.postUser(post)

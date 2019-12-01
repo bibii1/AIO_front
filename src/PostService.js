@@ -16,6 +16,11 @@ export default class PostService {
         return axios.post(`${apiBaseUrl}/users/login`,user)
     }
 
+    //verifie que le token existe bien dans la bdd pour l'user en question
+    getCheckToken(token){
+        return axios.get(`${apiBaseUrl}/users/checkToken`,token)
+    }
+
     //on crée un nouvel utilisateur
     postUser(user){
         if(user != null){

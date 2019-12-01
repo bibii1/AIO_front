@@ -22,10 +22,11 @@
 
 
 <script>
+import PostService from '../PostService';
+const postService = new PostService();
+import router from '../router';
 
-//import PostService from '../PostService';
 
-//const postService = new PostService();
 export default {
     name:"LoginForm",
     data(){
@@ -38,6 +39,16 @@ export default {
     },
     methods:{
       onSubmit(){
+        postService.getCheckLogin({
+          email: this.email,
+          password : this.password
+        })
+        .then(res =>{
+          const token = res.data.token
+          localStorage.setItem('token',token)
+          router.push('/account')
+        })
+
         /*this.$store.dispatch('retrieveToken',{
           email : this.email,
           password : this.password
