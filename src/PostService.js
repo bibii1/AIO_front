@@ -27,7 +27,7 @@ export default class PostService {
             //on verifie d'abord qu"il n'y a aucun utilisateur semblable avec le mail
             //la requete retourne uniquement le nombre d'users avec ce mail
             //elle ne retourne pas les infos de l'user
-            axios.get(`${apiBaseUrl}/users/check/${user.email}`)
+            axios.get(`${apiBaseUrl}/users/checkEmail/${user.email}`)
             .then(function(res){
                 if(res.data == 0){
                     axios.post(`${apiBaseUrl}/users`,user);

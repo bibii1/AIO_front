@@ -63,7 +63,7 @@ export default {
             const post={
                 first_name : this.fn,
                 last_name : this.ln,
-                password1 : this.password1,
+                password : this.password1,
                 email :this.email
             };
             postService.postUser(post)
