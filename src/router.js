@@ -5,6 +5,7 @@ import Home from './views/Home.vue';
 import Account from './views/Account.vue';
 import CreateUser from './views/CreateUser.vue';
 import About from './views/About.vue';
+import ErrorVue from './views/Error.vue';
 
 import PostService from './PostService';
 const postService = new PostService();
@@ -32,7 +33,7 @@ const router = new Router({
                         next('/account')
                     }
                     else{
-                        next('/about')
+                        next('/error')
                     }
                 })
             }
@@ -44,6 +45,10 @@ const router = new Router({
         {
             path:'/about',
             component : About
+        },
+        {
+            path:'/error',
+            component : ErrorVue
         }
     ]    
 })
