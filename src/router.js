@@ -6,6 +6,7 @@ import Account from './views/Account.vue';
 import CreateUser from './views/CreateUser.vue';
 import About from './views/About.vue';
 import ErrorVue from './views/Error.vue';
+import CreateContract from './views/CreateContract.vue'
 
 import axios from 'axios';
 const apiBaseUrl = 'http://localhost:3000';
@@ -63,7 +64,7 @@ const router = new Router({
             }
         },
         {
-            path:'/create',
+            path:'/users/create',
             component : CreateUser
         },
         {
@@ -73,6 +74,10 @@ const router = new Router({
         {
             path:'/error',
             component : ErrorVue
+        },
+        {
+            path:'/account/contract/create',
+            component : CreateContract
         }
     ]    
 })

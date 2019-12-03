@@ -48,6 +48,7 @@ export default {
           const folder_id = res.data.userTemp.folder
           localStorage.setItem('acces_token',token)
           localStorage.setItem('folder_id',folder_id)
+          localStorage.setItem('isAuth',true)
           router.push('/account')
         })
     }

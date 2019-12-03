@@ -7,6 +7,11 @@ const apiBaseUrl = 'http://localhost:3000';
 // '/contrat' à la place de '/contract'
 //pour voir les resultats de la console il faut faire sur mac pour chrome cmd+option+i 
 export default class PostService {
+
+    //__________________________________________________________________________________
+    //METHODES QUI AGISSENT SUR LA COLLECTION USERS
+    //__________________________________________________________________________________
+
     //on recupere tous les utilisateurs de la collection users
     getAllUser(){
         return axios.get(`${apiBaseUrl}/users/all`);
@@ -19,7 +24,7 @@ export default class PostService {
 
     //verifie que le token existe bien dans la bdd pour l'user en question
     getCheckToken(token){
-        return axios.get(`${apiBaseUrl}/users/checkToken`,token)
+        return axios.post(`${apiBaseUrl}/users/checkToken`,token)
     }
 
     //on crée un nouvel utilisateur
@@ -37,23 +42,10 @@ export default class PostService {
         }
     }
 
-    initAccount(folder){
-        //on verifie d'abord qu'auncun compte n'existe avec ce num de folder
-        console.log(folder)
-        axios.get(`${apiBaseUrl}/account/${folder}`)
-        .then(function(res){
-            if(res.data == null){
-                //alors on peut en créer un en evitant les doublons
-                axios.post(`${apiBaseUrl}/account/${folder}`);
-            }
-        });
-    }
-
     logoutAccount(token){
         const config = { headers :
             {'Authorization' : token}
         }
-        console.log(config)
         return axios.post(`${apiBaseUrl}/users/me/logout`,{},config)
     
     }
@@ -62,10 +54,12 @@ export default class PostService {
         const config = { headers :
             {'Authorization' : token}
         }
-        console.log(config)
         return axios.post(`${apiBaseUrl}/users/me/logoutall`,{},config)
     }
 
+     //__________________________________________________________________________________
+    //METHODES QUI AGISSENT SUR LA COLLECTION ACCOUNT
+    //__________________________________________________________________________________
     deleteAll(folder){
         //supp l'user
         axios.delete(`${apiBaseUrl}/users/${folder}`)
@@ -73,9 +67,31 @@ export default class PostService {
         axios.delete(`${apiBaseUrl}/account/${folder}`)
     }
 
+    initAccount(folder){
+        //on verifie d'abord qu'auncun compte n'existe avec ce num de folder
+        axios.get(`${apiBaseUrl}/account/${folder}`)
+        .then(function(res){
+            if(res.data == null){
+                //alors on peut en créer un en evitant les doublons
+                axios.post(`${apiBaseUrl}/account/`,{folder});
+            }
+        });
+    }
 
+    getAccount(folder){
+        return axios.get(`${apiBaseUrl}/account/${folder}`)
+    }
 
-    
+    //crée un nouveau contrat, le parametre contient egalement le folder_id !!!
+    createContract(contract){
+        return axios.post(`${apiBaseUrl}/account/contract/create`,contract)
+    }
 
-
+    deleteContract(folder_id,contract_id){
+        const post = {
+            folder_id : folder_id,
+            contract_id : contract_id
+        }
+        return axios.post(`${apiBaseUrl}/account/contract/delete`,post);
+    }
 }

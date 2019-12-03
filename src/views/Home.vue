@@ -1,6 +1,7 @@
 <template>
 <body>
   <div class="loginContainer">
+    <NavBar/>
     <h5>my-AIO page login</h5>
     <LoginForm/>
   </div>
@@ -13,9 +14,11 @@
 <script>
 
 import LoginForm from '../components/LoginForm';
+import NavBar from '../components/Navbar';
 export default {
   name: 'home',
   components :{
+    NavBar,
     LoginForm
   }
 }

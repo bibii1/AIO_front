@@ -1,5 +1,8 @@
 <template>
 <body>
+  <div class="createContainer">
+    <NavBar/>
+  </div>
   <div class="row">
     <form class="form" v-on:submit.prevent="onSubmit">
       <div class="row">
@@ -44,11 +47,15 @@
 <script>
 import router from '../router.js';
 const uuidv4 = require('uuid/v4');
+import NavBar from '../components/Navbar';
 
 import PostService from '../PostService';
 const postService = new PostService();
 export default {
     name:"create",
+    components : {
+      NavBar
+    },
     data(){
         return{
           fn : "",
