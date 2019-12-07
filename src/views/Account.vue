@@ -10,7 +10,7 @@
                 v-bind:key="contract.contract_id">
                 <div class="card small horizontal">
                     <div class="card-image">
-                        <img src="../assets/img/iphone-X.png">
+                        <img src="../assets/img/Apple/Phones/iphone-X.png">
                     </div>
                     <div class="card-stacked">
                         <div class="card-content">
@@ -28,7 +28,7 @@
         </div>
         <router-link v-show="!isAuth" :to="'/account/contract/create'">
             <button class="btn waves-effect waves-light">Ajouter un appareil à assurer</button>
-            </router-link>
+        </router-link>
         <br/>
         <button v-on:click="deleteAll" class="btn waves-effect waves-light" type="submit" name="action">Supprimer le compte et ses contrats</button>
     </div>

@@ -7,6 +7,8 @@ import CreateUser from './views/CreateUser.vue';
 import About from './views/About.vue';
 import ErrorVue from './views/Error.vue';
 import CreateContract from './views/CreateContract.vue'
+import CreateContract2 from './views/CreateContract2.vue'
+import CreateContract3 from './views/CreateContract3.vue'
 
 import axios from 'axios';
 const apiBaseUrl = 'http://localhost:3000';
@@ -78,6 +80,14 @@ const router = new Router({
         {
             path:'/account/contract/create',
             component : CreateContract
+        },
+        {
+            path:'/account/contract/create2',
+            component : CreateContract2
+        },
+        {
+            path:'/account/contract/create3',
+            component : CreateContract3
         }
     ]    
 })
