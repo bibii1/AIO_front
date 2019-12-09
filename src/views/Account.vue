@@ -17,6 +17,7 @@
                             <p>Objet : {{contract.object}}</p>
                             <p>Marque : {{contract.brand}}</p>
                             <p>Modèle : {{contract.model}}</p>
+                            <p>Numéro de série : {{contract.serialNumber}}</p>
                             <h6>Prix par mois : {{contract.month_price}} €</h6>
                         </div>
                         <div class="card-action">
@@ -26,7 +27,7 @@
                 </div>
             </div>
         </div>
-        <router-link v-show="!isAuth" :to="'/account/contract/create'">
+        <router-link v-show="!isAuth" :to="'/account/contract/create3'">
             <button class="btn waves-effect waves-light">Ajouter un appareil à assurer</button>
         </router-link>
         <br/>

@@ -32,7 +32,7 @@
       <div class="row">
         <div class="input-field col s12">
           <input id="purchaseDate" type="date" v-model="purchaseDate" class="validate">
-          <label for="purchaseDate">Confirmer mot de passe</label>
+          <label for="purchaseDate">Date d'achat</label>
         </div>
       </div>
       <div class="row">

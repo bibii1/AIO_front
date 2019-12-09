@@ -15,26 +15,41 @@
         </div>
       </div>
       <div class="row">
-        <div>
-            <select name="brand" id="brand">
-                <option value="">--Please choose an option--</option>
-                <option value="Apple">Apple</option>
-                <option value="Samsung">Samsung</option>
-                <option value="Huawei">Huawei</option>
-            </select>
+        <label for="brand">Marque</label>
+        <select v-model="brand">
+          <option disabled value="">Please select one</option>
+          <option>Apple</option>
+          <option>Samsung</option>
+          <option>Huawei</option>
+        </select>
       </div>
-        <div class="input-field col s12">
-          <input id="brand" type="text" v-model="brand" class="validate">
-          <label for="brand">Marque</label>
+        <div class="row">
+          <label for="model">Modèle</label>
+          <select v-model="model" v-if=" brand === 'Apple'">
+            <option disabled value="">Please select one</option>
+            <option>Iphone X</option>
+            <option>Iphone 11</option>
+            <option>Iphone 11 Pro</option>
+         </select>
+         <select v-model="model" v-else-if=" brand === 'Samsung'">
+            <option disabled value="">Please select one</option>
+            <option>Galaxy S11</option>
+            <option>Galaxy S10</option>
+            <option>Galaxy S9</option>
+         </select>
+         <!-- 
+           
+         Continuer a ajouter les options / trouver le moyen de les recup depuis une database
+         
+         -->
         </div>
-      </div>
-      <div class="row">
-        <div class="input-field col s12">
-          <input id="model" type="text" v-model="model" class="validate">
-          <label for="model">model</label>
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="serialNumber" type="text" v-model="serialNumber" class="validate">
+            <label for="serialNumber">Numéro de série</label>
+          </div>
         </div>
-      </div>
-      <div class="row">
+        <div class="row">
         <div class="input-field col s12">
           <input id="purschasePrice" type="number" v-model="purchasePrice" class="validate">
           <label for="purchasePrice">Prix d'achat</label>
@@ -42,8 +57,11 @@
       </div>
       <div class="row">
         <div class="input-field col s12">
-          <input id="purchaseDate" type="date" v-model="purchaseDate" class="validate">
-          <label for="purchaseDate">Confirmer mot de passe</label>
+          <input id="purchaseDate" type="date" v-model="purchaseDate" class="validate" min="2013-01-01" max="2020-12-31">
+
+        <!-- Faire en sorte que max soit < a la date du jour dans la validation-->
+
+          <label for="purchaseDate">Date d'achat</label>
         </div>
       </div>
       <div class="row">
@@ -70,6 +88,7 @@ export default {
             object : "",
             brand: "",
             model :"",
+            serialNumber : "", 
             purschasePrice : "",
             purschaseDate: "",
             month_price : 0,
@@ -84,6 +103,7 @@ export default {
                 object : this.object,
                 brand: this.brand,
                 model : this.model,
+                serialNumber : this.serialNumber,
                 purschasePrice : this.purschasePrice,
                 purschaseDate: this.purschaseDate,
                 month_price : 0,
@@ -101,8 +121,14 @@ export default {
 
 </script>
 
-<style scoped>
+<style>
 .input-field col s12{
   color: aliceblue
 }
+
+select {
+    display: block;
+    width: 200px;
+ }
+
 </style>
