@@ -13,8 +13,13 @@
       </div>
       <div class="row">
         <div class="input-field col s12">
-          <input id="brand" type="text" v-model="brand" class="validate">
-          <label for="brand">Marque</label>
+            <select>
+                <option value="" disabled selected>Marque</option>
+                <option value="1">Apple</option>
+                <option value="2">Samsung</option>
+                <option value="3">Option 3</option>
+            </select>
+            <label>Choisissez votre marque</label>
         </div>
       </div>
       <div class="row">
@@ -49,12 +54,32 @@ import NavBar from '../components/Navbar';
 
 import PostService from '../PostService';
 const postService = new PostService();
+      
+
 export default {
     name:"create",
     components : {
       NavBar
     },
     data(){
+      /*
+        brands : [
+            {text: 'Un', value : 'Apple'},
+            {text: 'Deux', value : 'Samsung'},
+            {text: 'Trois', value : 'Huawei'},
+            {text: 'Quatre', value : 'Sonny'},
+        ]
+
+        models : [
+            {text: '1', value : 'Apple'},
+            {text: '2', value : 'Apple'},
+            {text: '3', value : 'Apple'},
+            {text: '4', value : 'Apple'},
+            {text: '5', value : 'Apple'},
+            {text: '6', value : 'Apple'},
+            {text: '7', value : 'Apple'},
+            {text: '8', value : 'Apple'},
+        ]*/
         return{
             object : "",
             brand: "",
