@@ -7,7 +7,7 @@
     <NavBar/>
   </div>
   <div class="row">
-    <form class="form" v-on:submit.prevent="onSubmit">
+    <form class="form" v-on:submit.prevent="onSubmit" enctype="multipart/form-data">
       <div class="row">
         <div class="input-field col s12">
           <input id="object" type="text" v-model="object" class="validate">
@@ -58,10 +58,14 @@
       <div class="row">
         <div class="input-field col s12">
           <input id="purchaseDate" type="date" v-model="purchaseDate" class="validate" min="2013-01-01" max="2020-12-31">
-
         <!-- Faire en sorte que max soit < a la date du jour dans la validation-->
-
           <label for="purchaseDate">Date d'achat</label>
+        </div>
+      </div>
+      <div class="row">
+        <label>Facture d'achat</label>
+        <div class="input-field col s12">
+          <input type="file" id="file" ref="file" v-on:change="handleFileUpload()"/>
         </div>
       </div>
       <div class="row">
@@ -92,11 +96,14 @@ export default {
             purschasePrice : "",
             purschaseDate: "",
             month_price : 0,
-            listWarranted : {}
+            listWarranted : {},
+            file: ""
         }
     },
     methods:{
         onSubmit(){
+            const formData = new FormData();
+            formData.append('file',this.file)
             console.log(this.object)
             const contract={
                 folder_id : localStorage.getItem('folder_id'),
@@ -107,7 +114,7 @@ export default {
                 purschasePrice : this.purschasePrice,
                 purschaseDate: this.purschaseDate,
                 month_price : 0,
-                listWarranted : {}
+                listWarranted : {},
             };
             console.log(contract)
             postService.createContract(contract)
@@ -115,9 +122,12 @@ export default {
                 console.log(res);
             })
             router.push('/');
+        },
+        handleFileUpload(){
+          this.file = this.$refs.file.files[0];
         }
     }
-}
+  }
 
 </script>
 
