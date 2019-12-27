@@ -1,11 +1,12 @@
 <template>
 <body>
   <div class="loginContainer">
+    <NavBar/>
     <h5>my-AIO page login</h5>
     <LoginForm/>
   </div>
   <div class="createContainer">
-    <router-link to="/create" >Pas de compte, créer un compte</router-link>
+    <router-link to="/create" >créer un compte</router-link>
   </div>
 </body>
 </template>
@@ -13,9 +14,11 @@
 <script>
 
 import LoginForm from '../components/LoginForm';
+import NavBar from '../components/Navbar';
 export default {
   name: 'home',
   components :{
+    NavBar,
     LoginForm
   }
 }

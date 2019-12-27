@@ -1,0 +1,20 @@
+<template>
+<body>
+    <div class="errorContainer">
+        <NavBar/>
+        <h5>acces refusé, veuillez vous identifier ou créer un compte</h5>
+    </div>
+</body>
+</template>
+
+<script>
+import NavBar from '../components/Navbar';
+
+export default {
+    name : 'Error',
+    components : {
+        NavBar
+    }
+    
+}
+</script>

@@ -22,35 +22,37 @@
 
 
 <script>
-import router from '../router.js';
-
 import PostService from '../PostService';
 const postService = new PostService();
+import router from '../router';
+
+
 export default {
     name:"LoginForm",
     data(){
         return{
             email :"",
             password: "",
-            count:""
+            count:"",
+            error : false
         }
     },
     methods:{
-        onSubmit(){
-            const post={
-                email :this.email,
-                password : this.password
-            };
-            postService.getCheckLogin(post)
-            .then(res=>{
-                console.log(res.data);
-                if( res.data >= 1){
-                    router.push('/account');
-                }
-            })
-            .catch(err=>console.log(err));
-        }
+      onSubmit(){
+        postService.getCheckLogin({
+          email: this.email,
+          password : this.password
+        })
+        .then(res =>{
+          const token = res.data.token
+          const folder_id = res.data.userTemp.folder
+          localStorage.setItem('acces_token',token)
+          localStorage.setItem('folder_id',folder_id)
+          localStorage.setItem('isAuth',true)
+          router.push('/account')
+        })
     }
+  }
 }
 
 </script>

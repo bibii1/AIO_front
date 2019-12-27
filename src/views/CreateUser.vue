@@ -1,4 +1,8 @@
 <template>
+<body>
+  <div class="createContainer">
+    <NavBar/>
+  </div>
   <div class="row">
     <form class="form" v-on:submit.prevent="onSubmit">
       <div class="row">
@@ -22,13 +26,13 @@
       <div class="row">
         <div class="input-field col s12">
           <input id="password1" type="password" v-model="password1" class="validate">
-          <label for="password1">mot de passe</label>
+          <label for="password1">Mot de passe</label>
         </div>
       </div>
       <div class="row">
         <div class="input-field col s12">
           <input id="password2" type="password" v-model="password2" class="validate">
-          <label for="password2">mot de passe</label>
+          <label for="password2">Confirmer mot de passe</label>
         </div>
       </div>
       <div class="row">
@@ -36,21 +40,30 @@
       </div>
     </form>
   </div>
+</body>
 </template>
 
 
 <script>
 import router from '../router.js';
+const uuidv4 = require('uuid/v4');
+import NavBar from '../components/Navbar';
 
 import PostService from '../PostService';
 const postService = new PostService();
 export default {
     name:"create",
+    components : {
+      NavBar
+    },
     data(){
         return{
-            email :"",
-            password: "",
-            count:""
+          fn : "",
+          ln : "",
+          email :"",
+          password1: "",
+          password2: "",
+          count:""
         }
     },
     methods:{
@@ -59,14 +72,16 @@ export default {
                 first_name : this.fn,
                 last_name : this.ln,
                 password : this.password1,
-                email :this.email
+                email :this.email,
+                folder : uuidv4()
             };
             postService.postUser(post)
-            .then(res=>{
-                console.log(res.status);
-                router.push('/account');
-            })
-            .catch(err=>console.log(err));
+            localStorage.removeItem('acces-token');
+            localStorage.removeItem('folder_id');
+            postService.initAccount(post.folder)
+            //lorsque l'on crée un nouvel utilisateur on remove de localStorage les anciennes données
+            //num dossier + ancien acces_token
+            router.push('/');
         }
     }
 }
