@@ -15,8 +15,16 @@
         </div>
       </div>
       <div class="row">
+        <label for="category">Catégorie</label>
+        <select v-model="category">
+          <option disabled value="">Please select one</option>
+          <option>Smartphone</option>
+          <option>Ordinateur Portable</option>
+        </select>
+      </div>
+      <div class="row">
         <label for="brand">Marque</label>
-        <select v-model="brand">
+        <select v-model="brand" v-if=" category === 'Smartphone'">
           <option disabled value="">Please select one</option>
           <option>Apple</option>
           <option>Samsung</option>
@@ -27,15 +35,26 @@
           <label for="model">Modèle</label>
           <select v-model="model" v-if=" brand === 'Apple'">
             <option disabled value="">Please select one</option>
-            <option>Iphone X</option>
-            <option>Iphone 11</option>
+            <option>Iphone 11 Pro Max</option>
             <option>Iphone 11 Pro</option>
+            <option>Iphone 11 </option>
+            <option>Iphone XS Max</option>
+            <option>Iphone XS</option>
+            <option>Iphone X</option>
+            <option>Iphone XR</option>
+            <option>Iphone 8 Plus</option>
+            <option>Iphone 8</option>
+            <option>Iphone 7 Plus</option>
+            <option>Iphone 7</option>
          </select>
          <select v-model="model" v-else-if=" brand === 'Samsung'">
             <option disabled value="">Please select one</option>
-            <option>Galaxy S11</option>
+            <option>Galaxy S10+</option>
             <option>Galaxy S10</option>
-            <option>Galaxy S9</option>
+            <option>Galaxy Fold</option>
+            <option>Galaxy Note 10</option>
+            <option>Galaxy Note 9</option>
+            <option>Galaxy Note 8</option>
          </select>
          <!-- 
            
@@ -90,6 +109,7 @@ export default {
     data(){
         return{
             object : "",
+            category : "",
             brand: "",
             model :"",
             serialNumber : "", 
@@ -97,7 +117,7 @@ export default {
             purschaseDate: "",
             month_price : 0,
             listWarranted : {},
-            file: ""
+            files : []
         }
     },
     methods:{
@@ -108,6 +128,7 @@ export default {
             const contract={
                 folder_id : localStorage.getItem('folder_id'),
                 object : this.object,
+                category : this.category,
                 brand: this.brand,
                 model : this.model,
                 serialNumber : this.serialNumber,
@@ -115,6 +136,7 @@ export default {
                 purschaseDate: this.purschaseDate,
                 month_price : 0,
                 listWarranted : {},
+                files : this.file
             };
             console.log(contract)
             postService.createContract(contract)
