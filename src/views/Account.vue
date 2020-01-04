@@ -20,6 +20,7 @@
                             <p>Marque : {{contract.brand}}</p>
                             <p>Modèle : {{contract.model}}</p>
                             <p>Numéro de série : {{contract.serialNumber}}</p>
+                            <p>Liste de garanties : {{contract.listWarranted}}</p>
                             <h6>Prix par mois : {{contract.month_price}} €</h6>
                         </div>
                         <div class="card-action">
@@ -29,14 +30,11 @@
                 </div>
             </div>
         </div>
-        <router-link v-show="!isAuth" :to="'/account/contract/create3'">
+        <router-link v-show="!isAuth" :to="'/account/contract/create'">
             <button class="btn waves-effect waves-light">Ajouter un appareil à assurer</button>
         </router-link>
-        <br/>
-        <button v-on:click="deleteAll" class="btn waves-effect waves-light" type="submit" name="action">Supprimer le compte et ses contrats</button>
     </div>
 </body>
-
 </template>
 
 
@@ -62,19 +60,17 @@ export default {
         return{
             //on pourra charger tous les dossier ici pour l'instant que le folder_id
             folder_id : localStorage.getItem('folder_id'),
-            account: {}
+            account: {},
+            dialog: false
         }
     },
     methods : {
-        deleteAll(){
-            postService.deleteAll(this.folder_id);
-            localStorage.removeItem('acces_token');
-            localStorage.removeItem('folder_id');
-            router.push('/');
-        },
         deleteContract(contrat_id){
+            var text = "Êtes-vous certain de vouloir supprimer ce contract ?\n\n"
+            text+= "Votre contrat pour cet appareil ne sera pas reconduis le moins prochain et vous perdrez vos garanties."
             console.log(contrat_id);
             console.log(this.folder_id);
+            if(confirm(text))
             postService.deleteContract(this.folder_id,contrat_id)
             .then(()=>{
                 router.push('/');
