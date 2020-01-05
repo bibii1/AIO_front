@@ -38,10 +38,7 @@
         <br/>
         <router-link v-show="!isAuth" :to="'/account/contract/sinister/choseObject'">
             <button class="btn waves-effect waves-light">Declarer un sinistre</button>
-            </router-link>
-        <br/>
-        <br/>
-        <button v-on:click="deleteAll" class="btn waves-effect waves-light" type="submit" name="action">Supprimer le compte et ses contrats</button>
+        </router-link>
     </div>
 </body>
 </template>
@@ -68,6 +65,7 @@ export default {
     data: function(){
         return{
             //on pourra charger tous les dossier ici pour l'instant que le folder_id
+            isAuth: '',
             folder_id : localStorage.getItem('folder_id'),
             account: {},
             dialog: false
