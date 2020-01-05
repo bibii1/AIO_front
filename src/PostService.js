@@ -67,19 +67,19 @@ export default class PostService {
         axios.delete(`${apiBaseUrl}/account/${folder}`)
     }
 
-    initAccount(folder){
+    initAccount(folder_id){
         //on verifie d'abord qu'auncun compte n'existe avec ce num de folder
-        axios.get(`${apiBaseUrl}/account/${folder}`)
+        axios.post(`${apiBaseUrl}/account/init`,{folder_id : folder_id})
         .then(function(res){
             if(res.data == null){
                 //alors on peut en créer un en evitant les doublons
-                axios.post(`${apiBaseUrl}/account/`,{folder});
+                axios.post(`${apiBaseUrl}/account/init`,{folder_id});
             }
         });
     }
 
-    getAccount(folder){
-        return axios.get(`${apiBaseUrl}/account/${folder}`)
+    getAccount(folder_id){
+        return axios.post(`${apiBaseUrl}/account/`,{folder_id : folder_id})
     }
 
     //crée un nouveau contrat, le parametre contient egalement le folder_id !!!

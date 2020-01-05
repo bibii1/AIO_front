@@ -22,6 +22,13 @@
                             <p>Numéro de série : {{contract.serialNumber}}</p>
                             <p>Liste de garanties : {{contract.listWarranted}}</p>
                             <h6>Prix par mois : {{contract.month_price}} €</h6>
+                            <p>panne : {{contract.listWarranted.panne}}</p>
+                            <p>casse : {{contract.listWarranted.casse}}</p>
+                            <p>vol : {{contract.listWarranted.vol}}</p>
+                            <p>oxydation : {{contract.listWarranted.oxydation}}</p>
+                            <p>prix du tel : {{contract.purchasePrice}}</p>
+                            <p>index : {{index}}</p>
+                            <h6>Prix par mois : {{getMonth_price(index)}} €</h6>
                         </div>
                         <div class="card-action">
                             <a v-on:click="deleteContract(contract.contract_id)">Supprimer le contrat</a>
@@ -33,6 +40,14 @@
         <router-link v-show="!isAuth" :to="'/account/contract/create'">
             <button class="btn waves-effect waves-light">Ajouter un appareil à assurer</button>
         </router-link>
+        <br/>
+        <br/>
+        <router-link v-show="!isAuth" :to="'/account/contract/sinister/choseObject'">
+            <button class="btn waves-effect waves-light">Declarer un sinistre</button>
+            </router-link>
+        <br/>
+        <br/>
+        <button v-on:click="deleteAll" class="btn waves-effect waves-light" type="submit" name="action">Supprimer le compte et ses contrats</button>
     </div>
 </body>
 </template>
@@ -68,13 +83,65 @@ export default {
         deleteContract(contrat_id){
             var text = "Êtes-vous certain de vouloir supprimer ce contract ?\n\n"
             text+= "Votre contrat pour cet appareil ne sera pas reconduis le moins prochain et vous perdrez vos garanties."
-            console.log(contrat_id);
-            console.log(this.folder_id);
             if(confirm(text))
             postService.deleteContract(this.folder_id,contrat_id)
             .then(()=>{
                 router.push('/');
             })
+        },
+        declareSinister(contrat_id){
+            localStorage.setItem('contract_id',contrat_id);
+            router.push('/account/contract/sinister/choseObject')
+        }, 
+        getMonth_price(index){
+            // index correspond a l'index du contrat concerné, il permet d'indiquer 
+            // quel contrat dans listContract de account (récuprer à chaque création de la vue)
+            var totalPrice = 0;
+            const contract = this.account.listContract[index];
+            const price = contract.purchasePrice; 
+            if(price<250){
+                if(contract.listWarranted.panne == true){
+                    totalPrice = totalPrice + 1
+                }
+                if(contract.listWarranted.casse == true){
+                    totalPrice = totalPrice + 3
+                }
+                if(contract.listWarranted.vol == true){
+                    totalPrice = totalPrice + 1.5
+                }
+                if(contract.listWarranted.oxydation == true){
+                    totalPrice = totalPrice + 3
+                }
+            }
+            if(price>250 && price<600){
+                if(contract.listWarranted.panne == true){
+                    totalPrice = totalPrice + 1
+                }
+                if(contract.listWarranted.casse == true){
+                    totalPrice = totalPrice + 4.5
+                }
+                if(contract.listWarranted.vol == true){
+                    totalPrice = totalPrice + 3
+                }
+                if(contract.listWarranted.oxydation == true){
+                    totalPrice = totalPrice + 4.5
+                }
+            }
+            if(price>600){
+                if(contract.listWarranted.panne == true){
+                    totalPrice = totalPrice + 1.5
+                }
+                if(contract.listWarranted.casse == true){
+                    totalPrice = totalPrice + 6
+                }
+                if(contract.listWarranted.vol == true){
+                    totalPrice = totalPrice + 6
+                }
+                if(contract.listWarranted.oxydation == true){
+                    totalPrice = totalPrice + 6
+                }
+            }
+            return totalPrice;
         }
     },
     components : {
@@ -83,7 +150,7 @@ export default {
     created(){
         postService.getAccount(this.folder_id)
         .then(res=>{
-            console.log(res.data)
+
             this.account = res.data
         })
     }
