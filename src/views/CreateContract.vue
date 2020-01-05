@@ -129,8 +129,8 @@ export default {
             brand: "",
             model :"",
             serialNumber : "", 
-            purschasePrice : "",
-            purschaseDate: "",
+            purchasePrice : "",
+            purchaseDate: "",
             month_price : 0,
             listWarranted : {},
             files : []
@@ -148,8 +148,8 @@ export default {
                 brand: this.brand,
                 model : this.model,
                 serialNumber : this.serialNumber,
-                purschasePrice : this.purschasePrice,
-                purschaseDate: this.purschaseDate,
+                purchasePrice : this.purchasePrice,
+                purchaseDate: this.purchaseDate,
                 month_price : 0,
                 listWarranted : {},
                 files : this.file

@@ -21,13 +21,7 @@
                             <p>Modèle : {{contract.model}}</p>
                             <p>Numéro de série : {{contract.serialNumber}}</p>
                             <p>Liste de garanties : {{contract.listWarranted}}</p>
-                            <h6>Prix par mois : {{contract.month_price}} €</h6>
-                            <p>panne : {{contract.listWarranted.panne}}</p>
-                            <p>casse : {{contract.listWarranted.casse}}</p>
-                            <p>vol : {{contract.listWarranted.vol}}</p>
-                            <p>oxydation : {{contract.listWarranted.oxydation}}</p>
                             <p>prix du tel : {{contract.purchasePrice}}</p>
-                            <p>index : {{index}}</p>
                             <h6>Prix par mois : {{getMonth_price(index)}} €</h6>
                         </div>
                         <div class="card-action">
