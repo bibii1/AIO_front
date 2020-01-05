@@ -94,4 +94,8 @@ export default class PostService {
         }
         return axios.post(`${apiBaseUrl}/account/contract/delete`,post);
     }
+
+    updateWarrented(post){
+        return axios.post(`${apiBaseUrl}/account/contract/update/warranted`,post)
+    }
 }

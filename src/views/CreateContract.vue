@@ -90,15 +90,30 @@
       </div>
       <div class="row">
         <label>Liste des garanties souhaitées</label>
-        <br> 
-            <input type="checkbox" name="Vol" id="Vol" value="Vol" v-model="listWarranted">
-            <label for="Vol">Vol</label>
-            <input type="checkbox" id="Oxydation" value="Oxydation" v-model="listWarranted">
-            <label for="Oxydation">Oxydation</label>
-            <input type="checkbox" id="Casse" value="Casse" v-model="listWarranted">
-            <label for="Casse">Casse</label>
-            <input type="checkbox" id="Perte" value="Perte" v-model="listWarranted">
-            <label for="Perte">Perte</label>
+        <p>
+        <label>
+          <input type="checkbox" id="Perte" value="Perte" v-model="panne">
+          <span>Panne</span>
+        </label>
+        </p>
+        <p>
+        <label>
+          <input type="checkbox" id="Casse" value="Casse" v-model="casse">
+          <span>Casse</span>
+        </label>
+        </p>
+        <p>
+          <label>
+            <input type="checkbox" name="Vol" id="Vol" value="Vol" v-model="vol">
+            <span> Vol</span>
+          </label>
+        </p>
+        <p>
+        <label>
+          <input type="checkbox" id="Oxydation" value="Oxydation" v-model="oxydation">
+          <span> Oxydation </span>
+        </label>
+        </p>
       </div>
       <div class="row">
         <button class="btn waves-effect waves-light" type="submit" name="action">Enregistrer l'appareil</button>
@@ -133,14 +148,18 @@ export default {
             purchaseDate: "",
             month_price : 0,
             listWarranted : {},
-            files : []
+            files : [],
+            panne: false,
+            casse: false,
+            vol: false,
+            oxydation: false
         }
     },
     methods:{
         onSubmit(){
             const formData = new FormData();
             formData.append('file',this.file)
-            console.log(this.object)
+            console.log("form \n" + this.object)
             const contract={
                 folder_id : localStorage.getItem('folder_id'),
                 object : this.object,
@@ -152,14 +171,16 @@ export default {
                 purchaseDate: this.purchaseDate,
                 month_price : 0,
                 listWarranted : {},
+                panne : this.panne,
+                casse: this.casse,
+                vol: this.vol,
+                oxydation: this.oxydation,
                 files : this.file
             };
-            console.log(contract)
             postService.createContract(contract)
-            .then(res=>{
-                console.log(res);
+            .then(()=>{
+              router.push('/');
             })
-            router.push('/');
         },
         handleFileUpload(){
           this.file = this.$refs.file.files[0];
