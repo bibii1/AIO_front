@@ -30,7 +30,7 @@
       </div>
       <div class="row">
         <div class="input-field col s12">
-          <input id="purschasePrice" type="number" v-model="purchasePrice" class="validate">
+          <input id="purchasePrice" type="number" v-model="purchasePrice" class="validate">
           <label for="purchasePrice">Prix d'achat</label>
         </div>
       </div>
@@ -62,30 +62,13 @@ export default {
       NavBar
     },
     data(){
-      /*
-        brands : [
-            {text: 'Un', value : 'Apple'},
-            {text: 'Deux', value : 'Samsung'},
-            {text: 'Trois', value : 'Huawei'},
-            {text: 'Quatre', value : 'Sonny'},
-        ]
-
-        models : [
-            {text: '1', value : 'Apple'},
-            {text: '2', value : 'Apple'},
-            {text: '3', value : 'Apple'},
-            {text: '4', value : 'Apple'},
-            {text: '5', value : 'Apple'},
-            {text: '6', value : 'Apple'},
-            {text: '7', value : 'Apple'},
-            {text: '8', value : 'Apple'},
-        ]*/
+      
         return{
             object : "",
             brand: "",
             model :"",
-            purschasePrice : "",
-            purschaseDate: "",
+            purchasePrice : "",
+            purchaseDate: "",
             month_price : 0,
             listWarranted : {}
         }
@@ -98,8 +81,8 @@ export default {
                 object : this.object,
                 brand: this.brand,
                 model : this.model,
-                purschasePrice : this.purschasePrice,
-                purschaseDate: this.purschaseDate,
+                purchasePrice : this.purchasePrice,
+                purchaseDate: this.purchaseDate,
                 month_price : 0,
                 listWarranted : {}
             };
