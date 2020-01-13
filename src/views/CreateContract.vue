@@ -17,6 +17,7 @@
           <option disabled value="">Please select one</option>
           <option>Smartphone</option>
           <option>Ordinateur Portable</option>
+          <option>Tablette</option>
         </select>
       </div>
       <div class="row">
@@ -27,10 +28,15 @@
           <option>Samsung</option>
           <option>Huawei</option>
         </select>
+        <select v-model="brand" v-else-if=" category === 'Tablette'" required>
+          <option disabled value="">Please select one</option>
+          <option>Apple</option>
+          <option>Samsung</option>
+        </select>
       </div>
         <div class="row">
           <label for="model">Modèle</label>
-          <select v-model="model" v-if=" brand === 'Apple'" required>
+          <select v-model="model" v-if=" brand === 'Apple' && category==='Smartphone'" required>
             <option disabled value="">Please select one</option>
             <option>Iphone 11 Pro Max</option>
             <option>Iphone 11 Pro</option>
@@ -44,7 +50,7 @@
             <option>Iphone 7 Plus</option>
             <option>Iphone 7</option>
          </select>
-         <select v-model="model" v-else-if=" brand === 'Samsung'" required>
+         <select v-model="model" v-else-if=" brand === 'Samsung'&& category==='Smartphone'" required>
             <option disabled value="">Please select one</option>
             <option>Galaxy S10+</option>
             <option>Galaxy S10</option>
@@ -53,9 +59,17 @@
             <option>Galaxy Note 9</option>
             <option>Galaxy Note 8</option>
          </select>
-         <select v-model="model" v-else-if=" brand === 'Huawei'" required>
+         <select v-model="model" v-else-if=" brand === 'Huawei'&& category==='Smartphone'" required>
             <option disabled value="">Please select one</option>
             <option>P30 Pro</option>
+            <option>P30 Lite</option>
+            <option>P20 Pro</option>
+            <option>P20 Lite</option>
+            <option>Nova 5T</option>
+         </select>
+         <select v-model="model" v-if=" brand === 'Apple' && category==='Tablette'" required>
+            <option disabled value="">Please select one</option>
+            <option>Ipad Pro</option>
          </select>
          <!-- 
            
