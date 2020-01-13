@@ -3,6 +3,7 @@ import Router from 'vue-router';
 
 import Home from './views/Home.vue';
 import Account from './views/Account.vue';
+import Validation from './views/Validation.vue';
 import CreateUser from './views/CreateUser.vue';
 import About from './views/About.vue';
 import ErrorVue from './views/Error.vue';
@@ -68,6 +69,10 @@ const router = new Router({
         {
             path:'/users/create',
             component : CreateUser
+        },
+        {
+            path:'/users/validate',
+            component : Validation
         },
         {
             path:'/about',

@@ -51,6 +51,9 @@ import NavBar from '../components/Navbar';
 
 import PostService from '../PostService';
 const postService = new PostService();
+
+// eslint-disable-next-line no-unused-vars
+import mailSend from '../server';
 export default {
     name:"create",
     components : {
@@ -68,6 +71,7 @@ export default {
     },
     methods:{
         onSubmit(){
+            //mailSend(this.email);
             const post={
                 first_name : this.fn,
                 last_name : this.ln,
