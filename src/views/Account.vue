@@ -10,8 +10,8 @@
                 v-bind:key="contract.contract_id">
                 <div class="card small horizontal">
                     <div class="card-image">
-                        <img src="../assets/img/Apple/Phones/iphone-X.png" v-if=" contract.brand === 'Apple'">
-                        <img src="../assets/img/Samsung/Phones/636x900-vue-1-samsung-galaxy-s10-5g-argent-160694.png" v-else-if="contract.brand === 'Samsung'" >
+                        <img src="../assets/img/Apple/Smartphone/iphone-X.png" v-if=" contract.brand === 'Apple' && contract.model == 'Iphone X'">
+                        <img src="../assets/img/Samsung/Smartphone/636x900-vue-1-samsung-galaxy-s10-5g-argent-160694.png" v-else-if="contract.brand === 'Samsung'" >
                     </div>
                     <div class="card-stacked">
                         <div class="card-content">

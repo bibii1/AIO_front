@@ -2,7 +2,6 @@
 <body>
     <div class="sinisterContainer">
         <NavBar/>
-        <h5>nous sommes dans la vue sinister de l'objet rattaché au contract {{contract_id}}</h5>
         <h6>selectionnez votre sinistre</h6>
         <div class="collection">
             <a v-on:click="setPanne()" class="collection-item">panne</a>
@@ -43,6 +42,7 @@ export default {
     data: function(){
         return{
             //on pourra charger tous les dossier ici pour l'instant que le folder_id
+            isAuth: '',
             folder_id : localStorage.getItem('folder_id'),
             index : localStorage.getItem('index'),
             warranted : { 
