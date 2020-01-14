@@ -49,6 +49,9 @@ import router from '../router.js';
 const uuidv4 = require('uuid/v4');
 import NavBar from '../components/Navbar';
 
+
+
+
 import PostService from '../PostService';
 const postService = new PostService();
 export default {
@@ -82,7 +85,13 @@ export default {
             //lorsque l'on crée un nouvel utilisateur on remove de localStorage les anciennes données
             //num dossier + ancien acces_token
             router.push('/');
+            this.SendMail()
+        },
+        SendMail(){
+          console.log("nous sommes rentrés dans sendLMail le lien envoyé sera :\n\n")
+          console.log("http://localhost:3000/users/emailValidation/"+this.email)
         }
+        
     }
 }
 

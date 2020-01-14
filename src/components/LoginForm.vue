@@ -44,12 +44,18 @@ export default {
           password : this.password
         })
         .then(res =>{
-          const token = res.data.token
-          const folder_id = res.data.userTemp.folder
-          localStorage.setItem('acces_token',token)
-          localStorage.setItem('folder_id',folder_id)
-          localStorage.setItem('isAuth',true)
-          router.push('/account')
+          if(res.data.userTemp.emailValidation == true)
+          {
+            const token = res.data.token
+            const folder_id = res.data.userTemp.folder
+            console.log(res.data)
+            localStorage.setItem('acces_token',token)
+            localStorage.setItem('folder_id',folder_id)
+            localStorage.setItem('isAuth',true)
+            router.push('/account')
+          }
+          else
+            console.log("l'email n'est pas validé")
         })
     }
   }
