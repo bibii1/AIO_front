@@ -47,7 +47,6 @@
                         </div>
                         <div class="card-action">
                             <a v-on:click="deleteContract(contract.contract_id)" v-if="contract.isSinistered===false">Supprimer le contrat</a>
-                            <a v-on:click="modifyContract(contract.contract_id)" v-if="contract.isSinistered===false">Modifier le contrat</a>
                             <a v-on:click="checkSinister(contract.contract_id)" v-if="contract.isSinistered===true">Suivi du sinistre</a>
                         </div>
                     </div>
