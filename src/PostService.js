@@ -98,4 +98,8 @@ export default class PostService {
     updateWarrented(post){
         return axios.post(`${apiBaseUrl}/account/contract/update/warranted`,post)
     }
+
+    createSinister(sinister){
+        return axios.post(`${apiBaseUrl}/users/contract/sinister/informations`,sinister)
+    }
 }

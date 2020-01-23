@@ -55,7 +55,7 @@ export default {
             router.push('/account')
           }
           else
-            console.log("l'email n'est pas validé")
+            console.log("l'email n'est pas valide")
         })
     }
   }

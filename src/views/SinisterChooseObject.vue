@@ -51,7 +51,7 @@
         </div>
         <router-link v-show="!isAuth" :to="'/'">
             <button class="btn waves-effect waves-light">Visionnage du compte</button>
-            </router-link>
+        </router-link>
     </div>
 </body>
 
@@ -75,7 +75,7 @@ import router from '../router';
 
 
 export default {
-    name : "Account",
+    name : "ChooseObject",
     data: function(){
         return{
             //on pourra charger tous les dossier ici pour l'instant que le folder_id
@@ -103,7 +103,7 @@ export default {
         declareSinister(index){
             //on utilisera l'index de la card pour identifier le contrat sur lequel agir
             localStorage.setItem('index',index);
-            router.push('/account/contract/sinister/choseSinister');
+            router.push('/account/contract/sinister/chooseSinister');
         }
     },
     components : {

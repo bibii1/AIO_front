@@ -10,9 +10,9 @@
             <a v-on:click="setOxydation()" class="collection-item">oxydation</a>
             <a v-on:click="setTypeSinister('autre')" class="collection-item">autre</a>
         </div>
+        <Popup/>
         <div class="row">
             <div class="col s6">
-                
             </div>
         </div>
     </div>
@@ -36,9 +36,8 @@ import PostService from '../PostService';
 import router from '../router';
 const postService = new PostService();
 
-
 export default {
-    name : "Account",
+    name : "ChooseSinister",
     data: function(){
         return{
             //on pourra charger tous les dossier ici pour l'instant que le folder_id
@@ -51,7 +50,8 @@ export default {
                 vol: false,
                 oxydation: false
             },
-            account : {}
+            account : {},
+            typeSinister : this.typeSinister
         }
     },
     methods : {
@@ -61,7 +61,14 @@ export default {
         },
         setPanne(){
             this.warranted.panne = true
-            this.checkSinisterWarranted()
+            var [check,typeSinister] = this.checkSinisterWarranted()
+            this.typeSinister = typeSinister
+            if(check){
+                router.push('/account/contract/sinister/informations')
+            }
+            else{
+                alert("Vous n'avez pas souscris à cette garantie")
+            }
         },
         setCasse(){
             this.warranted.casse = true
@@ -80,40 +87,40 @@ export default {
             // on utilise une boucle pour comparer chaque propriété
             // il n'est pas interessant de comparer les attributs listWarranted et warranted
             // il faut juste comparer chacune de leur valeurs pour voir si le sinistre est le meme
-            console.log(listWar.panne)
             var check = false
+            var typeSinister ="";
             if(this.warranted.panne==true){
                 if(listWar.panne==true){
                     check=true;
+                    typeSinister="panne";
                 }
             }
-            if(this.warranted.casse==true){
+            else if(this.warranted.casse==true){
                 if(listWar.casse==true){
                     check=true;
+                    typeSinister ="casse";
                 }
             }
-            if(this.warranted.vol==true){
+            else if(this.warranted.vol==true){
                 if(listWar.vol==true){
                     check=true;
+                    typeSinister = "vol";
                 }
             }
-            if(this.warranted.oxydation==true){
+            else if(this.warranted.oxydation==true){
                 if(listWar.oxydation==true){
                     check=true;
+                    typeSinister = "oxydation";
                 }
             }
-            console.log("le garantie match: "+ check)
-            if(check == true){
-                console.log("réussite de la declaration du sinistre")
+            //console.log("le garantie match: "+ check)
+            /*if(check == true){
                 router.push('/')
             }
             else{
-                console.log("vous n'avez pas soustrait à cette garantie")
-                for(var warkk in this.warranted){
-                    warkk = false
-                    console.log(warkk)
-                }
-            }
+                alert("Vous n'avez pa souscris à cette garantie")
+            }*/
+            return [check,typeSinister]
         }
     },
     components : {

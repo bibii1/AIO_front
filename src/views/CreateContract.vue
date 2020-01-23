@@ -189,7 +189,8 @@ export default {
                 casse: this.casse,
                 vol: this.vol,
                 oxydation: this.oxydation,
-                files : this.file
+                files : this.file,
+                isSinistered: false
             };
             postService.createContract(contract)
             .then(()=>{

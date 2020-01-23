@@ -24,3 +24,7 @@ npm install vue-select --save
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+
+### A add
+npm install v-slim-dialog

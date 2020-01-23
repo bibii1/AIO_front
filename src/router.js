@@ -7,8 +7,9 @@ import CreateUser from './views/CreateUser.vue';
 import About from './views/About.vue';
 import ErrorVue from './views/Error.vue';
 import CreateContract from './views/CreateContract.vue';
-import SinisterChoseObject from './views/SinisterChoseObject.vue';
-import SinisterChoseSinister from './views/SinisterChoseSinister.vue'
+import SinisterChooseObject from './views/SinisterChooseObject.vue';
+import SinisterChooseSinister from './views/SinisterChooseSinister.vue'
+import SinisterInfos from './views/SinisterInfos.vue'
 
 import axios from 'axios';
 const apiBaseUrl = 'http://localhost:3000';
@@ -82,12 +83,16 @@ const router = new Router({
             component : CreateContract
         },
         {
-            path:'/account/contract/sinister/choseObject',
-            component : SinisterChoseObject
+            path:'/account/contract/sinister/chooseObject',
+            component : SinisterChooseObject
         },
         {
-            path:'/account/contract/sinister/choseSinister',
-            component : SinisterChoseSinister
+            path:'/account/contract/sinister/chooseSinister',
+            component : SinisterChooseSinister
+        },
+        {
+            path:'/account/contract/sinister/informations',
+            component : SinisterInfos
         }
     ]    
 })

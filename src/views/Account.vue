@@ -57,7 +57,7 @@
         </router-link>
         <br/>
         <br/>
-        <router-link v-show="!isAuth" :to="'/account/contract/sinister/choseObject'">
+        <router-link v-show="!isAuth" :to="'/account/contract/sinister/chooseObject'">
             <button class="btn waves-effect waves-light">Declarer un sinistre</button>
         </router-link>
     </div>
@@ -95,7 +95,7 @@ export default {
     methods : {
         deleteContract(contrat_id){
             var text = "Êtes-vous certain de vouloir supprimer ce contract ?\n\n"
-            text+= "Votre contrat pour cet appareil ne sera pas reconduis le moins prochain et vous perdrez vos garanties."
+            text+= "Votre contrat pour cet appareil ne sera pas reconduis le mois prochain et vous perdrez vos garanties."
             if(confirm(text))
             postService.deleteContract(this.folder_id,contrat_id)
             .then(()=>{
@@ -104,7 +104,7 @@ export default {
         },
         declareSinister(contrat_id){
             localStorage.setItem('contract_id',contrat_id);
-            router.push('/account/contract/sinister/choseObject')
+            router.push('/account/contract/sinister/chooseObject')
         }, 
         getMonth_price(index){
             // index correspond a l'index du contrat concerné, il permet d'indiquer 
