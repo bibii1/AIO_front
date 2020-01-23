@@ -10,6 +10,7 @@ import CreateContract from './views/CreateContract.vue';
 import SinisterChooseObject from './views/SinisterChooseObject.vue';
 import SinisterChooseSinister from './views/SinisterChooseSinister.vue'
 import SinisterInfos from './views/SinisterInfos.vue'
+import SinisterProgress from './views/SinisterProgress.vue'
 
 import axios from 'axios';
 const apiBaseUrl = 'http://localhost:3000';
@@ -93,6 +94,10 @@ const router = new Router({
         {
             path:'/account/contract/sinister/informations',
             component : SinisterInfos
+        },
+        {
+            path:'/account/contract/sinister/progress',
+            component : SinisterProgress
         }
     ]    
 })

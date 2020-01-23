@@ -46,7 +46,9 @@
                             <h6>Prix par mois : {{getMonth_price(index)}} €</h6>
                         </div>
                         <div class="card-action">
-                            <a v-on:click="deleteContract(contract.contract_id)">Supprimer le contrat</a>
+                            <a v-on:click="deleteContract(contract.contract_id)" v-if="contract.isSinistered===false">Supprimer le contrat</a>
+                            <a v-on:click="modifyContract(contract.contract_id)" v-if="contract.isSinistered===false">Modifier le contrat</a>
+                            <a v-on:click="checkSinister(contract.contract_id)" v-if="contract.isSinistered===true">Suivi du sinistre</a>
                         </div>
                     </div>
                 </div>
@@ -106,6 +108,10 @@ export default {
             localStorage.setItem('contract_id',contrat_id);
             router.push('/account/contract/sinister/chooseObject')
         }, 
+        checkSinister(contrat_id){
+            localStorage.setItem('contract_id',contrat_id);
+            router.push('/account/contract/sinister/progress')
+        },
         getMonth_price(index){
             // index correspond a l'index du contrat concerné, il permet d'indiquer 
             // quel contrat dans listContract de account (récuprer à chaque création de la vue)

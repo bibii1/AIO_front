@@ -10,7 +10,7 @@
                 v-bind:index="index"
                 v-bind:key="contract.contract_id">
                 <a v-on:click="declareSinister(index)">
-                    <div class="card small horizontal">
+                    <div class="card small horizontal" v-if="contract.isSinistered ===false">
                         <div class="card-image">
                         <img src="../assets/img/Apple/Smartphone/Iphone-X.png" v-if=" contract.brand === 'Apple' && contract.model == 'Iphone X'">
                         <img src="../assets/img/Apple/Smartphone/Iphone-11.png" v-if=" contract.brand === 'Apple' && contract.model == 'Iphone 11'">
