@@ -52,8 +52,10 @@ import NavBar from '../components/Navbar';
 import PostService from '../PostService';
 const postService = new PostService();
 
-// eslint-disable-next-line no-unused-vars
-import mailSend from '../server';
+//var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+//var request = require('request');
+//var xhr = new XMLHttpRequest();
+
 export default {
     name:"create",
     components : {
@@ -71,7 +73,6 @@ export default {
     },
     methods:{
         onSubmit(){
-            //mailSend(this.email);
             const post={
                 first_name : this.fn,
                 last_name : this.ln,
@@ -79,6 +80,8 @@ export default {
                 email :this.email,
                 folder : uuidv4()
             };
+            postService.sendValidationEmail(post);
+            console.log(post);
             postService.postUser(post)
             localStorage.removeItem('acces-token');
             localStorage.removeItem('folder_id');

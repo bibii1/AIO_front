@@ -6,7 +6,7 @@
     <LoginForm/>
   </div>
   <div class="createContainer">
-    <router-link to="/create" >créer un compte</router-link>
+    <router-link to="/users/create" >créer un compte</router-link>
   </div>
 </body>
 </template>
