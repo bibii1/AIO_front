@@ -71,7 +71,7 @@ const router = new Router({
             component : CreateUser
         },
         {
-            path:'/users/validate',
+            path:'/users/emailValidation/:id',
             component : Validation
         },
         {

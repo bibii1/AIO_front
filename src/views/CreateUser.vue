@@ -85,7 +85,8 @@ export default {
             postService.postUser(post)
             localStorage.removeItem('acces-token');
             localStorage.removeItem('folder_id');
-            postService.initAccount(post.folder)
+            postService.initAccount(post.folder);
+            console.log("Coucou");
             //lorsque l'on crée un nouvel utilisateur on remove de localStorage les anciennes données
             //num dossier + ancien acces_token
             router.push('/');
