@@ -17,6 +17,11 @@ export default class PostService {
         return axios.get(`${apiBaseUrl}/users/all`);
     }
 
+    //recupere un utilisateur avec son token
+    getUser(tokenId){
+        return axios.get(`${apiBaseUrl}/users/${tokenId}`)
+    }
+
     //on renvoie l'utilisateur si authantification
     getCheckLogin(user){
         return axios.post(`${apiBaseUrl}/users/login`,user)
@@ -97,5 +102,11 @@ export default class PostService {
 
     updateWarrented(post){
         return axios.post(`${apiBaseUrl}/account/contract/update/warranted`,post)
+    }
+
+
+    // ----------------------- EMAIL ---------------------------------------
+    sendEmailValidation(post){
+        return axios.post(`${apiBaseUrl}/mail/send/validationLink`,post)
     }
 }

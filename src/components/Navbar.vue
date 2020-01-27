@@ -6,11 +6,21 @@
       <ul id="nav-mobile" class="right">
         <li><router-link v-show="!isAuth" :to="'/'">Log in</router-link></li>
         <li><router-link v-show="!isAuth" :to="'/users/create'">Create</router-link></li>
-        <li><router-link v-show="!isAuth" :to="'/account'">Account</router-link></li>
-
+        <li><router-link v-show="isAuth" :to="'/users/modify'">Modify</router-link></li>
         <li><button v-show="isAuth" v-on:click="logout" class="btn waves-effect waves-light" type="submit" name="action">Deconnection</button></li>
         <li><button v-show="isAuth" v-on:click="logoutAll" class="btn waves-effect waves-light" type="submit" name="action">Deconnection totale</button></li>
+        <!-- Dropdown Trigger 
+        <a class='dropdown-trigger btn' href='#' data-target='dropdown1'>Drop Me!</a>
 
+        -- Dropdown Structure --
+        <ul id='dropdown1' class='dropdown-content'>
+          <li><a href="#!">one</a></li>
+          <li><a href="#!">two</a></li>
+          <li class="divider" tabindex="-1"></li>
+          <li><a href="#!">three</a></li>
+          <li><a href="#!"><i class="material-icons">view_module</i>four</a></li>
+          <li><a href="#!"><i class="material-icons">cloud</i>five</a></li>
+        </ul> -->
       </ul>
     </div>
   </nav>
@@ -20,6 +30,9 @@
 import PostService from '../PostService';
 const postService = new PostService();
 import router from '../router';
+import $ from 'jquery';
+
+
 
 export default {
   data(){
@@ -59,6 +72,20 @@ export default {
     })
   }
 }
+
+$(document).ready(function(){
+    $(".dropdown-trigger").dropdown({hover: false});
+  });
+
+
+
+
+// document.addEventListener('DOMContentLoaded', function() {
+//     var elems = document.querySelectorAll('.dropdown-trigger');
+//     var instances = M.Dropdown.init(elems, options);
+// });
+
+
 </script>
 <style scoped>
 .nav-wrapper{

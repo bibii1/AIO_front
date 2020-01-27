@@ -8,7 +8,9 @@ import About from './views/About.vue';
 import ErrorVue from './views/Error.vue';
 import CreateContract from './views/CreateContract.vue';
 import SinisterChoseObject from './views/SinisterChoseObject.vue';
-import SinisterChoseSinister from './views/SinisterChoseSinister.vue'
+import SinisterChoseSinister from './views/SinisterChoseSinister.vue';
+import ModifyUser from './views/ModifyUser.vue';
+import ModifyPassword from './views/ModifyPassword.vue';
 
 import axios from 'axios';
 const apiBaseUrl = 'http://localhost:3000';
@@ -68,6 +70,14 @@ const router = new Router({
         {
             path:'/users/create',
             component : CreateUser
+        },
+        {
+            path:'/users/modify',
+            component : ModifyUser
+        },
+        {
+            path:'/users/modify/password',
+            component : ModifyPassword
         },
         {
             path:'/about',

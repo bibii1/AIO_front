@@ -66,30 +66,33 @@ export default {
           email :"",
           password1: "",
           password2: "",
-          count:""
+          count:"",
+          folder:""
         }
     },
     methods:{
         onSubmit(){
-            const post={
-                first_name : this.fn,
-                last_name : this.ln,
-                password : this.password1,
-                email :this.email,
-                folder : uuidv4()
-            };
-            postService.postUser(post)
-            localStorage.removeItem('acces-token');
-            localStorage.removeItem('folder_id');
-            postService.initAccount(post.folder)
-            //lorsque l'on crée un nouvel utilisateur on remove de localStorage les anciennes données
-            //num dossier + ancien acces_token
-            router.push('/');
-            this.SendMail()
+          const post={
+              first_name : this.fn,
+              last_name : this.ln,
+              password : this.password1,
+              email :this.email,
+              folder : uuidv4()
+          };
+          postService.postUser(post)
+          localStorage.removeItem('acces-token');
+          localStorage.removeItem('folder_id');
+          postService.initAccount(post.folder)
+          //lorsque l'on crée un nouvel utilisateur on remove de localStorage les anciennes données
+          //num dossier + ancien acces_token
+          router.push('/');
+          this.SendMail(post)
         },
-        SendMail(){
-          console.log("nous sommes rentrés dans sendLMail le lien envoyé sera :\n\n")
-          console.log("http://localhost:3000/users/emailValidation/"+this.email)
+        SendMail(post){
+          console.log("nous sommes rentrés dans sendMail le lien envoyé sera :\n\n")
+          console.log(post)
+          postService.sendEmailValidation(post)
+          console.log(`http://localhost:3000/users/emailValidation/${this.post.folder}`)
         }
         
     }
