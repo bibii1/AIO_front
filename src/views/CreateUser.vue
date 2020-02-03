@@ -32,7 +32,7 @@
       <div class="row">
         <div class="input-field col s12">
           <input id="password2" type="password" v-model="password2" class="validate" required>
-          <label for="password2">Confirmer mot de passe</label>
+          <label for="password2">Confirmez votre mot de passe</label>
         </div>
       </div>
       <div class="row">
@@ -71,6 +71,10 @@ export default {
     },
     methods:{
         onSubmit(){
+            if (this.password1 != this.password2){
+              alert("Les mots de passes ne sont pas identiques, veuillez réessayer")
+              return;
+            }
             const post={
                 first_name : this.fn,
                 last_name : this.ln,

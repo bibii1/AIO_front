@@ -2,7 +2,7 @@
 <body>
     <div class="accountContainer">
         <NavBar/>
-        <h5>nous sommes dans l'account {{folder_id}}</h5>
+        <h5>Bienvenue {{user.first_name}}</h5>
         <div class="row">
             <div class="col s10" v-for="(contract,index) in account.listContract"
                 v-bind:item="contract"
@@ -59,7 +59,7 @@
         <br/>
         <br/>
         <router-link v-show="!isAuth" :to="'/account/contract/sinister/chooseObject'">
-            <button class="btn waves-effect waves-light">Declarer un sinistre</button>
+            <button class="btn waves-effect waves-light">Déclarer un sinistre</button>
         </router-link>
     </div>
 </body>
@@ -89,6 +89,7 @@ export default {
             //on pourra charger tous les dossier ici pour l'instant que le folder_id
             isAuth: '',
             folder_id : localStorage.getItem('folder_id'),
+            user :" " ,
             account: {},
             dialog: false
         }
@@ -109,6 +110,7 @@ export default {
         }, 
         checkSinister(contrat_id){
             localStorage.setItem('contract_id',contrat_id);
+            localStorage.setItem('folder_id',this.folder_id);
             router.push('/account/contract/sinister/progress')
         },
         getMonth_price(index){
@@ -168,8 +170,12 @@ export default {
     created(){
         postService.getAccount(this.folder_id)
         .then(res=>{
-
             this.account = res.data
+        })
+        postService.getUser(this.folder_id)
+        .then(res=> {
+            this.user = res.data
+            console.log(this.user)
         })
     }
 }

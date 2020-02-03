@@ -2,7 +2,7 @@
 <body>
     <div class="sinisterContainer">
         <NavBar/>
-        <h6>selectionnez votre sinistre</h6>
+        <h6>Veuillez sélectionner le type de sinistre</h6>
         <div class="collection">
             <a v-on:click="setPanne()" class="collection-item">panne</a>
             <a v-on:click="setCasse()" class="collection-item">casse</a>
@@ -72,15 +72,36 @@ export default {
         },
         setCasse(){
             this.warranted.casse = true
-            this.checkSinisterWarranted()
+            var [check,typeSinister] = this.checkSinisterWarranted()
+            this.typeSinister = typeSinister
+            if(check){
+                router.push('/account/contract/sinister/informations')
+            }
+            else{
+                alert("Vous n'avez pas souscris à cette garantie")
+            }
         },
         setVol(){
             this.warranted.vol = true
-            this.checkSinisterWarranted()
+            var [check,typeSinister] = this.checkSinisterWarranted()
+            this.typeSinister = typeSinister
+            if(check){
+                router.push('/account/contract/sinister/informations')
+            }
+            else{
+                alert("Vous n'avez pas souscris à cette garantie")
+            }
         },
         setOxydation(){
             this.warranted.oxydation = true
-            this.checkSinisterWarranted()
+            var [check,typeSinister] = this.checkSinisterWarranted()
+            this.typeSinister = typeSinister
+            if(check){
+                router.push('/account/contract/sinister/informations')
+            }
+            else{
+                alert("Vous n'avez pas souscris à cette garantie")
+            }
         },
         checkSinisterWarranted(){
             const listWar = this.account.listContract[this.index].listWarranted;
@@ -113,13 +134,6 @@ export default {
                     typeSinister = "oxydation";
                 }
             }
-            //console.log("le garantie match: "+ check)
-            /*if(check == true){
-                router.push('/')
-            }
-            else{
-                alert("Vous n'avez pa souscris à cette garantie")
-            }*/
             return [check,typeSinister]
         }
     },

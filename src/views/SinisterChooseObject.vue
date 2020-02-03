@@ -2,8 +2,7 @@
 <body>
     <div class="sinisterContainer">
         <NavBar/>
-        <h5>nous sommes dans la vue choisir le sinistre </h5>
-        <h6>du contract {{contract_id}}</h6>
+        <h5>Veuillez choisir l'objet sinistré</h5>
         <div class="row">
             <div class="col s10" v-for="(contract,index) in account.listContract"
                 v-bind:item="contract"
@@ -50,7 +49,7 @@
             </div>
         </div>
         <router-link v-show="!isAuth" :to="'/'">
-            <button class="btn waves-effect waves-light">Visionnage du compte</button>
+            <button class="btn waves-effect waves-light">Mon compte</button>
         </router-link>
     </div>
 </body>

@@ -17,6 +17,10 @@ export default class PostService {
         return axios.get(`${apiBaseUrl}/users/all`);
     }
 
+    getUser(folder_id){
+        return axios.post(`${apiBaseUrl}/users/getUser`,{folder_id : folder_id})
+    }
+
     //on renvoie l'utilisateur si authantification
     getCheckLogin(user){
         return axios.post(`${apiBaseUrl}/users/login`,user)
