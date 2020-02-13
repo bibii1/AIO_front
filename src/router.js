@@ -11,6 +11,7 @@ import SinisterChooseObject from './views/SinisterChooseObject.vue';
 import SinisterChooseSinister from './views/SinisterChooseSinister.vue'
 import SinisterInfos from './views/SinisterInfos.vue'
 import SinisterProgress from './views/SinisterProgress.vue'
+import AdminAccount from './views/AdminAccount.vue';
 
 import axios from 'axios';
 const apiBaseUrl = 'http://localhost:3000';
@@ -59,6 +60,28 @@ const router = new Router({
                 .then(res=>{
                     if(res.data==1){
                         next('/account')
+                    }
+                    else{
+                        next('/error')
+                    }
+                })
+                next()
+            }
+        },
+        {
+            path:'/adminAccount',
+            component : AdminAccount,
+            beforeEnter: (to,from,next)=>{
+                const tokenTemp  = localStorage.getItem('acces_token')
+                const post  =  {
+                    token: tokenTemp
+                }
+                //le post est different de mon token initial
+                axios.post(`${apiBaseUrl}/superUser/checkToken/`,post)
+                //res = nombre de fois ou le token est present dans la bdd
+                .then(res=>{
+                    if(res.data==1){
+                        next('/adminAccount')
                     }
                     else{
                         next('/error')

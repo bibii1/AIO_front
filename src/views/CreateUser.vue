@@ -19,6 +19,12 @@
       </div>
       <div class="row">
         <div class="input-field col s12">
+          <input id="phone" type="text" v-model="phone" class="validate" required>
+          <label for="phone">Telephone Portable</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
           <input id="email" type="email" v-model="email" class="validate" required>
           <label for="email">Email</label>
         </div>
@@ -66,6 +72,7 @@ export default {
           email :"",
           password1: "",
           password2: "",
+          phone: "",
           count:""
         }
     },
@@ -80,12 +87,20 @@ export default {
                 last_name : this.ln,
                 password : this.password1,
                 email :this.email,
+                phone: this.phone,
                 folder : uuidv4()
             };
-            postService.postUser(post)
+            if(this.email.includes("@aio.fr"))
+            {
+              postService.postSuperUser(post)
+            }
+            else
+            {
+              postService.initAccount(post.folder)
+              postService.postUser(post)
+            }
             localStorage.removeItem('acces-token');
             localStorage.removeItem('folder_id');
-            postService.initAccount(post.folder)
             //lorsque l'on crée un nouvel utilisateur on remove de localStorage les anciennes données
             //num dossier + ancien acces_token
             router.push('/');
