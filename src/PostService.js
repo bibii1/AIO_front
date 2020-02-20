@@ -104,6 +104,7 @@ export default class PostService {
     }
 
     createSinister(sinister){
+        
         return axios.post(`${apiBaseUrl}/users/contract/sinister/informations`,sinister)
     }
 }

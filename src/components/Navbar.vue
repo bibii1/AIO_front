@@ -1,67 +1,93 @@
 <template>
-     <nav>
-    
+  <nav>
     <div class="nav-wrapper">
       <router-link to="/" class="brand-logo left">AIO</router-link>
       <ul id="nav-mobile" class="right">
-        <li><router-link v-show="!isAuth" :to="'/'">Log in</router-link></li>
-        <li><router-link v-show="!isAuth" :to="'/users/create'">Create</router-link></li>
-        <li><router-link v-show="!isAuth" :to="'/account'">Account</router-link></li>
+        <li>
+          <router-link v-show="!isAuth" :to="'/'">Log in</router-link>
+        </li>
+        <li>
+          <router-link v-show="!isAuth" :to="'/users/create'">Create</router-link>
+        </li>
+        <li>
+          <router-link v-show="!isAuth" :to="'/account'">Account</router-link>
+        </li>
 
-        <li><button v-show="isAuth" v-on:click="logout" class="btn waves-effect waves-light" type="submit" name="action">Deconnection</button></li>
-        <li><button v-show="isAuth" v-on:click="logoutAll" class="btn waves-effect waves-light" type="submit" name="action">Deconnection totale</button></li>
-
+        <li>
+          <button
+            v-show="isAuth"
+            v-on:click="logout"
+            class="btn waves-effect waves-light"
+            type="submit"
+            name="action"
+          >Deconnection</button>
+        </li>
+        <li>
+          <button
+            v-show="isAuth"
+            v-on:click="logoutAll"
+            class="btn waves-effect waves-light"
+            type="submit"
+            name="action"
+          >Deconnection totale</button>
+        </li>
       </ul>
     </div>
   </nav>
 </template> 
 
 <script>
-import PostService from '../PostService';
+import PostService from "../PostService";
 const postService = new PostService();
-import router from '../router';
+import router from "../router";
 
 export default {
-  data(){
-    return{
-      isAuth : localStorage.getItem('isAuth')||false
-    }
+  data() {
+    return {
+      isAuth: localStorage.getItem("isAuth") || false
+    };
   },
-  methods : {
-    logout(){
-      const token = localStorage.getItem('acces_token');
+  methods: {
+    logout() {
+      const token = localStorage.getItem("acces_token");
       postService.logoutAccount(token);
-      localStorage.removeItem('acces_token')
-      localStorage.removeItem('folder_id')
-      localStorage.removeItem('isAuth')
-      router.push('/');
+      localStorage.removeItem("acces_token");
+      localStorage.removeItem("folder_id");
+      localStorage.removeItem("isAuth");
+      router.push("/");
     },
-    logoutAll(){
-      const token = localStorage.getItem('acces_token');
+    logoutAll() {
+      const token = localStorage.getItem("acces_token");
       postService.logoutallAccount(token);
-      localStorage.removeItem('isAuth')
-      localStorage.removeItem('acces_token')
-      localStorage.removeItem('folder_id')
-      router.push('/');
+      localStorage.removeItem("isAuth");
+      localStorage.removeItem("acces_token");
+      localStorage.removeItem("folder_id");
+      router.push("/");
     }
   },
-  created(){
-    const token = localStorage.getItem('acces_token');
-    postService.getCheckToken({token})
-    //res = nombre de fois ou le token est present dans la bdd
-    .then(res=>{
-    if(res.data==1){
-      this.isAuth = true
-    }
-    else{
-      this.isAuth = false
-    }
-    })
+  created() {
+    const token = localStorage.getItem("acces_token");
+    postService
+      .getCheckToken({ token })
+      //res = nombre de fois ou le token est present dans la bdd
+      .then(res => {
+        if (res.data == 1) {
+          this.isAuth = true;
+        } else {
+          this.isAuth = false;
+        }
+      });
   }
-}
+};
 </script>
 <style scoped>
-.nav-wrapper{
-  background-color: #45A1D9;
+nav {
+  background-color: #45a1d9;
+}
+.nav-wrapper {
+  width: 100%;
+  max-width: 730px;
+  padding: 0 20px;
+  margin: auto;
 }
 </style>
