@@ -8,6 +8,14 @@ import './assets/css/styles.css'
 //lien pour mieux comprendre https://www.thepolyglotdeveloper.com/2017/11/router-navigate-pages-vuejs-application/
 
 import router from './router';
+import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+Vue.use(BootstrapVue)
+Vue.use(IconsPlugin)
+
+/*import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'*/
+
+
 
 new Vue({
   router,

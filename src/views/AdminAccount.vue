@@ -3,6 +3,9 @@
     <div class="accountContainer">
         <NavBar/>
         <h5>Bienvenue {{superuser.first_name}}</h5>
+        <input type="text" id="myInput" v-on:keyup="myFunction" placeholder="Search for email">
+        <b-table id="myTable" striped hover :items="users" :fields="fields" :bordered="true" @row-clicked="myRowClickHandler">
+        </b-table>
     </div>
 </body>
 </template>
@@ -33,7 +36,35 @@ export default {
             folder_id : localStorage.getItem('folder_id'),
             superuser :" " ,
             account: {},
-            dialog: false
+            dialog: false,
+            users: [],
+            fields: [
+                {
+                    key: '_id',
+                    sortable: false
+                },
+                {
+                    key: 'last_name',
+                    sortable: false
+                },
+                {
+                    key: 'first_name',
+                    sortable: false
+                },
+                {
+                    key: 'folder',
+                    sortable: false
+                },
+                
+                {
+                    key: 'email',
+                    sortable: false
+                },
+                {
+                    key: 'phone',
+                    sortable: false
+                }
+            ]
         }
     },
     methods : {
@@ -46,64 +77,30 @@ export default {
                 router.push('/');
             })
         },
-        declareSinister(contrat_id){
-            localStorage.setItem('contract_id',contrat_id);
-            router.push('/account/contract/sinister/chooseObject')
-        }, 
-        checkSinister(contrat_id){
-            localStorage.setItem('contract_id',contrat_id);
-            localStorage.setItem('folder_id',this.folder_id);
-            router.push('/account/contract/sinister/progress')
+        myRowClickHandler(record) {
+            localStorage.setItem('folder_id_user',record.folder)
+            router.push('/adminAccount/adminCheckUser')
         },
-        getMonth_price(index){
-            // index correspond a l'index du contrat concerné, il permet d'indiquer 
-            // quel contrat dans listContract de account (récuprer à chaque création de la vue)
-            var totalPrice = 0;
-            const contract = this.account.listContract[index];
-            const price = contract.purchasePrice; 
-            if(price<250){
-                if(contract.listWarranted.panne == true){
-                    totalPrice = totalPrice + 1
-                }
-                if(contract.listWarranted.casse == true){
-                    totalPrice = totalPrice + 3
-                }
-                if(contract.listWarranted.vol == true){
-                    totalPrice = totalPrice + 1.5
-                }
-                if(contract.listWarranted.oxydation == true){
-                    totalPrice = totalPrice + 3
-                }
-            }
-            if(price>250 && price<600){
-                if(contract.listWarranted.panne == true){
-                    totalPrice = totalPrice + 1
-                }
-                if(contract.listWarranted.casse == true){
-                    totalPrice = totalPrice + 4.5
-                }
-                if(contract.listWarranted.vol == true){
-                    totalPrice = totalPrice + 3
-                }
-                if(contract.listWarranted.oxydation == true){
-                    totalPrice = totalPrice + 4.5
+        myFunction() {
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("myTable");
+            tr = table.getElementsByTagName("tr");
+
+            // Loop through all table rows, and hide those who don't match the search query
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[4];
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } 
+                    else {
+                        tr[i].style.display = "none";
+                    }
                 }
             }
-            if(price>600){
-                if(contract.listWarranted.panne == true){
-                    totalPrice = totalPrice + 1.5
-                }
-                if(contract.listWarranted.casse == true){
-                    totalPrice = totalPrice + 6
-                }
-                if(contract.listWarranted.vol == true){
-                    totalPrice = totalPrice + 6
-                }
-                if(contract.listWarranted.oxydation == true){
-                    totalPrice = totalPrice + 6
-                }
-            }
-            return totalPrice;
         }
     },
     components : {
@@ -113,7 +110,10 @@ export default {
         postService.getSuperUser(this.folder_id)
         .then(res=> {
             this.superuser = res.data
-            console.log(this.superuser)
+        })
+        postService.getAllUser()
+        .then(res=>{
+            this.users = res.data
         })
     }
 }

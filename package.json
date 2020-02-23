@@ -9,7 +9,9 @@
   },
   "dependencies": {
     "axios": "^0.19.0",
+    "b-table": "^1.0.0",
     "bootstrap": "^4.4.1",
+    "bootstrap-vue": "^2.5.0",
     "core-js": "^3.3.2",
     "dns": "^0.2.2",
     "emailjs-com": "^2.4.1",
