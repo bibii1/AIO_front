@@ -14,8 +14,9 @@
         </div>
       </div>
       <div class="row">
-        <button class="btn waves-effect waves-light" type="submit" name="action">Connection</button>
+        <button class="btn waves-effect waves-light" type="submit" name="action">Connexion</button>
       </div>
+      <router-link to="/users/create" >Créer un compte</router-link>
     </form>
   </div>
 </template>

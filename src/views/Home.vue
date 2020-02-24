@@ -1,12 +1,11 @@
 <template>
 <body>
+  <NavBar/>
   <div class="loginContainer">
-    <NavBar/>
     <h5>My-AIO login page</h5>
     <LoginForm/>
   </div>
   <div class="createContainer">
-    <router-link to="/users/create" >Créer un compte</router-link>
   </div>
 </body>
 </template>
@@ -34,12 +33,11 @@ h1,h2,h3,h4,h5,h6
 }
 
 .loginContainer{
-  text-align: center,
+  text-align: center;
+  width: 100%;
+  max-width: 730px;
+  padding: 0 20px;
+  margin: auto;
 }
-
-
-
-
-
 
 </style>

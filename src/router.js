@@ -13,6 +13,7 @@ import SinisterInfos from './views/SinisterInfos.vue'
 import SinisterProgress from './views/SinisterProgress.vue'
 import AdminAccount from './views/AdminAccount.vue';
 import AdminCheckUser from './views/AdminCheckUser.vue';
+import FillCreditCard from './views/CreditCard.vue';
 
 import axios from 'axios';
 const apiBaseUrl = 'http://localhost:3000';
@@ -126,6 +127,10 @@ const router = new Router({
         {
             path:'/account/contract/sinister/progress',
             component : SinisterProgress
+        },
+        {
+            path:'/account/payment',
+            component : FillCreditCard
         }
     ]    
 })
