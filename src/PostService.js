@@ -139,4 +139,12 @@ export default class PostService {
     createSinister(sinister){
         return axios.post(`${apiBaseUrl}/users/contract/sinister/informations`,sinister)
     }
+
+    getSinister(folder_id,contract_id){
+        return axios.post(`${apiBaseUrl}/users/contract/getsinister`,{folder_id,contract_id})
+    }
+
+    updateSinister(sinister,folder_id){
+        return axios.post(`${apiBaseUrl}/users/contract/updatesinister`,{sinister,folder_id})
+    }
 }

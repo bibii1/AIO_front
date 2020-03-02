@@ -3,8 +3,9 @@
     <div class="accountContainer">
         <NavBar/>
         <h5>Bienvenue {{superuser.first_name}}</h5>
-                <b-table id="myTable" striped hover :items="account.listContract" :bordered="true" :fields="fields" @row-clicked="myRowClickHandler">
-                </b-table>
+        <div class="card-action">
+         <button v-on:click="updateSinister()">Valider l'etape</button>
+        </div>
     </div>
 </body>
 </template>
@@ -37,29 +38,7 @@ export default {
             account: {},
             dialog: false,
             user: "",
-            fields: [
-                {
-                    key: 'contract_id',
-                    sortable: false
-                },
-                {
-                    key: 'object',
-                    sortable: false
-                },
-                {
-                    key: 'serialNumber',
-                    sortable: false
-                },
-                {
-                    key: 'listWarranted',
-                    sortable: false
-                },
-                
-                {
-                    key: 'purchasePrice',
-                    sortable: false
-                }
-            ]
+            sinister: ""
         }
     },
     methods : {
@@ -73,39 +52,36 @@ export default {
             })
         },
         myRowClickHandler(record) {
-            localStorage.setItem('contract_id_user',record.contract_id)
-            localStorage.setItem('folder_id_user',this.user.folder)
-            if(record.isSinistered === true)
-            router.push('/adminAccount/AdminCheckSinister')
-            else
-            alert("Cet appareil n'a pas de sinistre en cours")
+            localStorage.setItem('contract_id_user',record.contrat_id)
+            //router.push('/adminAccount/AdminCheckSinister')
         },
+        updateSinister(){
+            this.sinister.sinisterStep = 1
+            postService.updateSinister(this.sinister,localStorage.getItem('folder_id_user'))
+            .then(res=>
+            console.log(res))
+        }
     },
     components : {
         NavBar
     },
     created(){
+        const folder_id_user = localStorage.getItem('folder_id_user')
         postService.getSuperUser(this.folder_id)
         .then(res=> {
             this.superuser = res.data
         })
-        postService.getUser(localStorage.getItem('folder_id_user'))
+        postService.getUser(folder_id_user)
         .then(res=> {
             this.user = res.data
         })
-        postService.getAccount(localStorage.getItem('folder_id_user'))
-        .then(res=> {
-            this.account = res.data
+        postService.getSinister(folder_id_user,localStorage.getItem('contract_id_user'))
+        .then(res=>{
+            this.sinister = res.data
         })
     }
-    
 }
 </script>
 
 <style>
-
-.b-table{
-cursor:pointer;
-}
-    
 </style>
