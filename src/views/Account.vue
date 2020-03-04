@@ -68,6 +68,7 @@
                         </div>
                         <div class="card-action">
                             <a v-on:click="deleteContract(contract.contract_id)" v-if="contract.isSinistered===false">Supprimer le contrat</a>
+                            <a v-on:click="updateContract(index)" v-if="contract.isSinistered===false">Update les garanties</a>                            
                             <a v-on:click="checkSinister(contract.contract_id)" v-if="contract.isSinistered===true">Suivi du sinistre</a>
                         </div>
                     </div>
@@ -133,6 +134,10 @@ export default {
             localStorage.setItem('contract_id',contrat_id);
             localStorage.setItem('folder_id',this.folder_id);
             router.push('/account/contract/sinister/progress')
+        },
+        updateContract(index){
+            localStorage.setItem('index',index);
+            router.push('/account/contract/update/warranted')
         },
         getMonth_price(index){
             // index correspond a l'index du contrat concerné, il permet d'indiquer 
