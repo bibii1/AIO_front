@@ -37,11 +37,32 @@
                     <div class="card-stacked">
                         <div class="card-content">
                             <p>Objet : {{contract.object}}</p>
-                            <p>Catégorie : {{contract.category}}</p>
                             <p>Marque : {{contract.brand}}</p>
                             <p>Modèle : {{contract.model}}</p>
-                            <p>Numéro de série : {{contract.serialNumber}}</p>
-                            <p>Liste de garanties : {{contract.listWarranted}}</p>
+                            <p>
+                            <label>
+                            <input type="checkbox" id="Perte" disabled="disabled" value="Perte" v-model="contract.listWarranted.panne">
+                            <span>Panne</span>
+                            </label>
+                            </p>
+                            <p>
+                            <label>
+                            <input type="checkbox" id="Casse" disabled="disabled" value="Casse" v-model="contract.listWarranted.casse">
+                            <span>Casse</span>
+                            </label>
+                            </p>
+                            <p>
+                            <label>
+                                <input type="checkbox" name="Vol" id="Vol" disabled="disabled" value="Vol" v-model="contract.listWarranted.vol">
+                                <span> Vol</span>
+                            </label>
+                            </p>
+                            <p>
+                            <label>
+                            <input type="checkbox" id="Oxydation" disabled="disabled" value="Oxydation" v-model="contract.listWarranted.oxydation">
+                            <span> Oxydation </span>
+                            </label>
+                            </p>
                             <p>prix du tel : {{contract.purchasePrice}}</p>
                             <h6>Prix par mois : {{getMonth_price(index)}} €</h6>
                         </div>
