@@ -3,12 +3,7 @@
     <div class="accountContainer">
         <NavBar/>
         <h5> Bonjour {{user.first_name}}, </h5>
-        <h7> Votre appareil, {{contract.object}}, est actuellement assuré pour : </h7>
-
-        
-        <h7> Votre garantie a commencé le XX:XX et nous sommes aujourd'hui le {{dd}}/{{mm}}.</h7>
-        <h7> La modification de votre garantie et votre nouvelle facturation prendra effet le XX:XX et vous ne serez pas couvert jusqu'a cette date.</h7>
-        <h7> Cliquer sur les cases correspondantes pour modifier vos garanties</h7>
+        <h7> Votre appareil '{{contract.object}}' est actuellement assuré pour : </h7>
         <p>
         <label> 
         <input type="checkbox" id="Perte" value="Perte" v-model="contract.listWarranted.panne">
@@ -75,8 +70,15 @@ export default {
     },
     methods : {
         updateContract(){
-            var text = `Votre garantie a commencé le XX:XX et nous sommes aujourd'hui le {{dd}}/{{mm}}.\n\n`
-            text+=  `La modification de vos garanties et son prix actualisé prendra effet le XX:XX.`
+            console.log(this.contract.contractDate)
+            const dateCont = new Date(this.contract.contractDate);
+            const m = String(dateCont.getMonth() + 1).padStart(2, '0');
+            // the next month
+            const m2 = String(dateCont.getMonth() + 2).padStart(2, '0')
+            const d = String(dateCont.getDate()).padStart(2, '0');
+            const y = String(dateCont.getFullYear());
+            var text = `Votre garantie a commencé le ${d}/${m}/${y} et nous sommes aujourd'hui le ${this.dd}/${this.mm}.\n\n`
+            text+=  `La modification de vos garanties et son prix actualisé prendra effet le ${d}/${m2}.`
             if(confirm(text))
             var post = {
                 folder_id : this.folder_id, 
