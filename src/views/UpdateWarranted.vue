@@ -87,9 +87,22 @@ export default {
                 casse: this.contract.listWarranted.casse,
                 vol: this.contract.listWarranted.vol,
                 oxydation : this.contract.listWarranted.oxydation}
-            console.log()
             postService.updateWarrented(post)
             .then(()=>{
+                console.log("debut")
+                const cont = {
+                    email : this.user.email,
+                    first_name : this.user.first_name,
+                    object : this.contract.object,
+                    m : m2, //the number of the next month
+                    d : d,
+                    panne: this.contract.listWarranted.panne,
+                    casse: this.contract.listWarranted.casse,
+                    vol: this.contract.listWarranted.vol,
+                    oxydation : this.contract.listWarranted.oxydation
+                }
+                console.log(this.user.email,this.contract)
+                postService.sendMailUpdateWarranted(cont)
                 router.push('/');
             })
         },

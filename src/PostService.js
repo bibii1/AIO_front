@@ -139,4 +139,12 @@ export default class PostService {
     createSinister(sinister){
         return axios.post(`${apiBaseUrl}/users/contract/sinister/informations`,sinister)
     }
+
+     //__________________________________________________________________________________
+    //METHODES QUI AGISSENT SUR L'ENVOIE DE MAIL
+    //__________________________________________________________________________________
+
+    sendMailUpdateWarranted(cont){
+        return axios.post(`${apiBaseUrl}/mail/send/updateWarranted`,cont)
+    }
 }
