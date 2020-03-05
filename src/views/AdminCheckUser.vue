@@ -3,8 +3,9 @@
     <div class="accountContainer">
         <NavBar/>
         <h5>Bienvenue {{superuser.first_name}}</h5>
-                <b-table id="myTable" striped hover :items="account.listContract" :bordered="true" :fields="fields" @row-clicked="myRowClickHandler">
-                </b-table>
+        <input type="text" id="myInput" v-on:keyup="searchBySN" placeholder="Search for serial number">
+        <b-table id="myTable" striped hover :items="items" :bordered="true" :fields="fields" @row-clicked="myRowClickHandler">
+        </b-table>
     </div>
 </body>
 </template>
@@ -30,13 +31,13 @@ export default {
     name : "Account",
     data: function(){
         return{
-            //on pourra charger tous les dossier ici pour l'instant que le folder_id
             isAuth: '',
             folder_id : localStorage.getItem('folder_id'),
             superuser :" " ,
             account: {},
             dialog: false,
             user: "",
+            items:[],
             fields: [
                 {
                     key: 'contract_id',
@@ -50,10 +51,11 @@ export default {
                     key: 'serialNumber',
                     sortable: false
                 },
-                {
+                // Voir si necessaire
+                /*{
                     key: 'listWarranted',
                     sortable: false
-                },
+                },*/
                 
                 {
                     key: 'purchasePrice',
@@ -63,15 +65,6 @@ export default {
         }
     },
     methods : {
-        deleteContract(contrat_id){
-            var text = "Êtes-vous certain de vouloir supprimer ce contract ?\n\n"
-            text+= "Votre contrat pour cet appareil ne sera pas reconduis le mois prochain et vous perdrez vos garanties."
-            if(confirm(text))
-            postService.deleteContract(this.folder_id,contrat_id)
-            .then(()=>{
-                router.push('/');
-            })
-        },
         myRowClickHandler(record) {
             localStorage.setItem('contract_id_user',record.contract_id)
             localStorage.setItem('folder_id_user',this.user.folder)
@@ -79,6 +72,27 @@ export default {
             router.push('/adminAccount/AdminCheckSinister')
             else
             alert("Cet appareil n'a pas de sinistre en cours")
+        },
+        searchBySN() {
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("myTable");
+            tr = table.getElementsByTagName("tr");
+
+            // Loop through all table rows, and hide those who don't match the search query
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[2]; //index of parameter in
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } 
+                    else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
         },
     },
     components : {
@@ -96,6 +110,7 @@ export default {
         postService.getAccount(localStorage.getItem('folder_id_user'))
         .then(res=> {
             this.account = res.data
+            this.items=this.account.listContract
         })
     }
     
@@ -103,7 +118,6 @@ export default {
 </script>
 
 <style>
-
 .b-table{
 cursor:pointer;
 }

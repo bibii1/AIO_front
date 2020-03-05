@@ -147,4 +147,8 @@ export default class PostService {
     updateSinister(sinister,folder_id){
         return axios.post(`${apiBaseUrl}/users/contract/updatesinister`,{sinister,folder_id})
     }
+
+    getUserByEmail(email){
+        return axios.post(`${apiBaseUrl}/users/getUserByEmail`,email)
+    }
 }

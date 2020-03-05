@@ -24,42 +24,32 @@ import '../../node_modules/materialize-css/dist/js/materialize.min.js';
 import NavBar from '../components/Navbar';
 import PostService from '../PostService';
 const postService = new PostService();
-import router from '../router';
+//import router from '../router';
 
 
 export default {
     name : "Account",
     data: function(){
         return{
-            //on pourra charger tous les dossier ici pour l'instant que le folder_id
             isAuth: '',
             folder_id : localStorage.getItem('folder_id'),
             superuser :" " ,
             account: {},
             dialog: false,
             user: "",
-            sinister: ""
+            sinister: "",
+            object: ""
         }
     },
     methods : {
-        deleteContract(contrat_id){
-            var text = "Êtes-vous certain de vouloir supprimer ce contract ?\n\n"
-            text+= "Votre contrat pour cet appareil ne sera pas reconduis le mois prochain et vous perdrez vos garanties."
-            if(confirm(text))
-            postService.deleteContract(this.folder_id,contrat_id)
-            .then(()=>{
-                router.push('/');
-            })
-        },
         myRowClickHandler(record) {
             localStorage.setItem('contract_id_user',record.contrat_id)
             //router.push('/adminAccount/AdminCheckSinister')
         },
         updateSinister(){
-            this.sinister.sinisterStep = 1
+            if(this.sinisterStep< 3)
+            this.sinisterStep+=1
             postService.updateSinister(this.sinister,localStorage.getItem('folder_id_user'))
-            .then(res=>
-            console.log(res))
         }
     },
     components : {
@@ -78,6 +68,10 @@ export default {
         postService.getSinister(folder_id_user,localStorage.getItem('contract_id_user'))
         .then(res=>{
             this.sinister = res.data
+        })
+        postService.getAccount(localStorage.getItem('contract_id_user'))
+        .then(res=>{
+            this.account = res.data
         })
     }
 }
