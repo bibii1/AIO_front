@@ -143,7 +143,6 @@ import NavBar from '../components/Navbar';
 
 import PostService from '../PostService';
 const postService = new PostService();
-      
 
 export default {
     name:"create",
@@ -162,7 +161,7 @@ export default {
             purchaseDate: "",
             month_price : 0,
             listWarranted : {},
-            files : [],
+            file : "",
             panne: false,
             casse: false,
             vol: false,
@@ -171,9 +170,6 @@ export default {
     },
     methods:{
         onSubmit(){
-            const formData = new FormData();
-            formData.append('file',this.file)
-            console.log("form \n" + this.object)
             const contract={
                 folder_id : localStorage.getItem('folder_id'),
                 object : this.object,
@@ -189,16 +185,20 @@ export default {
                 casse: this.casse,
                 vol: this.vol,
                 oxydation: this.oxydation,
-                files : this.file,
                 isSinistered: false
             };
-            postService.createContract(contract)
+            postService.createContract(contract,this.file)
             .then(()=>{
               router.push('/');
             })
         },
         handleFileUpload(){
-          this.file = this.$refs.file.files[0];
+          if (this.$refs.file.files[0])
+          {
+            this.file = this.$refs.file.files[0];
+          }
+          else
+            this.file = null
         }
     }
   }

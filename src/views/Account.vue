@@ -175,7 +175,6 @@ export default {
         postService.getUser(this.folder_id)
         .then(res=> {
             this.user = res.data
-            console.log(this.user)
         })
     }
 }
