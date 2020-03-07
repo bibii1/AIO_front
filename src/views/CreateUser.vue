@@ -61,7 +61,7 @@ import NavBar from '../components/Navbar';
 import PostService from '../PostService';
 const postService = new PostService();
 export default {
-    name:"create",
+    name:"createUser",
     components : {
       NavBar
     },

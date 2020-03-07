@@ -149,6 +149,7 @@ export default class PostService {
     }
 
     getUserByEmail(email){
+        console.log(email)
         return axios.post(`${apiBaseUrl}/users/getUserByEmail`,email)
     }
 }

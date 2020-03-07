@@ -28,7 +28,7 @@ import router from '../router';
 
 
 export default {
-    name : "Account",
+    name : "AdminAccount",
     data: function(){
         return{
             //on pourra charger tous les dossier ici pour l'instant que le folder_id
@@ -81,7 +81,7 @@ export default {
             router.push('/adminAccount/adminCheckUser')
         },
         searchByEmail() {
-            var input = document.getElementById("myInput").value;
+            var input = {email: document.getElementById("myInput").value};
             postService.getUserByEmail(input)
             .then(res=>{
             this.users = res.data

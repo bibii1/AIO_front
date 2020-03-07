@@ -56,7 +56,6 @@ export default {
     },
     methods : {
         setTypeSinister(name){
-            console.log(name);
             this.type = name;
         },
         setPanne(){

@@ -180,6 +180,8 @@ export default {
 }
 </script>
 
-<style scoped>
-    
+<style>
+a{
+cursor:pointer;
+}
 </style>

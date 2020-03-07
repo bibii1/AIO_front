@@ -77,7 +77,7 @@ const postService = new PostService();
 
 
 export default {
-    name : "Account",
+    name : "AdminCheckSinister",
     data: function(){
         return{
             isAuth: '',

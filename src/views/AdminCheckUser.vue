@@ -28,7 +28,7 @@ import router from '../router';
 
 
 export default {
-    name : "Account",
+    name : "AdminCheckUser",
     data: function(){
         return{
             isAuth: '',

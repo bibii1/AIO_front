@@ -92,8 +92,6 @@ export default {
             router.push('/');
         },
         deleteContract(contrat_id){
-            console.log(contrat_id);
-            console.log(this.folder_id);
             postService.deleteContract(this.folder_id,contrat_id)
             .then(()=>{
                 router.push('/');
@@ -111,7 +109,6 @@ export default {
     created(){
         postService.getAccount(this.folder_id)
         .then(res=>{
-            console.log(res.data)
             this.account = res.data
         })
     }

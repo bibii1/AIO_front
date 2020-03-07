@@ -145,12 +145,11 @@ import PostService from '../PostService';
 const postService = new PostService();
 
 export default {
-    name:"create",
+    name:"createContract",
     components : {
       NavBar
     },
     data(){
-      
         return{
             object : "",
             category : "",
@@ -187,7 +186,7 @@ export default {
                 oxydation: this.oxydation,
                 isSinistered: false
             };
-            postService.createContract(contract,this.file)
+            postService.createContract(contract)
             .then(()=>{
               router.push('/');
             })
@@ -195,7 +194,7 @@ export default {
         handleFileUpload(){
           if (this.$refs.file.files[0])
           {
-            this.file = this.$refs.file.files[0];
+            this.file = {file:this.$refs.file.files[0]};
           }
           else
             this.file = null
@@ -218,6 +217,10 @@ select {
 input[type="checkbox"]{
   position: static !important;
   -webkit-appearance:checkbox;
+}
+
+input{
+cursor:pointer;
 }
 
 </style>
