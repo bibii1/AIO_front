@@ -9,11 +9,13 @@ import './assets/css/styles.css'
 
 import router from './router';
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+import VueCardPayment from 'vue-card-payment'
+import 'vue-card-payment/dist/vue-card-payment.css'
+
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
+Vue.use(VueCardPayment)
 
-/*import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap-vue/dist/bootstrap-vue.css'*/
 
 
 
