@@ -78,7 +78,6 @@ export default {
     created(){
         postService.getAccount(this.folder_id)
         .then(res=>{
-            console.log(res.data)
             this.account = res.data
         })
     }
@@ -99,6 +98,10 @@ select {
 input[type="checkbox"]{
   position: static !important;
   -webkit-appearance:checkbox;
+}
+
+input{
+cursor:pointer;
 }
 
 </style>

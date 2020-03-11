@@ -3,7 +3,7 @@
     <div class="accountContainer">
         <NavBar/>
         <h5>Bienvenue {{superuser.first_name}}</h5>
-        <input type="text" id="myInput" v-on:keyup="myFunction" placeholder="Search for email">
+        <input type="text" id="myInput" v-on:keyup="searchByEmail" placeholder="Search for email">
         <b-table id="myTable" striped hover :items="users" :fields="fields" :bordered="true" @row-clicked="myRowClickHandler">
         </b-table>
     </div>
@@ -28,14 +28,13 @@ import router from '../router';
 
 
 export default {
-    name : "Account",
+    name : "AdminAccount",
     data: function(){
         return{
             //on pourra charger tous les dossier ici pour l'instant que le folder_id
             isAuth: '',
             folder_id : localStorage.getItem('folder_id'),
             superuser :" " ,
-            account: {},
             dialog: false,
             users: [],
             fields: [
@@ -81,26 +80,12 @@ export default {
             localStorage.setItem('folder_id_user',record.folder)
             router.push('/adminAccount/adminCheckUser')
         },
-        myFunction() {
-            var input, filter, table, tr, td, i, txtValue;
-            input = document.getElementById("myInput");
-            filter = input.value.toUpperCase();
-            table = document.getElementById("myTable");
-            tr = table.getElementsByTagName("tr");
-
-            // Loop through all table rows, and hide those who don't match the search query
-            for (i = 0; i < tr.length; i++) {
-                td = tr[i].getElementsByTagName("td")[4];
-                if (td) {
-                    txtValue = td.textContent || td.innerText;
-                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                        tr[i].style.display = "";
-                    } 
-                    else {
-                        tr[i].style.display = "none";
-                    }
-                }
-            }
+        searchByEmail() {
+            var input = {email: document.getElementById("myInput").value};
+            postService.getUserByEmail(input)
+            .then(res=>{
+            this.users = res.data
+            })
         }
     },
     components : {

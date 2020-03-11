@@ -2,9 +2,16 @@
 <body>
     <div class="accountContainer">
         <NavBar/>
-        <h5>Bienvenue {{superuser.first_name}}</h5>
-                <b-table id="myTable" striped hover :items="user.sinisters" :bordered="true" @row-clicked="myRowClickHandler">
-                </b-table>
+        <h5>Fiche client</h5>
+        <p>Nom : {{user.last_name}}</p>
+        <p>Prenom : {{user.first_name}}</p>
+        <p>Numero de contrat d'assurance : {{user.folder}}</p>
+        <p>Telephone : {{user.phone}}</p>
+        <p>Email : {{user.email}}</p>
+        <h5>Liste des appareils assurés </h5>
+        <input type="text" id="myInput" v-on:keyup="searchBySN" placeholder="Search for serial number">
+        <b-table id="myTable" striped hover :items="items" :bordered="true" :fields="fields" @row-clicked="myRowClickHandler">
+        </b-table>
     </div>
 </body>
 </template>
@@ -27,27 +34,71 @@ import router from '../router';
 
 
 export default {
-    name : "Account",
+    name : "AdminCheckUser",
     data: function(){
         return{
-            //on pourra charger tous les dossier ici pour l'instant que le folder_id
             isAuth: '',
             folder_id : localStorage.getItem('folder_id'),
             superuser :" " ,
             account: {},
             dialog: false,
-            user: ""
+            user: "",
+            items:[],
+            fields: [
+                {
+                    key: 'contract_id',
+                    sortable: false
+                },
+                {
+                    key: 'object',
+                    sortable: false
+                },
+                {
+                    key: 'serialNumber',
+                    sortable: false
+                },
+                // Voir si necessaire
+                /*{
+                    key: 'listWarranted',
+                    sortable: false
+                },*/
+                
+                {
+                    key: 'purchasePrice',
+                    sortable: false
+                }
+            ]
         }
     },
     methods : {
-        deleteContract(contrat_id){
-            var text = "Êtes-vous certain de vouloir supprimer ce contract ?\n\n"
-            text+= "Votre contrat pour cet appareil ne sera pas reconduis le mois prochain et vous perdrez vos garanties."
-            if(confirm(text))
-            postService.deleteContract(this.folder_id,contrat_id)
-            .then(()=>{
-                router.push('/');
-            })
+        myRowClickHandler(record) {
+            localStorage.setItem('contract_id_user',record.contract_id)
+            localStorage.setItem('folder_id_user',this.user.folder)
+            if(record.isSinistered === true)
+            router.push('/adminAccount/AdminCheckSinister')
+            else
+            alert("Cet appareil n'a pas de sinistre en cours")
+        },
+        searchBySN() {
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("myTable");
+            tr = table.getElementsByTagName("tr");
+
+            // Loop through all table rows, and hide those who don't match the search query
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[2]; //index of parameter in
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } 
+                    else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
         },
     },
     components : {
@@ -61,13 +112,23 @@ export default {
         postService.getUser(localStorage.getItem('folder_id_user'))
         .then(res=> {
             this.user = res.data
-            console.log(this.user)
         })
-
+        postService.getAccount(localStorage.getItem('folder_id_user'))
+        .then(res=> {
+            this.account = res.data
+            this.items=this.account.listContract
+        })
     }
+    
 }
 </script>
 
-<style scoped>
+<style>
+.b-table{
+cursor:pointer;
+}
+p{
+    margin-left: 10px;
+}
     
 </style>

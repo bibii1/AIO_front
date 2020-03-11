@@ -2,6 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import './assets/css/styles.css'
 
+
 //le routeur va nous permetre de naviguer entre chaque page de l'appli
 //il peut etre appele dans 'template' avec la balise <link-router>
 //il peut etre appele dans 'script' avec la methode push
@@ -11,6 +12,7 @@ import router from './router';
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
+
 
 /*import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'*/

@@ -16,7 +16,7 @@
 import LoginForm from '../components/LoginForm';
 import NavBar from '../components/Navbar';
 export default {
-  name: 'home',
+  name: 'Home',
   components :{
     NavBar,
     LoginForm

@@ -15,6 +15,7 @@ import SinisterProgress from './views/SinisterProgress.vue'
 import AdminAccount from './views/AdminAccount.vue';
 import AdminCheckUser from './views/AdminCheckUser.vue';
 import UpdateWarranted from './views/UpdateWarranted.vue';
+import AdminCheckSinister from './views/AdminCheckSinister.vue';
 
 import axios from 'axios';
 const apiBaseUrl = 'http://localhost:3000';
@@ -96,6 +97,10 @@ const router = new Router({
         {
             path: '/adminAccount/adminCheckUser',
             component: AdminCheckUser
+        },
+        {
+            path: '/adminAccount/adminCheckSinister',
+            component: AdminCheckSinister
         },
         {
             path:'/users/create',

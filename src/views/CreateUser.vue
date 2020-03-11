@@ -66,7 +66,7 @@ const postService = new PostService();
 //var xhr = new XMLHttpRequest();
 
 export default {
-    name:"create",
+    name:"createUser",
     components : {
       NavBar
     },
