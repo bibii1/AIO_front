@@ -94,6 +94,10 @@ export default class PostService {
         return axios.post(`${apiBaseUrl}/users/me/logoutall`,{},config)
     }
 
+    sendValidationEmail(post){
+        axios.post(`${apiBaseUrl}/mail/send/validationLink`,post);
+    }
+
      //__________________________________________________________________________________
     //METHODES QUI AGISSENT SUR LA COLLECTION ACCOUNT
     //__________________________________________________________________________________

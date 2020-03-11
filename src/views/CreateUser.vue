@@ -60,6 +60,11 @@ import NavBar from '../components/Navbar';
 
 import PostService from '../PostService';
 const postService = new PostService();
+
+//var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+//var request = require('request');
+//var xhr = new XMLHttpRequest();
+
 export default {
     name:"create",
     components : {
@@ -101,16 +106,11 @@ export default {
             }
             localStorage.removeItem('acces-token');
             localStorage.removeItem('folder_id');
+            postService.sendValidationEmail(post);
             //lorsque l'on crée un nouvel utilisateur on remove de localStorage les anciennes données
             //num dossier + ancien acces_token
             router.push('/');
-            this.SendMail()
-        },
-        SendMail(){
-          console.log("nous sommes rentrés dans sendLMail le lien envoyé sera :\n\n")
-          console.log("http://localhost:3000/users/emailValidation/"+this.email)
         }
-        
     }
 }
 
