@@ -17,9 +17,24 @@ export default class PostService {
         return axios.get(`${apiBaseUrl}/users/all`);
     }
 
-    //on renvoie l'utilisateur si authantification
+    getUser(folder_id){
+        return axios.post(`${apiBaseUrl}/users/getUser`,{folder_id : folder_id})
+    }
+
+    getSuperUser(folder_id){
+        return axios.post(`${apiBaseUrl}/superUser/getUser`,{folder_id : folder_id})
+    }
+
+    //on renvoie l'utilisateur si authentification
     getCheckLogin(user){
-        return axios.post(`${apiBaseUrl}/users/login`,user)
+        if(user.email.includes('@aio.fr'))
+        {
+            return axios.post(`${apiBaseUrl}/superUser/login`,user)
+        }
+        else
+        {
+            return axios.post(`${apiBaseUrl}/users/login`,user)
+        }
     }
 
     //verifie que le token existe bien dans la bdd pour l'user en question
@@ -38,6 +53,28 @@ export default class PostService {
                 if(res.data == 0){
                     axios.post(`${apiBaseUrl}/users`,user);
                 }
+                else
+                {
+                    alert("Un compte existe déjà avec cet email.")
+                }
+            })
+        }
+    }
+
+    postSuperUser(user){
+        if(user != null){
+            //on verifie d'abord qu"il n'y a aucun utilisateur semblable avec le mail
+            //la requete retourne uniquement le nombre d'users avec ce mail
+            //elle ne retourne pas les infos de l'user
+            axios.get(`${apiBaseUrl}/superUser/checkEmail/${user.email}`)
+            .then(function(res){
+                if(res.data == 0){
+                    axios.post(`${apiBaseUrl}/superUser`,user);
+                }
+                else
+                {
+                    alert("Un compte existe déjà avec cet email.")
+                }
             })
         }
     }
@@ -55,6 +92,10 @@ export default class PostService {
             {'Authorization' : token}
         }
         return axios.post(`${apiBaseUrl}/users/me/logoutall`,{},config)
+    }
+
+    sendValidationEmail(post){
+        axios.post(`${apiBaseUrl}/mail/send/validationLink`,post);
     }
 
      //__________________________________________________________________________________
@@ -101,5 +142,24 @@ export default class PostService {
 
     createSinister(sinister){
         return axios.post(`${apiBaseUrl}/users/contract/sinister/informations`,sinister)
+    }
+
+     //__________________________________________________________________________________
+    //METHODES QUI AGISSENT SUR L'ENVOIE DE MAIL
+    //__________________________________________________________________________________
+
+    sendMailUpdateWarranted(cont){
+        return axios.post(`${apiBaseUrl}/mail/send/updateWarranted`,cont)
+    }
+    getSinister(folder_id,contract_id){
+        return axios.post(`${apiBaseUrl}/users/contract/getsinister`,{folder_id,contract_id})
+    }
+
+    updateSinister(sinister,folder_id){
+        return axios.post(`${apiBaseUrl}/users/contract/updatesinister`,{sinister,folder_id})
+    }
+
+    getUserByEmail(email){
+        return axios.post(`${apiBaseUrl}/users/getUserByEmail`,email)
     }
 }

@@ -19,6 +19,12 @@
       </div>
       <div class="row">
         <div class="input-field col s12">
+          <input id="phone" type="text" v-model="phone" class="validate" required>
+          <label for="phone">Telephone Portable</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
           <input id="email" type="email" v-model="email" class="validate" required>
           <label for="email">Email</label>
         </div>
@@ -32,7 +38,7 @@
       <div class="row">
         <div class="input-field col s12">
           <input id="password2" type="password" v-model="password2" class="validate" required>
-          <label for="password2">Confirmer mot de passe</label>
+          <label for="password2">Confirmez votre mot de passe</label>
         </div>
       </div>
       <div class="row">
@@ -54,8 +60,13 @@ import NavBar from '../components/Navbar';
 
 import PostService from '../PostService';
 const postService = new PostService();
+
+//var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+//var request = require('request');
+//var xhr = new XMLHttpRequest();
+
 export default {
-    name:"create",
+    name:"createUser",
     components : {
       NavBar
     },
@@ -66,32 +77,40 @@ export default {
           email :"",
           password1: "",
           password2: "",
+          phone: "",
           count:""
         }
     },
     methods:{
         onSubmit(){
+            if (this.password1 != this.password2){
+              alert("Les mots de passes ne sont pas identiques, veuillez réessayer")
+              return;
+            }
             const post={
                 first_name : this.fn,
                 last_name : this.ln,
                 password : this.password1,
                 email :this.email,
+                phone: this.phone,
                 folder : uuidv4()
             };
-            postService.postUser(post)
+            if(this.email.includes("@aio.fr"))
+            {
+              postService.postSuperUser(post)
+            }
+            else
+            {
+              postService.initAccount(post.folder)
+              postService.postUser(post)
+            }
             localStorage.removeItem('acces-token');
             localStorage.removeItem('folder_id');
-            postService.initAccount(post.folder)
+            postService.sendValidationEmail(post);
             //lorsque l'on crée un nouvel utilisateur on remove de localStorage les anciennes données
             //num dossier + ancien acces_token
             router.push('/');
-            this.SendMail()
-        },
-        SendMail(){
-          console.log("nous sommes rentrés dans sendLMail le lien envoyé sera :\n\n")
-          console.log("http://localhost:3000/users/emailValidation/"+this.email)
         }
-        
     }
 }
 

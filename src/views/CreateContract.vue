@@ -143,15 +143,13 @@ import NavBar from '../components/Navbar';
 
 import PostService from '../PostService';
 const postService = new PostService();
-      
 
 export default {
-    name:"create",
+    name:"createContract",
     components : {
       NavBar
     },
     data(){
-      
         return{
             object : "",
             category : "",
@@ -162,7 +160,7 @@ export default {
             purchaseDate: "",
             month_price : 0,
             listWarranted : {},
-            files : [],
+            file : "",
             panne: false,
             casse: false,
             vol: false,
@@ -171,9 +169,6 @@ export default {
     },
     methods:{
         onSubmit(){
-            const formData = new FormData();
-            formData.append('file',this.file)
-            console.log("form \n" + this.object)
             const contract={
                 folder_id : localStorage.getItem('folder_id'),
                 object : this.object,
@@ -189,7 +184,6 @@ export default {
                 casse: this.casse,
                 vol: this.vol,
                 oxydation: this.oxydation,
-                files : this.file,
                 isSinistered: false
             };
             postService.createContract(contract)
@@ -198,7 +192,12 @@ export default {
             })
         },
         handleFileUpload(){
-          this.file = this.$refs.file.files[0];
+          if (this.$refs.file.files[0])
+          {
+            this.file = {file:this.$refs.file.files[0]};
+          }
+          else
+            this.file = null
         }
     }
   }
@@ -218,6 +217,10 @@ select {
 input[type="checkbox"]{
   position: static !important;
   -webkit-appearance:checkbox;
+}
+
+input{
+cursor:pointer;
 }
 
 </style>

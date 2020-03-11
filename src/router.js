@@ -3,6 +3,7 @@ import Router from 'vue-router';
 
 import Home from './views/Home.vue';
 import Account from './views/Account.vue';
+import Validation from './views/Validation.vue';
 import CreateUser from './views/CreateUser.vue';
 import About from './views/About.vue';
 import ErrorVue from './views/Error.vue';
@@ -11,6 +12,10 @@ import SinisterChooseObject from './views/SinisterChooseObject.vue';
 import SinisterChooseSinister from './views/SinisterChooseSinister.vue'
 import SinisterInfos from './views/SinisterInfos.vue'
 import SinisterProgress from './views/SinisterProgress.vue'
+import AdminAccount from './views/AdminAccount.vue';
+import AdminCheckUser from './views/AdminCheckUser.vue';
+import UpdateWarranted from './views/UpdateWarranted.vue';
+import AdminCheckSinister from './views/AdminCheckSinister.vue';
 
 import axios from 'axios';
 const apiBaseUrl = 'http://localhost:3000';
@@ -68,8 +73,42 @@ const router = new Router({
             }
         },
         {
+            path:'/adminAccount',
+            component : AdminAccount,
+            beforeEnter: (to,from,next)=>{
+                const tokenTemp  = localStorage.getItem('acces_token')
+                const post  =  {
+                    token: tokenTemp
+                }
+                //le post est different de mon token initial
+                axios.post(`${apiBaseUrl}/superUser/checkToken/`,post)
+                //res = nombre de fois ou le token est present dans la bdd
+                .then(res=>{
+                    if(res.data==1){
+                        next('/adminAccount')
+                    }
+                    else{
+                        next('/error')
+                    }
+                })
+                next()
+            }
+        },
+        {
+            path: '/adminAccount/adminCheckUser',
+            component: AdminCheckUser
+        },
+        {
+            path: '/adminAccount/adminCheckSinister',
+            component: AdminCheckSinister
+        },
+        {
             path:'/users/create',
             component : CreateUser
+        },
+        {
+            path:'/users/emailValidation/:id',
+            component : Validation
         },
         {
             path:'/about',
@@ -98,7 +137,12 @@ const router = new Router({
         {
             path:'/account/contract/sinister/progress',
             component : SinisterProgress
-        }
+        },
+        {
+            path:'/account/contract/update/warranted',
+            component : UpdateWarranted
+        },
+
     ]    
 })
 

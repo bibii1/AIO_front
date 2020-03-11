@@ -1,6 +1,5 @@
 <template>
-     <nav>
-    
+  <nav>
     <div class="nav-wrapper">
       <router-link to="/" class="brand-logo left">AIO</router-link>
       <ul id="nav-mobile" class="right">
@@ -10,7 +9,6 @@
 
         <li><button v-show="isAuth" v-on:click="logout" class="btn waves-effect waves-light" type="submit" name="action">Deconnection</button></li>
         <li><button v-show="isAuth" v-on:click="logoutAll" class="btn waves-effect waves-light" type="submit" name="action">Deconnection totale</button></li>
-
       </ul>
     </div>
   </nav>
@@ -21,9 +19,12 @@ import PostService from '../PostService';
 const postService = new PostService();
 import router from '../router';
 
+
 export default {
+
   data(){
     return{
+
       isAuth : localStorage.getItem('isAuth')||false
     }
   },
@@ -45,6 +46,8 @@ export default {
       router.push('/');
     }
   },
+  components:{
+  },
   created(){
     const token = localStorage.getItem('acces_token');
     postService.getCheckToken({token})
@@ -64,4 +67,20 @@ export default {
 .nav-wrapper{
   background-color: #45A1D9;
 }
-</style>
+
+.navbar {
+  overflow: hidden;
+  background-color: #333;
+}
+
+.navbar a {
+  float: left;
+  font-size: 16px;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+
+</style>-

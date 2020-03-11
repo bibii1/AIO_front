@@ -52,10 +52,17 @@ export default {
             localStorage.setItem('acces_token',token)
             localStorage.setItem('folder_id',folder_id)
             localStorage.setItem('isAuth',true)
-            router.push('/account')
+            if(this.email.includes('@aio.fr'))
+            {
+              router.push('/adminAccount')
+            }
+            else
+            {
+              router.push('account')
+            }
           }
           else
-            console.log("l'email n'est pas valide")
+            console.log("L'email n'est pas valide")
         })
     }
   }
