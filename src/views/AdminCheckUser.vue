@@ -2,7 +2,13 @@
 <body>
     <div class="accountContainer">
         <NavBar/>
-        <h5>Bienvenue {{superuser.first_name}}</h5>
+        <h5>Fiche client</h5>
+        <p>Nom : {{user.last_name}}</p>
+        <p>Prenom : {{user.first_name}}</p>
+        <p>Numero de contrat d'assurance : {{user.folder}}</p>
+        <p>Telephone : {{user.phone}}</p>
+        <p>Email : {{user.email}}</p>
+        <h5>Liste des appareils assurés </h5>
         <input type="text" id="myInput" v-on:keyup="searchBySN" placeholder="Search for serial number">
         <b-table id="myTable" striped hover :items="items" :bordered="true" :fields="fields" @row-clicked="myRowClickHandler">
         </b-table>
@@ -120,6 +126,9 @@ export default {
 <style>
 .b-table{
 cursor:pointer;
+}
+p{
+    margin-left: 10px;
 }
     
 </style>
