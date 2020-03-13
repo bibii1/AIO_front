@@ -8,7 +8,7 @@
                 v-bind:item="contract"
                 v-bind:index="index"
                 v-bind:key="contract.contract_id">
-                <div class="card small horizontal" v-if="contract.contract_id === contrat_id ">
+                <div class="card small horizontal">
                     <div class="card-image">
                         <img src="../assets/img/Apple/Smartphone/Iphone-X.png" v-if=" contract.brand === 'Apple' && contract.model == 'Iphone X'">
                         <img src="../assets/img/Apple/Smartphone/Iphone-11.png" v-if=" contract.brand === 'Apple' && contract.model == 'Iphone 11'">
@@ -43,18 +43,21 @@
                             <p>Numéro de série : {{contract.serialNumber}}</p>
                             <p>Liste de garanties : {{contract.listWarranted}}</p>
                             <p>prix du tel : {{contract.purchasePrice}}</p>
-                            <h6>Prix par mois : {{contract.month_price}} €</h6>
+                            <h6>Prix par mois : {{getMonth_price(index)}} €</h6>
+                            <p>est sinistré : {{index}}</p>
                         </div>
                         <div class="card-action">
-                            <!-- Voir les documents ici -->
+                            <a v-on:click="deleteContract(contract.contract_id)" v-if="contract.isSinistered===false">Supprimer le contrat</a>
+                            <a v-on:click="modifyContract(contract.contract_id)" v-if="contract.isSinistered===false">Modifier le contrat</a>
+                            <a v-on:click="checkSinister(contract.contract_id)" v-if="contract.isSinistered===true">Suivi du sinistre</a>
                         </div>
                     </div>
                 </div>
-            </div>    
+            </div>
         </div>
-        <div class="card-action">
+        <!-- <div class="card-action">
          <button v-on:click="updateSinister()">Valider l'etape</button>
-        </div>
+        </div> -->
     </div>
 </body>
 </template>
