@@ -171,7 +171,6 @@ export default {
         postService.getAccount(this.folder_id)
         .then(res=>{
             this.account = res.data
-            console.log(res.data)
         })
     }
 }

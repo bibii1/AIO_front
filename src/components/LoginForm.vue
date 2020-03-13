@@ -48,7 +48,6 @@ export default {
           {
             const token = res.data.token
             const folder_id = res.data.userTemp.folder
-            console.log(res.data)
             localStorage.setItem('acces_token',token)
             localStorage.setItem('folder_id',folder_id)
             localStorage.setItem('isAuth',true)
