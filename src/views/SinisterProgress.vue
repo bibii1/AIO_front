@@ -27,7 +27,7 @@ export default {
     data: function(){
         return{
             //on pourra charger tous les dossier ici pour l'instant que le folder_id
-            mySteps : ['Déclaration','Vérification','Validation','Fin'],
+            mySteps : ['Déclaration','Validation','Fin'],
             currentStep : 0,
             isAuth: '',
             folder_id : localStorage.getItem('folder_id'),

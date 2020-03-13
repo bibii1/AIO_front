@@ -98,8 +98,6 @@ export default {
             //router.push('/adminAccount/AdminCheckSinister')
         },
         updateSinister(){
-            if(this.sinisterStep< 3)
-            this.sinisterStep+=1
             postService.updateSinister(this.sinister,this.folder_id_user)
         },
         getMonth_price(index){
