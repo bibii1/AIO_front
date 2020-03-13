@@ -2,7 +2,7 @@
 <body>
     <div class="accountContainer">
         <NavBar/>
-        <h5>Bienvenue {{user.first_name}},</h5>
+        <h5>nous sommes dans l'account {{folder_id}}</h5>
         <div class="row">
             <div class="col s10" v-for="(contract,index) in account.listContract"
                 v-bind:item="contract"
@@ -37,39 +37,18 @@
                     <div class="card-stacked">
                         <div class="card-content">
                             <p>Objet : {{contract.object}}</p>
+                            <p>Catégorie : {{contract.category}}</p>
                             <p>Marque : {{contract.brand}}</p>
                             <p>Modèle : {{contract.model}}</p>
-                            <p>
-                            <label>
-                            <input type="checkbox" id="Perte" disabled="disabled" value="Perte" v-model="contract.listWarranted.panne">
-                            <span>Panne</span>
-                            </label>
-                            </p>
-                            <p>
-                            <label>
-                            <input type="checkbox" id="Casse" disabled="disabled" value="Casse" v-model="contract.listWarranted.casse">
-                            <span>Casse</span>
-                            </label>
-                            </p>
-                            <p>
-                            <label>
-                                <input type="checkbox" name="Vol" id="Vol" disabled="disabled" value="Vol" v-model="contract.listWarranted.vol">
-                                <span> Vol</span>
-                            </label>
-                            </p>
-                            <p>
-                            <label>
-                            <input type="checkbox" id="Oxydation" disabled="disabled" value="Oxydation" v-model="contract.listWarranted.oxydation">
-                            <span> Oxydation </span>
-                            </label>
-                            </p>
+                            <p>Numéro de série : {{contract.serialNumber}}</p>
+                            <p>Liste de garanties : {{contract.listWarranted}}</p>
                             <p>prix du tel : {{contract.purchasePrice}}</p>
                             <h6>Prix par mois : {{getMonth_price(index)}} €</h6>
                             <p>est sinistré : {{index}}</p>
                         </div>
                         <div class="card-action">
                             <a v-on:click="deleteContract(contract.contract_id)" v-if="contract.isSinistered===false">Supprimer le contrat</a>
-                            <a v-on:click="updateContract(index)" v-if="contract.isSinistered===false">Modifier les garanties</a>                            
+                            <a v-on:click="modifyContract(contract.contract_id)" v-if="contract.isSinistered===false">Modifier le contrat</a>
                             <a v-on:click="checkSinister(contract.contract_id)" v-if="contract.isSinistered===true">Suivi du sinistre</a>
                         </div>
                     </div>
@@ -82,7 +61,7 @@
         <br/>
         <br/>
         <router-link v-show="!isAuth" :to="'/account/contract/sinister/chooseObject'">
-            <button class="btn waves-effect waves-light">Déclarer un sinistre</button>
+            <button class="btn waves-effect waves-light">Declarer un sinistre</button>
         </router-link>
     </div>
 </body>
@@ -112,7 +91,6 @@ export default {
             //on pourra charger tous les dossier ici pour l'instant que le folder_id
             isAuth: '',
             folder_id : localStorage.getItem('folder_id'),
-            user :" " ,
             account: {},
             dialog: false
         }
@@ -133,12 +111,7 @@ export default {
         }, 
         checkSinister(contrat_id){
             localStorage.setItem('contract_id',contrat_id);
-            localStorage.setItem('folder_id',this.folder_id);
             router.push('/account/contract/sinister/progress')
-        },
-        updateContract(index){
-            localStorage.setItem('index',index);
-            router.push('/account/contract/update/warranted')
         },
         getMonth_price(index){
             // index correspond a l'index du contrat concerné, il permet d'indiquer 
@@ -200,20 +173,10 @@ export default {
             this.account = res.data
             console.log(res.data)
         })
-        postService.getUser(this.folder_id)
-        .then(res=> {
-            this.user = res.data
-        })
     }
 }
 </script>
 
-<style>
-a{
-cursor:pointer;
-}
-
-input[type="checkbox"]{
-    cursor: auto;
-}
+<style scoped>
+    
 </style>

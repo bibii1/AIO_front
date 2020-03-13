@@ -84,10 +84,10 @@ export default class PostService {
             {'Authorization' : token}
         }
         return axios.post(`${apiBaseUrl}/users/me/logout`,{},config)
-    
     }
 
     logoutallAccount(token){
+
         const config = { headers :
             {'Authorization' : token}
         }

@@ -3,11 +3,29 @@
     <div class="accountContainer">
         <NavBar/>
         <h5>Fiche client</h5>
-        <p>Nom : {{user.last_name}}</p>
-        <p>Prenom : {{user.first_name}}</p>
-        <p>Numero de contrat d'assurance : {{user.folder}}</p>
-        <p>Telephone : {{user.phone}}</p>
-        <p>Email : {{user.email}}</p>
+        <div class="col s12 m7">
+            <div class="card horizontal">
+            <div class="card-image">
+                <img src="https://www.ecole-tunon.com/sites/default/files/secteur/reception_bleu_0.png" alt="" height="250" width="100">
+            </div>
+            <div class="card-stacked">
+                <div class="card-content">
+                    <p>Nom : {{user.last_name}}</p>
+                    <p>Prenom : {{user.first_name}}</p>
+                    <p>Numero de contrat d'assurance : {{user.folder}}</p>
+                    <p>Telephone : {{user.phone}}</p>
+                    <p>Email : {{user.email}}</p>                
+                </div>
+                <div class="card-action">
+                    <a v-on:click="test()">Modifier la fiche client</a>
+                    <a v-on:click="logoutAll()">Déconnecter les appareils</a>
+                    <br/><br/>
+                    <a v-on:click="deleteUser()">Supprimer l'utilisateur et ses contrats</a>                
+                </div>
+            </div>
+            </div>
+        </div>
+    
         <h5>Liste des appareils assurés </h5>
         <input type="text" id="myInput" v-on:keyup="searchBySN" placeholder="Search for serial number">
         <b-table id="myTable" striped hover :items="items" :bordered="true" :fields="fields" @row-clicked="myRowClickHandler">
@@ -71,13 +89,32 @@ export default {
         }
     },
     methods : {
+        logoutAll(){
+            postService.getUser(localStorage.getItem('folder_id_user'))
+            .then(res=> {
+                this.user = res.data
+            })
+            if(this.user.tokens.length == 0){
+                alert(`${this.user.first_name} ${this.user.last_name} est deja déconnecté(e) de tous ses appareils`);
+                router.push('/adminAccount/adminCheckUser');
+
+            }
+            else{
+                alert(`les appareils de ${this.user.first_name} ${this.user.last_name} ont été déconnectés`)
+                const token = this.user.tokens[0].token
+                postService.logoutallAccount(token);
+                
+            }
+        },
+        deleteUser(){
+            alert(`Etes-vous sûr de vouloir supprimer l'utilisateur ${this.user.first_name} ${this.user.last_name} ?`);
+            postService.deleteAll(this.user.folder);
+            router.push('/adminAccount')
+        },
         myRowClickHandler(record) {
             localStorage.setItem('contract_id_user',record.contract_id)
             localStorage.setItem('folder_id_user',this.user.folder)
-            if(record.isSinistered === true)
-            router.push('/adminAccount/AdminCheckSinister')
-            else
-            alert("Cet appareil n'a pas de sinistre en cours")
+            router.push('/adminAccount/AdminCheckContract')
         },
         searchBySN() {
             var input, filter, table, tr, td, i, txtValue;

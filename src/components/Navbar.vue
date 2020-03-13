@@ -29,16 +29,14 @@ export default {
     }
   },
   methods : {
-    logout(){
-      const token = localStorage.getItem('acces_token');
+    logout(token=localStorage.getItem('acces_token')){
       postService.logoutAccount(token);
       localStorage.removeItem('acces_token')
       localStorage.removeItem('folder_id')
       localStorage.removeItem('isAuth')
       router.push('/');
     },
-    logoutAll(){
-      const token = localStorage.getItem('acces_token');
+    logoutAll(token=localStorage.getItem('acces_token')){
       postService.logoutallAccount(token);
       localStorage.removeItem('isAuth')
       localStorage.removeItem('acces_token')
