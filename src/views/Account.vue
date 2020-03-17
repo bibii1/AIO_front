@@ -2,7 +2,7 @@
 <body>
     <div class="accountContainer">
         <NavBar/>
-        <h5>nous sommes dans l'account {{folder_id}}</h5>
+        <h5>Bienvenue {{user.first_name}}</h5>
         <div class="row">
             <div class="col s10" v-for="(contract,index) in account.listContract"
                 v-bind:item="contract"
@@ -92,7 +92,8 @@ export default {
             isAuth: '',
             folder_id : localStorage.getItem('folder_id'),
             account: {},
-            dialog: false
+            dialog: false,
+            user:''
         }
     },
     methods : {
@@ -171,6 +172,10 @@ export default {
         postService.getAccount(this.folder_id)
         .then(res=>{
             this.account = res.data
+        })
+        postService.getUser(this.folder_id)
+        .then(res=> {
+            this.user = res.data
         })
     }
 }

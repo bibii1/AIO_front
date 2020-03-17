@@ -5,7 +5,7 @@
       <ul id="nav-mobile" class="right">
         <li><router-link v-show="!isAuth" :to="'/'">Log in</router-link></li>
         <li><router-link v-show="!isAuth" :to="'/users/create'">Create</router-link></li>
-        <li><router-link v-show="!isAuth" :to="'/account'">Account</router-link></li>
+        <!--<li><router-link v-show="!isAuth" :to="'/account'">Account</router-link></li>-->
 
         <li><button v-show="isAuth" v-on:click="logout" class="btn waves-effect waves-light" type="submit" name="action">Deconnection</button></li>
         <li><button v-show="isAuth" v-on:click="logoutAll" class="btn waves-effect waves-light" type="submit" name="action">Deconnection totale</button></li>
@@ -24,7 +24,6 @@ export default {
 
   data(){
     return{
-
       isAuth : localStorage.getItem('isAuth')||false
     }
   },

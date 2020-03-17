@@ -17,7 +17,7 @@
                     <p>Email : {{user.email}}</p>                
                 </div>
                 <div class="card-action">
-                    <a v-on:click="test()">Modifier la fiche client</a>
+                    <a v-on:click="updateUser()">Modifier la fiche client</a>
                     <a v-on:click="logoutAll()">Déconnecter les appareils</a>
                     <br/><br/>
                     <a v-on:click="deleteUser()">Supprimer l'utilisateur et ses contrats</a>                
@@ -75,12 +75,6 @@ export default {
                     key: 'serialNumber',
                     sortable: false
                 },
-                // Voir si necessaire
-                /*{
-                    key: 'listWarranted',
-                    sortable: false
-                },*/
-                
                 {
                     key: 'purchasePrice',
                     sortable: false
@@ -107,9 +101,13 @@ export default {
             }
         },
         deleteUser(){
-            alert(`Etes-vous sûr de vouloir supprimer l'utilisateur ${this.user.first_name} ${this.user.last_name} ?`);
-            postService.deleteAll(this.user.folder);
-            router.push('/adminAccount')
+            if(confirm(`Etes-vous sûr de vouloir supprimer l'utilisateur ${this.user.first_name} ${this.user.last_name} ?\n Cette opération est irréversible.`)){
+                postService.deleteAll(this.user.folder);
+                router.push('/adminAccount')
+            }
+        },
+        updateUser(){
+            router.push('/adminAccount/UpdateUserInfos')
         },
         myRowClickHandler(record) {
             localStorage.setItem('contract_id_user',record.contract_id)

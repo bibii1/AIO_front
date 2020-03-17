@@ -162,4 +162,8 @@ export default class PostService {
     getUserByEmail(email){
         return axios.post(`${apiBaseUrl}/users/getUserByEmail`,email)
     }
+
+    updateUserInfos(user){
+        return axios.post(`${apiBaseUrl}/users/updateUserInfos`,user)
+    }
 }

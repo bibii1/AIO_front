@@ -16,6 +16,7 @@ import AdminAccount from './views/AdminAccount.vue';
 import AdminCheckUser from './views/AdminCheckUser.vue';
 import UpdateWarranted from './views/UpdateWarranted.vue';
 import AdminCheckContract from './views/AdminCheckContract.vue';
+import UpdateUserInfos from './views/UpdateUserInfos.vue';
 
 import axios from 'axios';
 const apiBaseUrl = 'http://localhost:3000';
@@ -41,7 +42,10 @@ const router = new Router({
                 //res = nombre de fois ou le token est present dans la bdd
                 .then(res=>{
                     if(res.data==1){
-                        next('/account')
+                        if(localStorage.getItem('isAdmin') =='true')
+                            next('/adminAccount')
+                        else
+                            next('/account')
                     }
                     else{
                         next()
@@ -70,16 +74,14 @@ const router = new Router({
                     }
                 })
                 next()
-            }
+            }     
         },
         {
             path:'/adminAccount',
             component : AdminAccount,
             beforeEnter: (to,from,next)=>{
                 const tokenTemp  = localStorage.getItem('acces_token')
-                const post  =  {
-                    token: tokenTemp
-                }
+                const post  =  {token: tokenTemp}
                 //le post est different de mon token initial
                 axios.post(`${apiBaseUrl}/superUser/checkToken/`,post)
                 //res = nombre de fois ou le token est present dans la bdd
@@ -96,19 +98,33 @@ const router = new Router({
         },
         {
             path: '/adminAccount/adminCheckUser',
-            component: AdminCheckUser
+            component: AdminCheckUser,
+            beforeEnter: (to,from,next)=>{
+                if(localStorage.getItem('isAuth')!='true')
+                {
+                    next('/')
+                }
+                next()
+            }
         },
         {
             path: '/adminAccount/adminCheckContract',
-            component: AdminCheckContract
+            component: AdminCheckContract,
+            beforeEnter: (to,from,next)=>{
+                if(localStorage.getItem('isAuth')!='true')
+                {
+                    next('/')
+                }
+                next()
+            }
         },
         {
             path:'/users/create',
-            component : CreateUser
+            component : CreateUser,
         },
         {
             path:'/users/emailValidation/:id',
-            component : Validation
+            component : Validation,
         },
         {
             path:'/about',
@@ -120,29 +136,89 @@ const router = new Router({
         },
         {
             path:'/account/contract/create',
-            component : CreateContract
+            component : CreateContract,
+            beforeEnter: (to,from,next)=>{
+                if(localStorage.getItem('isAuth')!='true')
+                {
+                    next('/')
+                }
+                next()
+
+            }
         },
         {
             path:'/account/contract/sinister/chooseObject',
-            component : SinisterChooseObject
+            component : SinisterChooseObject,
+            beforeEnter: (to,from,next)=>{
+                if(localStorage.getItem('isAuth')!='true')
+                {
+                    next('/')
+                }
+                next()
+                
+            }
         },
         {
             path:'/account/contract/sinister/chooseSinister',
-            component : SinisterChooseSinister
+            component : SinisterChooseSinister,
+            beforeEnter: (to,from,next)=>{
+                if(localStorage.getItem('isAuth')!='true')
+                {
+                    next('/')
+                }
+                next()
+                
+            }
         },
         {
             path:'/account/contract/sinister/informations',
-            component : SinisterInfos
+            component : SinisterInfos,
+            beforeEnter: (to,from,next)=>{
+                if(localStorage.getItem('isAuth')!='true')
+                {
+                    next('/')
+                }
+                next()
+                
+            }
         },
         {
             path:'/account/contract/sinister/progress',
-            component : SinisterProgress
+            component : SinisterProgress,
+            beforeEnter: (to,from,next)=>{
+                if(localStorage.getItem('isAuth')!='true')
+                {
+                    next('/')
+                }
+                next()
+                
+            }
         },
         {
             path:'/account/contract/update/warranted',
-            component : UpdateWarranted
-        },
+            component : UpdateWarranted,
+            beforeEnter: (to,from,next)=>{
+                if(localStorage.getItem('isAuth')!='true')
+                {
+                    next('/')
+                }
+                next()
+                
+            }
 
+        },
+        {
+            path:'/adminAccount/UpdateUserInfos',
+            component:UpdateUserInfos,
+            beforeEnter: (to,from,next)=>{
+                if(localStorage.getItem('isAuth')!='true')
+                {
+                    next('/')
+                }
+                next()
+                
+            }
+        }
     ]    
 })
 

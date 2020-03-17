@@ -53,10 +53,12 @@ export default {
             localStorage.setItem('isAuth',true)
             if(this.email.includes('@aio.fr'))
             {
+              localStorage.setItem('isAdmin',true)
               router.push('/adminAccount')
             }
             else
             {
+              localStorage.setItem('isAdmin',false)
               router.push('account')
             }
           }
