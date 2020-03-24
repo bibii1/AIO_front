@@ -20,8 +20,6 @@ function requestToMongoDb(functionToMongoDb){
 
   function createUser(name,firstName,email,password){
       var pwdEncoded = forge.util.encodeUtf8(password); //first type of encryption, in the future it will be good to have a better key
-      console.log(password);
-      console.log(pwdEncoded);
       var userCreated = new User(name,firstName,email,pwdEncoded);
 
       requestToMongoDb(userCollection.insertOne({UserName : userCreated.UserName, Password : userCreated.pwdEncoded}));
@@ -29,8 +27,6 @@ function requestToMongoDb(functionToMongoDb){
 
   function login(name,password){
       var pwdEncoded=forge.util.encodeUtf8(password);
-      console.log(password);
-      console.log(pwdEncoded);
       
       requestToMongoDb();
   }
@@ -64,5 +60,3 @@ function requestToMongoDb(functionToMongoDb){
         return `${this.adress}`;
     }
 }
-const John = new User("John","Doe","jdoe@gmail.com")
-console.log(John.getUsername());

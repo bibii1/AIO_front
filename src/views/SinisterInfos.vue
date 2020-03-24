@@ -60,7 +60,6 @@ export default {
     methods:{
       //Transferer les infos a la base de données
         onSubmit(){
-          console.log("test")
             const sinister={
                 folder_id : this.folder_id,
                 contract_id: this.account.listContract[this.index].contract_id,
@@ -68,7 +67,6 @@ export default {
                 sinisterTime: this.sinisterTime,
                 sinisterCircumstances:this.sinisterCircumstances
             };
-            console.log(sinister)
             postService.createSinister(sinister)
             .then(()=>{
               router.push('/');

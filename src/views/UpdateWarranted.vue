@@ -70,7 +70,6 @@ export default {
     },
     methods : {
         updateContract(){
-            console.log(this.contract.contractDate)
             const dateCont = new Date(this.contract.contractDate);
             const m = String(dateCont.getMonth() + 1).padStart(2, '0');
             // the next month
@@ -89,7 +88,6 @@ export default {
                 oxydation : this.contract.listWarranted.oxydation}
             postService.updateWarrented(post)
             .then(()=>{
-                console.log("debut")
                 const cont = {
                     email : this.user.email,
                     first_name : this.user.first_name,
@@ -101,7 +99,6 @@ export default {
                     vol: this.contract.listWarranted.vol,
                     oxydation : this.contract.listWarranted.oxydation
                 }
-                console.log(this.user.email,this.contract)
                 postService.sendMailUpdateWarranted(cont)
                 router.push('/');
             })
@@ -169,7 +166,6 @@ export default {
             const account = res.data
             this.index = localStorage.getItem("index");
             this.contract = account.listContract[this.index];
-            console.log(this.contract)
         })
         postService.getUser(this.folder_id)
         .then(res=> {
