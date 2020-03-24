@@ -23,6 +23,7 @@
         <div class="col s12 m7">
             <div class="card horizontal">
             <div class="card-stacked">
+                <p>Les informations à ne pas changer doivent être remplies avec leur valeur actuelle </p>
                 <form class="form" v-on:submit.prevent="onSubmit">
                     <div class="row">
                         <div class="input-field col s12">
@@ -100,6 +101,22 @@ export default {
             {
                 postService.updateUserInfos(post)
                 router.push('/adminAccount/AdminCheckUser');
+                if(this.user.email != this.email){
+                    const post = {
+                        first_name : this.fn,
+                        last_name : this.ln,
+                        password : this.password1,
+                        email :this.email,
+                        phone: this.phone,
+                        folder : this.user.folder
+                    }
+                    postService.sendValidationEmail(post)
+                    alert("Vous avez changer l'email associé à ce compte.\nUn email de validation vous à été envoyé sur cette nouvelle adresse.\nVous allez maintenant être redirigé vers la page d'accueil.")
+                    const token = localStorage.getItem('acces_token')
+                    postService.logoutAccount(token);
+                    postService.unvalidateUser(this.folder);
+                    router.push('/')
+                }
             }
         }
     },

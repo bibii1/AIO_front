@@ -98,6 +98,10 @@ export default class PostService {
         axios.post(`${apiBaseUrl}/mail/send/validationLink`,post);
     }
 
+    unvalidateUser(post){
+        axios.post(`${apiBaseUrl}/users/unvalidateUser`,post);
+    }
+
      //__________________________________________________________________________________
     //METHODES QUI AGISSENT SUR LA COLLECTION ACCOUNT
     //__________________________________________________________________________________

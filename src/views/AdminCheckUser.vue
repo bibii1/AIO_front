@@ -84,20 +84,22 @@ export default {
     },
     methods : {
         logoutAll(){
-            postService.getUser(localStorage.getItem('folder_id_user'))
-            .then(res=> {
-                this.user = res.data
-            })
-            if(this.user.tokens.length == 0){
-                alert(`${this.user.first_name} ${this.user.last_name} est deja déconnecté(e) de tous ses appareils`);
-                router.push('/adminAccount/adminCheckUser');
+            if(confirm(`Etes-vous sûr de vouloir déconnecter tous les appareils ${this.user.first_name} ${this.user.last_name} ?\n Cette opération est irréversible.`)){
+                postService.getUser(localStorage.getItem('folder_id_user'))
+                .then(res=> {
+                    this.user = res.data
+                })
+                if(this.user.tokens.length == 0){
+                    alert(`${this.user.first_name} ${this.user.last_name} est deja déconnecté(e) de tous ses appareils`);
+                    router.push('/adminAccount/adminCheckUser');
 
-            }
-            else{
-                alert(`les appareils de ${this.user.first_name} ${this.user.last_name} ont été déconnectés`)
-                const token = this.user.tokens[0].token
-                postService.logoutallAccount(token);
-                
+                }
+                else{
+                    alert(`les appareils de ${this.user.first_name} ${this.user.last_name} ont été déconnectés`)
+                    const token = this.user.tokens[0].token
+                    postService.logoutallAccount(token);
+                    
+                }
             }
         },
         deleteUser(){

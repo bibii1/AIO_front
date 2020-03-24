@@ -17,6 +17,7 @@ import AdminCheckUser from './views/AdminCheckUser.vue';
 import UpdateWarranted from './views/UpdateWarranted.vue';
 import AdminCheckContract from './views/AdminCheckContract.vue';
 import UpdateUserInfos from './views/UpdateUserInfos.vue';
+import UserSettings from './views/UserSettings.vue'
 
 import axios from 'axios';
 const apiBaseUrl = 'http://localhost:3000';
@@ -216,7 +217,27 @@ const router = new Router({
                     next('/')
                 }
                 next()
-                
+            }
+        },
+        {
+            path:'/users/UpdateUserInfos',
+            component:UpdateUserInfos,
+            beforeEnter: (to,from,next)=>{
+                if(localStorage.getItem('isAuth')!='true')
+                {
+                    next('/')
+                }
+                next()
+            }
+        },{
+            path:'/users/settings',
+            component:UserSettings,
+            beforeEnter: (to,from,next)=>{
+                if(localStorage.getItem('isAuth')!='true')
+                {
+                    next('/')
+                }
+                next()
             }
         }
     ]    

@@ -3,10 +3,10 @@
     <div class="nav-wrapper">
       <router-link to="/" class="brand-logo left">AIO</router-link>
       <ul id="nav-mobile" class="right">
-        <li><router-link v-show="!isAuth" :to="'/'">Log in</router-link></li>
-        <li><router-link v-show="!isAuth" :to="'/users/create'">Create</router-link></li>
-        <!--<li><router-link v-show="!isAuth" :to="'/account'">Account</router-link></li>-->
+        <li><router-link v-show="!isAuth" :to="'/'">Se connecter</router-link></li>
+        <li><router-link v-show="!isAuth" :to="'/users/create'">Créer un compte</router-link></li>
 
+        <li><button v-show="isAuth" v-on:click="goToSettings" class="btn waves-effect waves-light" type="submit" name="action">Paramètres</button></li>
         <li><button v-show="isAuth" v-on:click="logout" class="btn waves-effect waves-light" type="submit" name="action">Deconnection</button></li>
         <li><button v-show="isAuth" v-on:click="logoutAll" class="btn waves-effect waves-light" type="submit" name="action">Deconnection totale</button></li>
       </ul>
@@ -24,7 +24,8 @@ export default {
 
   data(){
     return{
-      isAuth : localStorage.getItem('isAuth')||false
+      isAuth : localStorage.getItem('isAuth')||false,
+      folder_id : localStorage.getItem('folder_id')
     }
   },
   methods : {
@@ -41,6 +42,9 @@ export default {
       localStorage.removeItem('acces_token')
       localStorage.removeItem('folder_id')
       router.push('/');
+    },
+    goToSettings(){
+      router.push('/users/settings');
     }
   },
   components:{
@@ -49,14 +53,14 @@ export default {
     const token = localStorage.getItem('acces_token');
     postService.getCheckToken({token})
     //res = nombre de fois ou le token est present dans la bdd
-    .then(res=>{
-    if(res.data==1){
-      this.isAuth = true
-    }
-    else{
-      this.isAuth = false
-    }
-    })
+      .then(res=>{
+        if(res.data==1){
+          this.isAuth = true
+        }
+        else{
+          this.isAuth = false
+        }
+      })
   }
 }
 </script>
