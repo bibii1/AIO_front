@@ -85,14 +85,13 @@
         </div>
         <div class="row">
         <div class="input-field col s12">
-          <input id="purschasePrice" type="number" v-model="purchasePrice" class="validate" required>
+          <input id="purschasePrice" type="number" v-model="purchasePrice" class="validate" min="2013-01-01" max="2020-12-31" required>
           <label for="purchasePrice">Prix d'achat</label>
         </div>
       </div>
       <div class="row">
         <div class="input-field col s12">
-          <input id="purchaseDate" type="date" v-model="purchaseDate" class="validate" min="2013-01-01" max="2020-12-31" required>
-        <!-- Faire en sorte que max soit < a la date du jour dans la validation et max 7 ans-->
+          <input id="purchaseDate" type="date" v-model="purchaseDate" class="validate" required>
           <label for="purchaseDate">Date d'achat</label>
         </div>
       </div>
@@ -201,12 +200,6 @@ export default {
         }
     },
     created(){
-            var today = new Date();
-            var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-            var time = today.getHours() + ":" + today.getMinutes() + ":" + 
-            today.getSeconds();
-            var dateTime = date+' '+time;
-            console.log(dateTime)
     }
   }
 

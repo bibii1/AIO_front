@@ -55,9 +55,9 @@
                 </div>
             </div>
         </div>
-        <!-- <div class="card-action">
-         <button v-on:click="updateSinister()">Valider l'etape</button>
-        </div> -->
+        <div class="card-action">
+         <button class="btn waves-effect waves-light" v-on:click="updateSinister()">Valider l'etape</button>
+        </div>
     </div>
 </body>
 </template>

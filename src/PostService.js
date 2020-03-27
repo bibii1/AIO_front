@@ -61,6 +61,10 @@ export default class PostService {
         }
     }
 
+    checkExist(email){
+        return axios.get(`${apiBaseUrl}/users/checkEmail/${email}`)
+    }
+
     postSuperUser(user){
         if(user != null){
             //on verifie d'abord qu"il n'y a aucun utilisateur semblable avec le mail

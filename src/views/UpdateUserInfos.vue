@@ -86,6 +86,7 @@ export default {
             ln : "",
             email :"",
             phone: "",
+            exist:-1
         }
     },
     methods : {
@@ -99,24 +100,30 @@ export default {
             };
             if(confirm('Êtes-vous certain de vouloir modifier ces informations ?\nCette action est irréversible.'))
             {
-                postService.updateUserInfos(post)
-                router.push('/adminAccount/AdminCheckUser');
-                if(this.user.email != this.email){
-                    const post = {
-                        first_name : this.fn,
-                        last_name : this.ln,
-                        password : this.password1,
-                        email :this.email,
-                        phone: this.phone,
-                        folder : this.user.folder
+                postService.checkExist(this.email).then(res=> {
+                    this.exist = res.data
+                    if(this.user.email != this.email ){
+                        if(this.exist==0)
+                        {
+                            postService.updateUserInfos(post)
+                            postService.sendValidationEmail(post)
+                            alert("Vous avez changer l'email associé à ce compte.\nUn email de validation vous à été envoyé sur cette nouvelle adresse.\nVous allez maintenant être redirigé vers la page d'accueil.")
+                            const token = localStorage.getItem('acces_token')
+                            postService.logoutAccount(token);
+                            postService.unvalidateUser(this.folder);
+                            if(this.user.isSuperUser!==undefined){
+                                router.push('/adminAccount/AdminCheckUser');
+                            }
+                            else{
+                                router.push('/')
+                            }
+                        }
+                        else
+                        {
+                            alert('Un compte est déjà associé à cet email')
+                        }
                     }
-                    postService.sendValidationEmail(post)
-                    alert("Vous avez changer l'email associé à ce compte.\nUn email de validation vous à été envoyé sur cette nouvelle adresse.\nVous allez maintenant être redirigé vers la page d'accueil.")
-                    const token = localStorage.getItem('acces_token')
-                    postService.logoutAccount(token);
-                    postService.unvalidateUser(this.folder);
-                    router.push('/')
-                }
+                })
             }
         }
     },
