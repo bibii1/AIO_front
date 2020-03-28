@@ -122,56 +122,6 @@ export default {
         },
         updateSinister(){
             postService.updateSinister(this.sinister,this.folder_id_user)
-        },
-        getMonth_price(index){
-            // index correspond a l'index du contrat concerné, il permet d'indiquer 
-            // quel contrat dans listContract de account (récuprer à chaque création de la vue)
-            var totalPrice = 0;
-            const contract = this.account.listContract[index];
-            const price = contract.purchasePrice; 
-            if(price<250){
-                if(contract.listWarranted.panne == true){
-                    totalPrice = totalPrice + 1
-                }
-                if(contract.listWarranted.casse == true){
-                    totalPrice = totalPrice + 3
-                }
-                if(contract.listWarranted.vol == true){
-                    totalPrice = totalPrice + 1.5
-                }
-                if(contract.listWarranted.oxydation == true){
-                    totalPrice = totalPrice + 3
-                }
-            }
-            if(price>250 && price<600){
-                if(contract.listWarranted.panne == true){
-                    totalPrice = totalPrice + 1
-                }
-                if(contract.listWarranted.casse == true){
-                    totalPrice = totalPrice + 4.5
-                }
-                if(contract.listWarranted.vol == true){
-                    totalPrice = totalPrice + 3
-                }
-                if(contract.listWarranted.oxydation == true){
-                    totalPrice = totalPrice + 4.5
-                }
-            }
-            if(price>600){
-                if(contract.listWarranted.panne == true){
-                    totalPrice = totalPrice + 1.5
-                }
-                if(contract.listWarranted.casse == true){
-                    totalPrice = totalPrice + 6
-                }
-                if(contract.listWarranted.vol == true){
-                    totalPrice = totalPrice + 6
-                }
-                if(contract.listWarranted.oxydation == true){
-                    totalPrice = totalPrice + 6
-                }
-            }
-            return totalPrice;
         }
     },
     components : {
