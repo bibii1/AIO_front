@@ -49,7 +49,7 @@ export default {
             const token = res.data.token
             const folder_id = res.data.userTemp.folder
             localStorage.setItem('acces_token',token)
-            localStorage.setItem('folder_id',folder_id)
+            localStorage.setItem('folder_id_user',folder_id)
             localStorage.setItem('isAuth',true)
             if(this.email.includes('@aio.fr'))
             {
@@ -63,7 +63,7 @@ export default {
             }
           }
           else
-            console.log("L'email n'est pas valide")
+            alert("L'email n'a pas été validé. Véfifiez votre boite mail.")
         })
     }
   }

@@ -30,7 +30,7 @@ export default {
             mySteps : ['Déclaration','Validation','Fin'],
             currentStep : 0,
             isAuth: '',
-            folder_id : localStorage.getItem('folder_id'),
+            folder_id : localStorage.getItem('folder_id_user'),
             contract_id : localStorage.getItem('contract_id'),
             user : ""
         }

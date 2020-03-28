@@ -37,14 +37,34 @@
                     <div class="card-stacked">
                         <div class="card-content">
                             <p>Objet : {{contract.object}}</p>
-                            <p>Catégorie : {{contract.category}}</p>
                             <p>Marque : {{contract.brand}}</p>
                             <p>Modèle : {{contract.model}}</p>
-                            <p>Numéro de série : {{contract.serialNumber}}</p>
-                            <p>Liste de garanties : {{contract.listWarranted}}</p>
-                            <p>prix du tel : {{contract.purchasePrice}}</p>
-                            <h6>Prix par mois : {{getMonth_price(index)}} €</h6>
-                            <p>est sinistré : {{index}}</p>
+                            <p>
+                            <label>
+                            <input type="checkbox" id="Perte" disabled="disabled" value="Perte" v-model="contract.listWarranted.panne">
+                            <span>Panne</span>
+                            </label>
+                            </p>
+                            <p>
+                            <label>
+                            <input type="checkbox" id="Casse" disabled="disabled" value="Casse" v-model="contract.listWarranted.casse">
+                            <span>Casse</span>
+                            </label>
+                            </p>
+                            <p>
+                            <label>
+                                <input type="checkbox" name="Vol" id="Vol" disabled="disabled" value="Vol" v-model="contract.listWarranted.vol">
+                                <span> Vol</span>
+                            </label>
+                            </p>
+                            <p>
+                            <label>
+                            <input type="checkbox" id="Oxydation" disabled="disabled" value="Oxydation" v-model="contract.listWarranted.oxydation">
+                            <span> Oxydation </span>
+                            </label>
+                            </p>
+                            <p>Prix de l'appareil : {{contract.purchasePrice}}</p>
+                            <h6>Prix par mois : {{contract.month_price}} €</h6>
                         </div>
                         <div class="card-action">
                             <a v-on:click="deleteContract(contract.contract_id)" v-if="contract.isSinistered===false">Supprimer le contrat</a>
@@ -90,7 +110,7 @@ export default {
         return{
             //on pourra charger tous les dossier ici pour l'instant que le folder_id
             isAuth: '',
-            folder_id : localStorage.getItem('folder_id'),
+            folder_id : localStorage.getItem('folder_id_user'),
             account: {},
             dialog: false,
             user:''
@@ -117,57 +137,7 @@ export default {
         updateContract(index){
             localStorage.setItem('index',index);
             router.push('/account/contract/update/warranted')
-        },  
-        getMonth_price(index){
-            // index correspond a l'index du contrat concerné, il permet d'indiquer 
-            // quel contrat dans listContract de account (récuprer à chaque création de la vue)
-            var totalPrice = 0;
-            const contract = this.account.listContract[index];
-            const price = contract.purchasePrice; 
-            if(price<250){
-                if(contract.listWarranted.panne == true){
-                    totalPrice = totalPrice + 1
-                }
-                if(contract.listWarranted.casse == true){
-                    totalPrice = totalPrice + 3
-                }
-                if(contract.listWarranted.vol == true){
-                    totalPrice = totalPrice + 1.5
-                }
-                if(contract.listWarranted.oxydation == true){
-                    totalPrice = totalPrice + 3
-                }
-            }
-            if(price>250 && price<600){
-                if(contract.listWarranted.panne == true){
-                    totalPrice = totalPrice + 1
-                }
-                if(contract.listWarranted.casse == true){
-                    totalPrice = totalPrice + 4.5
-                }
-                if(contract.listWarranted.vol == true){
-                    totalPrice = totalPrice + 3
-                }
-                if(contract.listWarranted.oxydation == true){
-                    totalPrice = totalPrice + 4.5
-                }
-            }
-            if(price>600){
-                if(contract.listWarranted.panne == true){
-                    totalPrice = totalPrice + 1.5
-                }
-                if(contract.listWarranted.casse == true){
-                    totalPrice = totalPrice + 6
-                }
-                if(contract.listWarranted.vol == true){
-                    totalPrice = totalPrice + 6
-                }
-                if(contract.listWarranted.oxydation == true){
-                    totalPrice = totalPrice + 6
-                }
-            }
-            return totalPrice;
-        }
+        },
     },
     components : {
         NavBar

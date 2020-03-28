@@ -79,7 +79,7 @@ export default {
         return{
             //on pourra charger tous les dossier ici pour l'instant que le folder_id
             isAuth: '',
-            folder_id : localStorage.getItem('folder_id'),
+            folder_id : localStorage.getItem('folder_id_user'),
             contract_id : localStorage.getItem('contract_id'),
             account: {}
         }
@@ -88,7 +88,7 @@ export default {
         deleteAll(){
             postService.deleteAll(this.folder_id);
             localStorage.removeItem('acces_token');
-            localStorage.removeItem('folder_id');
+            localStorage.removeItem('folder_id_user');
             router.push('/');
         },
         deleteContract(contrat_id){

@@ -48,7 +48,7 @@ export default {
     },
     data(){
         return{
-            folder_id: localStorage.getItem('folder_id'),
+            folder_id: localStorage.getItem('folder_id_user'),
             index: localStorage.getItem("index"),
             isAuth: '',
             sinisterDate: "",

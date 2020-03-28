@@ -4,7 +4,7 @@
         <NavBar/>
         <h6>Veuillez sélectionner le type de sinistre</h6>
         <div class="collection">
-            <a v-on:click="setPanne()" class="collection-item">panne</a>
+            <!-- <a v-on:click="setPanne()" class="collection-item">panne</a> -->
             <a v-on:click="setCasse()" class="collection-item">casse</a>
             <a v-on:click="setVol()" class="collection-item">vol</a>
             <a v-on:click="setOxydation()" class="collection-item">oxydation</a>
@@ -42,10 +42,10 @@ export default {
         return{
             //on pourra charger tous les dossier ici pour l'instant que le folder_id
             isAuth: '',
-            folder_id : localStorage.getItem('folder_id'),
+            folder_id : localStorage.getItem('folder_id_user'),
             index : localStorage.getItem('index'),
             warranted : { 
-                panne: false,
+                // panne: false,
                 casse: false,
                 vol: false,
                 oxydation: false
@@ -58,17 +58,17 @@ export default {
         setTypeSinister(name){
             this.type = name;
         },
-        setPanne(){
-            this.warranted.panne = true
-            var [check,typeSinister] = this.checkSinisterWarranted()
-            this.typeSinister = typeSinister
-            if(check){
-                router.push('/account/contract/sinister/informations')
-            }
-            else{
-                alert("Vous n'avez pas souscris à cette garantie")
-            }
-        },
+        // setPanne(){
+        //     this.warranted.panne = true
+        //     var [check,typeSinister] = this.checkSinisterWarranted()
+        //     this.typeSinister = typeSinister
+        //     if(check){
+        //         router.push('/account/contract/sinister/informations')
+        //     }
+        //     else{
+        //         alert("Vous n'avez pas souscris à cette garantie")
+        //     }
+        // },
         setCasse(){
             this.warranted.casse = true
             var [check,typeSinister] = this.checkSinisterWarranted()

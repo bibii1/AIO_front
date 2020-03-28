@@ -18,6 +18,8 @@
           <option>Smartphone</option>
           <option>Ordinateur Portable</option>
           <option>Tablette</option>
+          <option>Photo et Optique</option>
+          <option>Consoles</option>
         </select>
       </div>
       <div class="row">
@@ -85,13 +87,13 @@
         </div>
         <div class="row">
         <div class="input-field col s12">
-          <input id="purschasePrice" type="number" v-model="purchasePrice" class="validate" min="2013-01-01" max="2020-12-31" required>
+          <input id="purschasePrice" type="number" v-model="purchasePrice" class="validate" min="100" max="1999" required>
           <label for="purchasePrice">Prix d'achat</label>
         </div>
       </div>
       <div class="row">
         <div class="input-field col s12">
-          <input id="purchaseDate" type="date" v-model="purchaseDate" class="validate" required>
+          <input id="purchaseDate" type="date" v-model="purchaseDate" class="validate" min="2013-01-01" max="2020-12-31" required>
           <label for="purchaseDate">Date d'achat</label>
         </div>
       </div>
@@ -103,12 +105,6 @@
       </div>
       <div class="row">
         <label>Liste des garanties souhaitées</label>
-        <p>
-        <label>
-          <input type="checkbox" id="Perte" value="Perte" v-model="panne">
-          <span>Panne</span>
-        </label>
-        </p>
         <p>
         <label>
           <input type="checkbox" id="Casse" value="Casse" v-model="casse">
@@ -127,6 +123,12 @@
           <span> Oxydation </span>
         </label>
         </p>
+      </div>
+      <div class="row">
+        <label>Prix par mois</label>
+        <div class="input-field col s12">
+          <input disabled type="text" id="month_price" v-model="month_price" class="validate">
+        </div>
       </div>
       <div class="row">
         <button class="btn waves-effect waves-light" type="submit" name="action">Enregistrer l'appareil</button>
@@ -160,16 +162,16 @@ export default {
             month_price : 0,
             listWarranted : {},
             file : "",
-            panne: false,
             casse: false,
             vol: false,
-            oxydation: false
+            oxydation: false,
+            user:''
         }
     },
     methods:{
         onSubmit(){
             const contract={
-                folder_id : localStorage.getItem('folder_id'),
+                folder_id : localStorage.getItem('folder_id_user'),
                 object : this.object,
                 category : this.category,
                 brand: this.brand,
@@ -177,14 +179,14 @@ export default {
                 serialNumber : this.serialNumber,
                 purchasePrice : this.purchasePrice,
                 purchaseDate: this.purchaseDate,
-                month_price : 0,
+                month_price : this.month_price,
                 listWarranted : {},
-                panne : this.panne,
                 casse: this.casse,
                 vol: this.vol,
                 oxydation: this.oxydation,
-                isSinistered: false
+                isSinistered: false,
             };
+            postService.sendMailContract(contract,this.user.email,this.user.first_name)
             postService.createContract(contract)
             .then(()=>{
               router.push('/');
@@ -197,9 +199,233 @@ export default {
           }
           else
             this.file = null
-        }
+        },
+        getMonthPrice(casse,vol,oxydation,category,price){
+          var month_price = parseFloat(0)
+          if(category==='Smartphone'){
+            if(casse===true){
+              if(price < 499){
+                month_price+=3.99
+              }
+              else if (price<799){
+                month_price+=5.99
+              }
+              else if (price<999){
+                month_price+=6.99
+              }
+              else if(price<2000){
+                month_price+=7.99
+              }
+            }
+            if(oxydation===true){
+              month_price+=0.99
+            }
+            if(vol===true){
+              if(price < 499){
+                month_price+=0.99
+              }
+              else if (price<999){
+                month_price+=1.99
+              }
+              else if(price<2000){
+                month_price+=2.99
+              }
+            }
+          }
+
+          if(category==='Tablette'){
+            if(casse===true){
+              if(price < 499){
+                month_price+=2.99
+              }
+              else if (price<799){
+                month_price+=4.99
+              }
+              else if (price<999){
+                month_price+=6.99
+              }
+              else if(price<2000){
+                month_price+=8.99
+              }
+            }
+            if(oxydation===true){
+              month_price+=0.99
+            }
+            if(vol===true){
+              if (price<799){
+                month_price+=0.99
+              }
+              else if(price<2000){
+                month_price+=1.99
+              }
+            }
+          }
+
+          if(category==='Ordinateur portable'){
+            if(casse===true){
+              if(price < 499){
+                month_price+=2.99
+              }
+              else if (price<799){
+                month_price+=4.99
+              }
+              else if (price<999){
+                month_price+=6.99
+              }
+              else if(price<2000){
+                month_price+=11.99
+              }
+              else if(price<2500){
+                month_price+=17.99
+              }
+              else if(price<3000){
+                month_price+=21.99
+              }
+              else if(price<4000){
+                month_price+=27.99
+              }
+            }
+            if(oxydation===true){
+              if(price<2000){
+                month_price+=0.99
+              }
+              else{
+                month_price+=1.99
+              }
+            }
+            if(vol===true){
+              if (price<799){
+                month_price+=0.99
+              }
+              else if(price<2000){
+                month_price+=1.99
+              }
+              else if(price<2500){
+                month_price+=2.99
+              }
+              else if(price<3000){
+                month_price+=3.99
+              }
+              else if(price<4000){
+                month_price+=4.99
+              }
+            }
+          }
+
+          if(category==='Photo et Optique'){
+            if(casse===true){
+              if(price < 499){
+                month_price+=3.99
+              }
+              else if (price<799){
+                month_price+=5.99
+              }
+              else if (price<999){
+                month_price+=6.99
+              }
+              else if(price<2000){
+                month_price+=12.99
+              }
+              else if(price<2500){
+                month_price+=18.99
+              }
+              else if(price<3000){
+                month_price+=22.99
+              }
+              else if(price<4000){
+                month_price+=28.99
+              }
+            }
+            if(oxydation===true){
+              if(price<2000){
+                month_price+=0.99
+              }
+              else{
+                month_price+=1.99
+              }
+            }
+            if(vol===true){
+              if (price<799){
+                month_price+=0.99
+              }
+              else if(price<2000){
+                month_price+=1.99
+              }
+              else if(price<2500){
+                month_price+=2.99
+              }
+              else if(price<3000){
+                month_price+=3.99
+              }
+              else if(price<4000){
+                month_price+=4.99
+              }
+            }
+          }
+
+          if(category==="Console"){
+            if(casse===true){
+              if(price < 499){
+                month_price+=2.99
+              }
+              else if (price<799){
+                month_price+=4.99
+              }
+              else if (price<999){
+                month_price+=6.99
+              }
+              else if(price<2000){
+                month_price+=10.99
+              }
+              else if(price<2500){
+                month_price+=15.99
+              }
+            }
+            if(oxydation===true){
+              if(price<2000){
+                month_price+=0.99
+              }
+              else{
+                month_price+=1.99
+              }
+            }
+            if(vol===true){
+              if (price<799){
+                month_price+=0.99
+              }
+              else if(price<2000){
+                month_price+=1.99
+              }
+              else{
+                month_price+=2.99
+              }
+            }
+          }
+          return month_price
+        },
     },
     created(){
+      postService.getUser(localStorage.getItem('folder_id_user'))
+        .then(res=> {
+            this.user = res.data
+        })
+    },
+    watch:{
+      casse: function(val){
+        this.month_price = this.getMonthPrice(val,this.vol,this.oxydation,this.category,this.purchasePrice).toFixed(2)
+      },
+      oxydation: function(val){
+        this.month_price = this.getMonthPrice(this.casse,this.vol,val,this.category,this.purchasePrice).toFixed(2)
+      },
+      vol: function(val){
+        this.month_price = this.getMonthPrice(this.casse,val,this.oxydation,this.category,this.purchasePrice).toFixed(2)
+      },
+      category: function(val){
+        this.month_price = this.getMonthPrice(this.casse,this.vol,this.oxydation,val,this.purchasePrice).toFixed(2)
+      },
+      purchasePrice: function(val){
+        this.month_price = this.getMonthPrice(this.casse,this.vol,this.oxydation,this.category,val).toFixed(2)
+      }
     }
   }
 
