@@ -49,16 +49,17 @@ export default {
             const token = res.data.token
             const folder_id = res.data.userTemp.folder
             localStorage.setItem('acces_token',token)
-            localStorage.setItem('folder_id_user',folder_id)
             localStorage.setItem('isAuth',true)
             if(this.email.includes('@aio.fr'))
             {
               localStorage.setItem('isAdmin',true)
+              localStorage.setItem('folder_id',folder_id)
               router.push('/adminAccount')
             }
             else
             {
               localStorage.setItem('isAdmin',false)
+              localStorage.setItem('folder_id_user',folder_id)
               router.push('account')
             }
           }
