@@ -43,7 +43,7 @@
                             <p>Numéro de série : {{contract.serialNumber}}</p>
                             <p>Liste de garanties : {{contract.listWarranted}}</p>
                             <p>prix du tel : {{contract.purchasePrice}}</p>
-                            <h6>Prix par mois : {{getMonth_price(index)}} €</h6>
+                            <h6>Prix par mois : {{contract.month_price}} €</h6>
                             <p>est sinistré : {{index}}</p>
                         </div>
                         <div class="card-action">
@@ -114,56 +114,56 @@ export default {
             localStorage.setItem('contract_id',contrat_id);
             router.push('/account/contract/sinister/progress')
         },
-        getMonth_price(index){
-            // index correspond a l'index du contrat concerné, il permet d'indiquer 
-            // quel contrat dans listContract de account (récuprer à chaque création de la vue)
-            var totalPrice = 0;
-            const contract = this.account.listContract[index];
-            const price = contract.purchasePrice; 
-            if(price<250){
-                if(contract.listWarranted.panne == true){
-                    totalPrice = totalPrice + 1
-                }
-                if(contract.listWarranted.casse == true){
-                    totalPrice = totalPrice + 3
-                }
-                if(contract.listWarranted.vol == true){
-                    totalPrice = totalPrice + 1.5
-                }
-                if(contract.listWarranted.oxydation == true){
-                    totalPrice = totalPrice + 3
-                }
-            }
-            if(price>250 && price<600){
-                if(contract.listWarranted.panne == true){
-                    totalPrice = totalPrice + 1
-                }
-                if(contract.listWarranted.casse == true){
-                    totalPrice = totalPrice + 4.5
-                }
-                if(contract.listWarranted.vol == true){
-                    totalPrice = totalPrice + 3
-                }
-                if(contract.listWarranted.oxydation == true){
-                    totalPrice = totalPrice + 4.5
-                }
-            }
-            if(price>600){
-                if(contract.listWarranted.panne == true){
-                    totalPrice = totalPrice + 1.5
-                }
-                if(contract.listWarranted.casse == true){
-                    totalPrice = totalPrice + 6
-                }
-                if(contract.listWarranted.vol == true){
-                    totalPrice = totalPrice + 6
-                }
-                if(contract.listWarranted.oxydation == true){
-                    totalPrice = totalPrice + 6
-                }
-            }
-            return totalPrice;
-        }
+        // getMonth_price(index){
+        //     // index correspond a l'index du contrat concerné, il permet d'indiquer 
+        //     // quel contrat dans listContract de account (récuprer à chaque création de la vue)
+        //     var totalPrice = 0;
+        //     const contract = this.account.listContract[index];
+        //     const price = contract.purchasePrice; 
+        //     if(price<250){
+        //         if(contract.listWarranted.panne == true){
+        //             totalPrice = totalPrice + 1
+        //         }
+        //         if(contract.listWarranted.casse == true){
+        //             totalPrice = totalPrice + 3
+        //         }
+        //         if(contract.listWarranted.vol == true){
+        //             totalPrice = totalPrice + 1.5
+        //         }
+        //         if(contract.listWarranted.oxydation == true){
+        //             totalPrice = totalPrice + 3
+        //         }
+        //     }
+        //     if(price>250 && price<600){
+        //         if(contract.listWarranted.panne == true){
+        //             totalPrice = totalPrice + 1
+        //         }
+        //         if(contract.listWarranted.casse == true){
+        //             totalPrice = totalPrice + 4.5
+        //         }
+        //         if(contract.listWarranted.vol == true){
+        //             totalPrice = totalPrice + 3
+        //         }
+        //         if(contract.listWarranted.oxydation == true){
+        //             totalPrice = totalPrice + 4.5
+        //         }
+        //     }
+        //     if(price>600){
+        //         if(contract.listWarranted.panne == true){
+        //             totalPrice = totalPrice + 1.5
+        //         }
+        //         if(contract.listWarranted.casse == true){
+        //             totalPrice = totalPrice + 6
+        //         }
+        //         if(contract.listWarranted.vol == true){
+        //             totalPrice = totalPrice + 6
+        //         }
+        //         if(contract.listWarranted.oxydation == true){
+        //             totalPrice = totalPrice + 6
+        //         }
+        //     }
+        //     return totalPrice;
+        // }
     },
     components : {
         NavBar

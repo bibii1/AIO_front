@@ -4,12 +4,12 @@
         <NavBar/>
         <h5> Bonjour {{user.first_name}}, </h5>
         <h7> Votre appareil '{{contract.object}}' est actuellement assuré pour : </h7>
-        <p>
+        <!-- <p>
         <label> 
         <input type="checkbox" id="Perte" value="Perte" v-model="contract.listWarranted.panne">
         <span>Panne</span>
         </label>
-        </p>
+        </p> -->
         <p> 
         <label>
         <input type="checkbox" id="Casse" value="Casse" v-model="contract.listWarranted.casse">
@@ -82,7 +82,7 @@ export default {
             var post = {
                 folder_id : this.folder_id, 
                 contract_id:this.contract.contract_id,
-                panne: this.contract.listWarranted.panne,
+                // panne: this.contract.listWarranted.panne,
                 casse: this.contract.listWarranted.casse,
                 vol: this.contract.listWarranted.vol,
                 oxydation : this.contract.listWarranted.oxydation}
@@ -94,7 +94,7 @@ export default {
                     object : this.contract.object,
                     m : m2, //the number of the next month
                     d : d,
-                    panne: this.contract.listWarranted.panne,
+                    // panne: this.contract.listWarranted.panne,
                     casse: this.contract.listWarranted.casse,
                     vol: this.contract.listWarranted.vol,
                     oxydation : this.contract.listWarranted.oxydation
