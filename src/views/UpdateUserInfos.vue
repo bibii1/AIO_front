@@ -86,7 +86,8 @@ export default {
             ln : "",
             email :"",
             phone: "",
-            exist:-1
+            exist:-1,
+            folder: ""
         }
     },
     methods : {
@@ -110,7 +111,7 @@ export default {
                             alert("Vous avez changer l'email associé à ce compte.\nUn email de validation vous à été envoyé sur cette nouvelle adresse.\nVous allez maintenant être redirigé vers la page d'accueil.")
                             const token = localStorage.getItem('acces_token')
                             postService.logoutAccount(token);
-                            postService.unvalidateUser(this.folder);
+                            postService.unvalidateUser({folder:this.folder});
                             if(this.user.isSuperUser!==undefined){
                                 router.push('/adminAccount/AdminCheckUser');
                             }
@@ -131,7 +132,8 @@ export default {
         NavBar
     },
     created(){
-        postService.getUser(localStorage.getItem('folder_id_user'))
+        this.folder = localStorage.getItem('folder_id_user')
+        postService.getUser(this.folder)
         .then(res=> {
             this.user = res.data
         })

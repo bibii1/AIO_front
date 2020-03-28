@@ -113,13 +113,13 @@
         </p>
         <p>
           <label>
-            <input type="checkbox" name="Vol" id="Vol" value="Vol" v-model="vol" @change="handleChange">
+            <input type="checkbox" name="Vol" id="Vol" value="Vol" v-model="vol">
             <span> Vol</span>
           </label>
         </p>
         <p>
         <label>
-          <input type="checkbox" id="Oxydation" value="Oxydation" v-model="oxydation" @change="handleChange">
+          <input type="checkbox" id="Oxydation" value="Oxydation" v-model="oxydation">
           <span> Oxydation </span>
         </label>
         </p>
@@ -127,7 +127,7 @@
       <div class="row">
         <label>Prix par mois</label>
         <div class="input-field col s12">
-          <input type="text" id="month_price" v-model="month_price" class="validate">
+          <input disabled type="text" id="month_price" v-model="month_price" class="validate">
         </div>
       </div>
       <div class="row">
@@ -164,13 +164,14 @@ export default {
             file : "",
             casse: false,
             vol: false,
-            oxydation: false
+            oxydation: false,
+            user:''
         }
     },
     methods:{
         onSubmit(){
             const contract={
-                folder_id : localStorage.getItem('folder_id'),
+                folder_id : localStorage.getItem('folder_id_user'),
                 object : this.object,
                 category : this.category,
                 brand: this.brand,
@@ -183,8 +184,9 @@ export default {
                 casse: this.casse,
                 vol: this.vol,
                 oxydation: this.oxydation,
-                isSinistered: false
+                isSinistered: false,
             };
+            postService.sendMailContract(contract,this.user.email,this.user.first_name)
             postService.createContract(contract)
             .then(()=>{
               router.push('/');
@@ -199,7 +201,7 @@ export default {
             this.file = null
         },
         getMonthPrice(casse,vol,oxydation,category,price){
-          var month_price = 0
+          var month_price = parseFloat(0)
           if(category==='Smartphone'){
             if(casse===true){
               if(price < 499){
@@ -403,16 +405,26 @@ export default {
         },
     },
     created(){
+      postService.getUser(localStorage.getItem('folder_id_user'))
+        .then(res=> {
+            this.user = res.data
+        })
     },
     watch:{
       casse: function(val){
-        this.month_price = this.getMonthPrice(val,this.vol,this.oxydation,this.category,this.purchasePrice)
+        this.month_price = this.getMonthPrice(val,this.vol,this.oxydation,this.category,this.purchasePrice).toFixed(2)
       },
       oxydation: function(val){
-        this.month_price = this.getMonthPrice(this.casse,this.vol,val,this.category,this.purchasePrice)
+        this.month_price = this.getMonthPrice(this.casse,this.vol,val,this.category,this.purchasePrice).toFixed(2)
       },
       vol: function(val){
-        this.month_price = this.getMonthPrice(this.casse,val,this.oxydation,this.category,this.purchasePrice)
+        this.month_price = this.getMonthPrice(this.casse,val,this.oxydation,this.category,this.purchasePrice).toFixed(2)
+      },
+      category: function(val){
+        this.month_price = this.getMonthPrice(this.casse,this.vol,this.oxydation,val,this.purchasePrice).toFixed(2)
+      },
+      purchasePrice: function(val){
+        this.month_price = this.getMonthPrice(this.casse,this.vol,this.oxydation,this.category,val).toFixed(2)
       }
     }
   }

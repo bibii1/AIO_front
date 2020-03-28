@@ -4,31 +4,30 @@
         <NavBar/>
         <h5> Bonjour {{user.first_name}}, </h5>
         <h7> Votre appareil '{{contract.object}}' est actuellement assuré pour : </h7>
-        <!-- <p>
-        <label> 
-        <input type="checkbox" id="Perte" value="Perte" v-model="contract.listWarranted.panne">
-        <span>Panne</span>
-        </label>
-        </p> -->
-        <p> 
+        <p>
         <label>
-        <input type="checkbox" id="Casse" value="Casse" v-model="contract.listWarranted.casse">
-        <span>Casse</span>
+          <input type="checkbox" id="Casse" value="Casse" v-model="casse">
+          <span>Casse</span>
         </label>
         </p>
         <p>
-        <label>
-            <input type="checkbox" name="Vol" id="Vol" value="Vol" v-model="contract.listWarranted.vol">
+          <label>
+            <input type="checkbox" name="Vol" id="Vol" value="Vol" v-model="vol">
             <span> Vol</span>
-        </label>
+          </label>
         </p>
         <p>
         <label>
-        <input type="checkbox" id="Oxydation" value="Oxydation" v-model="contract.listWarranted.oxydation">
-        <span> Oxydation </span>
+          <input type="checkbox" id="Oxydation" value="Oxydation" v-model="oxydation">
+          <span> Oxydation </span>
         </label>
         </p>
-        <h6>Prix par mois : {{getMonth_price(index)}} €</h6>
+        <div class="row">
+        <label>Prix par mois</label>
+        <div class="input-field col s12">
+          <input disabled type="text" id="month_price" v-model="month_price" class="validate">
+        </div>
+      </div>
     </div>
     <button class="btn waves-effect waves-light" v-on:click="updateContract()" >Confirmer les nouvelles garanties</button>
 
@@ -59,13 +58,17 @@ export default {
             //on pourra charger tous les dossier ici pour l'instant que le folder_id
             isAuth: '',
             index :'',
-            folder_id : localStorage.getItem('folder_id'),
+            folder_id : localStorage.getItem('folder_id_user'),
             user :'' ,
             contract: '',
             today : new Date(),
             mm: '',
             dd: '',
-            dialog: false
+            dialog: false,
+            month_price: 0,
+            casse:false,
+            oxydation:false,
+            vol:false
         }
     },
     methods : {
@@ -85,7 +88,8 @@ export default {
                 // panne: this.contract.listWarranted.panne,
                 casse: this.contract.listWarranted.casse,
                 vol: this.contract.listWarranted.vol,
-                oxydation : this.contract.listWarranted.oxydation}
+                oxydation : this.contract.listWarranted.oxydation,
+                month_price: this.month_price}
             postService.updateWarrented(post)
             .then(()=>{
                 const cont = {
@@ -97,62 +101,228 @@ export default {
                     // panne: this.contract.listWarranted.panne,
                     casse: this.contract.listWarranted.casse,
                     vol: this.contract.listWarranted.vol,
-                    oxydation : this.contract.listWarranted.oxydation
+                    oxydation : this.contract.listWarranted.oxydation,
+                    month_price: this.month_price
                 }
                 postService.sendMailUpdateWarranted(cont)
                 router.push('/');
             })
         },
-        getMonth_price(){
-            // index correspond a l'index du contrat concerné, il permet d'indiquer 
-            // quel contrat dans listContract de account (récuprer à chaque création de la vue)
-            var totalPrice = 0;
-            const contract = this.contract;
-            const price = contract.purchasePrice; 
-            if(price<250){
-                if(contract.listWarranted.panne == true){
-                    totalPrice = totalPrice + 1
-                }
-                if(contract.listWarranted.casse == true){
-                    totalPrice = totalPrice + 3
-                }
-                if(contract.listWarranted.vol == true){
-                    totalPrice = totalPrice + 1.5
-                }
-                if(contract.listWarranted.oxydation == true){
-                    totalPrice = totalPrice + 3
-                }
+        getMonthPrice(casse,vol,oxydation,category,price){
+          var month_price = 0
+          if(category==='Smartphone'){
+            if(casse===true){
+              if(price < 499){
+                month_price+=3.99
+              }
+              else if (price<799){
+                month_price+=5.99
+              }
+              else if (price<999){
+                month_price+=6.99
+              }
+              else if(price<2000){
+                month_price+=7.99
+              }
             }
-            if(price>250 && price<600){
-                if(contract.listWarranted.panne == true){
-                    totalPrice = totalPrice + 1
-                }
-                if(contract.listWarranted.casse == true){
-                    totalPrice = totalPrice + 4.5
-                }
-                if(contract.listWarranted.vol == true){
-                    totalPrice = totalPrice + 3
-                }
-                if(contract.listWarranted.oxydation == true){
-                    totalPrice = totalPrice + 4.5
-                }
+            if(oxydation===true){
+              month_price+=0.99
             }
-            if(price>600){
-                if(contract.listWarranted.panne == true){
-                    totalPrice = totalPrice + 1.5
-                }
-                if(contract.listWarranted.casse == true){
-                    totalPrice = totalPrice + 6
-                }
-                if(contract.listWarranted.vol == true){
-                    totalPrice = totalPrice + 6
-                }
-                if(contract.listWarranted.oxydation == true){
-                    totalPrice = totalPrice + 6
-                }
+            if(vol===true){
+              if(price < 499){
+                month_price+=0.99
+              }
+              else if (price<999){
+                month_price+=1.99
+              }
+              else if(price<2000){
+                month_price+=2.99
+              }
             }
-            return totalPrice;
-        }
+          }
+
+          if(category==='Tablette'){
+            if(casse===true){
+              if(price < 499){
+                month_price+=2.99
+              }
+              else if (price<799){
+                month_price+=4.99
+              }
+              else if (price<999){
+                month_price+=6.99
+              }
+              else if(price<2000){
+                month_price+=8.99
+              }
+            }
+            if(oxydation===true){
+              month_price+=0.99
+            }
+            if(vol===true){
+              if (price<799){
+                month_price+=0.99
+              }
+              else if(price<2000){
+                month_price+=1.99
+              }
+            }
+          }
+
+          if(category==='Ordinateur portable'){
+            if(casse===true){
+              if(price < 499){
+                month_price+=2.99
+              }
+              else if (price<799){
+                month_price+=4.99
+              }
+              else if (price<999){
+                month_price+=6.99
+              }
+              else if(price<2000){
+                month_price+=11.99
+              }
+              else if(price<2500){
+                month_price+=17.99
+              }
+              else if(price<3000){
+                month_price+=21.99
+              }
+              else if(price<4000){
+                month_price+=27.99
+              }
+            }
+            if(oxydation===true){
+              if(price<2000){
+                month_price+=0.99
+              }
+              else{
+                month_price+=1.99
+              }
+            }
+            if(vol===true){
+              if (price<799){
+                month_price+=0.99
+              }
+              else if(price<2000){
+                month_price+=1.99
+              }
+              else if(price<2500){
+                month_price+=2.99
+              }
+              else if(price<3000){
+                month_price+=3.99
+              }
+              else if(price<4000){
+                month_price+=4.99
+              }
+            }
+          }
+
+          if(category==='Photo et Optique'){
+            if(casse===true){
+              if(price < 499){
+                month_price+=3.99
+              }
+              else if (price<799){
+                month_price+=5.99
+              }
+              else if (price<999){
+                month_price+=6.99
+              }
+              else if(price<2000){
+                month_price+=12.99
+              }
+              else if(price<2500){
+                month_price+=18.99
+              }
+              else if(price<3000){
+                month_price+=22.99
+              }
+              else if(price<4000){
+                month_price+=28.99
+              }
+            }
+            if(oxydation===true){
+              if(price<2000){
+                month_price+=0.99
+              }
+              else{
+                month_price+=1.99
+              }
+            }
+            if(vol===true){
+              if (price<799){
+                month_price+=0.99
+              }
+              else if(price<2000){
+                month_price+=1.99
+              }
+              else if(price<2500){
+                month_price+=2.99
+              }
+              else if(price<3000){
+                month_price+=3.99
+              }
+              else if(price<4000){
+                month_price+=4.99
+              }
+            }
+          }
+
+          if(category==="Console"){
+            if(casse===true){
+              if(price < 499){
+                month_price+=2.99
+              }
+              else if (price<799){
+                month_price+=4.99
+              }
+              else if (price<999){
+                month_price+=6.99
+              }
+              else if(price<2000){
+                month_price+=10.99
+              }
+              else if(price<2500){
+                month_price+=15.99
+              }
+            }
+            if(oxydation===true){
+              if(price<2000){
+                month_price+=0.99
+              }
+              else{
+                month_price+=1.99
+              }
+            }
+            if(vol===true){
+              if (price<799){
+                month_price+=0.99
+              }
+              else if(price<2000){
+                month_price+=1.99
+              }
+              else{
+                month_price+=2.99
+              }
+            }
+          }
+          return month_price
+        },
+    },
+    watch:{
+      casse: function(val){
+        this.month_price = this.getMonthPrice(val,this.vol,this.oxydation,this.contract.category,this.contract.purchasePrice).toFixed(2)
+      },
+      oxydation: function(val){
+        this.month_price = this.getMonthPrice(this.casse,this.vol,val,this.contract.category,this.contract.purchasePrice).toFixed(2)
+      },
+      vol: function(val){
+        this.month_price = this.getMonthPrice(this.casse,val,this.oxydation,this.contract.category,this.contract.purchasePrice).toFixed(2)
+        console.log('ok')
+      }
     },
     components : {
         NavBar
@@ -166,6 +336,10 @@ export default {
             const account = res.data
             this.index = localStorage.getItem("index");
             this.contract = account.listContract[this.index];
+            this.month_price = this.contract.month_price
+            this.casse = this.contract.listWarranted.casse
+            this.vol = this.contract.listWarranted.vol
+            this.oxydation = this.contract.listWarranted.oxydation
         })
         postService.getUser(this.folder_id)
         .then(res=> {

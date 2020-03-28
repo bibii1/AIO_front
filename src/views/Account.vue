@@ -48,7 +48,7 @@
                         </div>
                         <div class="card-action">
                             <a v-on:click="deleteContract(contract.contract_id)" v-if="contract.isSinistered===false">Supprimer le contrat</a>
-                            <a v-on:click="modifyContract(contract.contract_id)" v-if="contract.isSinistered===false">Modifier le contrat</a>
+                            <a v-on:click="updateContract(index)" v-if="contract.isSinistered===false">Modifier mes garanties</a>
                             <a v-on:click="checkSinister(contract.contract_id)" v-if="contract.isSinistered===true">Suivi du sinistre</a>
                         </div>
                     </div>
@@ -90,7 +90,7 @@ export default {
         return{
             //on pourra charger tous les dossier ici pour l'instant que le folder_id
             isAuth: '',
-            folder_id : localStorage.getItem('folder_id'),
+            folder_id : localStorage.getItem('folder_id_user'),
             account: {},
             dialog: false,
             user:''
@@ -114,56 +114,10 @@ export default {
             localStorage.setItem('contract_id',contrat_id);
             router.push('/account/contract/sinister/progress')
         },
-        // getMonth_price(index){
-        //     // index correspond a l'index du contrat concerné, il permet d'indiquer 
-        //     // quel contrat dans listContract de account (récuprer à chaque création de la vue)
-        //     var totalPrice = 0;
-        //     const contract = this.account.listContract[index];
-        //     const price = contract.purchasePrice; 
-        //     if(price<250){
-        //         if(contract.listWarranted.panne == true){
-        //             totalPrice = totalPrice + 1
-        //         }
-        //         if(contract.listWarranted.casse == true){
-        //             totalPrice = totalPrice + 3
-        //         }
-        //         if(contract.listWarranted.vol == true){
-        //             totalPrice = totalPrice + 1.5
-        //         }
-        //         if(contract.listWarranted.oxydation == true){
-        //             totalPrice = totalPrice + 3
-        //         }
-        //     }
-        //     if(price>250 && price<600){
-        //         if(contract.listWarranted.panne == true){
-        //             totalPrice = totalPrice + 1
-        //         }
-        //         if(contract.listWarranted.casse == true){
-        //             totalPrice = totalPrice + 4.5
-        //         }
-        //         if(contract.listWarranted.vol == true){
-        //             totalPrice = totalPrice + 3
-        //         }
-        //         if(contract.listWarranted.oxydation == true){
-        //             totalPrice = totalPrice + 4.5
-        //         }
-        //     }
-        //     if(price>600){
-        //         if(contract.listWarranted.panne == true){
-        //             totalPrice = totalPrice + 1.5
-        //         }
-        //         if(contract.listWarranted.casse == true){
-        //             totalPrice = totalPrice + 6
-        //         }
-        //         if(contract.listWarranted.vol == true){
-        //             totalPrice = totalPrice + 6
-        //         }
-        //         if(contract.listWarranted.oxydation == true){
-        //             totalPrice = totalPrice + 6
-        //         }
-        //     }
-        //     return totalPrice;
-        // }
+        updateContract(index){
+            localStorage.setItem('index',index);
+            router.push('/account/contract/update/warranted')
+        },
     },
     components : {
         NavBar

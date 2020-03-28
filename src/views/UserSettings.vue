@@ -47,7 +47,7 @@ export default {
     data: function(){
         return{
             isAuth: '',
-            folder_id : localStorage.getItem('folder_id'),
+            folder_id : localStorage.getItem('folder_id_user'),
             account: {},
             dialog: false,
             user: ""
@@ -62,11 +62,11 @@ export default {
         NavBar
     },
     created(){
-        postService.getUser(localStorage.getItem('folder_id'))
+        postService.getUser(localStorage.getItem('folder_id_user'))
         .then(res=> {
             this.user = res.data
         })
-        postService.getAccount(localStorage.getItem('folder_id'))
+        postService.getAccount(localStorage.getItem('folder_id_user'))
         .then(res=> {
             this.account = res.data
             this.items=this.account.listContract

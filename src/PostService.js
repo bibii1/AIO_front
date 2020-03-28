@@ -156,8 +156,8 @@ export default class PostService {
     //METHODES QUI AGISSENT SUR L'ENVOIE DE MAIL
     //__________________________________________________________________________________
 
-    sendMailUpdateWarranted(cont){
-        return axios.post(`${apiBaseUrl}/mail/send/updateWarranted`,cont)
+    sendMailUpdateWarranted(contract){
+        return axios.post(`${apiBaseUrl}/mail/send/updateWarranted`,contract)
     }
     getSinister(folder_id,contract_id){
         return axios.post(`${apiBaseUrl}/users/contract/getsinister`,{folder_id,contract_id})
@@ -173,5 +173,9 @@ export default class PostService {
 
     updateUserInfos(user){
         return axios.post(`${apiBaseUrl}/users/updateUserInfos`,user)
+    }
+
+    sendMailContract(contract,email,name){
+        return axios.post(`${apiBaseUrl}/mail/send/createContract`,{contract,email,name})
     }
 }
