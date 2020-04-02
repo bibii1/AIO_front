@@ -2,7 +2,7 @@
 <body>
     <div class="accountContainer">
         <NavBar/>
-        <h5>nous sommes dans l'account {{folder_id}}</h5>
+        <h5>Nous sommes dans l'account {{folder_id}}</h5>
         <div class="row">
             <div class="col s10" v-for="(contract,index) in account.listContract"
                 v-bind:item="contract"
@@ -10,7 +10,7 @@
                 v-bind:key="contract.contract_id">
                 <div class="card small">
                     <div class="card-image">
-                        il faut mettre la photo de l'utilisateur ca serait bien
+                        Il faut mettre la photo de l'utilisateur ca serait bien
                     </div>
                     <div class="card-stacked">
                         <div class="card-content">
@@ -20,8 +20,8 @@
                             <p>Modèle : {{contract.model}}</p>
                             <p>Numéro de série : {{contract.serialNumber}}</p>
                             <p>Liste de garanties : {{contract.listWarranted}}</p>
-                            <p>prix du tel : {{contract.purchasePrice}}</p>
-                            <h6>Prix par mois : {{getMonth_price(index)}} €</h6>
+                            <p>Prix d'achat : {{contract.purchasePrice}}</p>
+                            <h6>Prix mensuel : {{getMonth_price(index)}} €</h6>
                         </div>
                         <div class="card-action">
                             <a v-on:click="deleteContract(contract.contract_id)" v-if="contract.isSinistered===false">Supprimer le contrat</a>
@@ -38,7 +38,7 @@
         <br/>
         <br/>
         <router-link v-show="!isAuth" :to="'/account/contract/sinister/chooseObject'">
-            <button class="btn waves-effect waves-light">Declarer un sinistre</button>
+            <button class="btn waves-effect waves-light">Déclarer un sinistre</button>
         </router-link>
     </div>
 </body>

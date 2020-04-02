@@ -41,7 +41,7 @@
                                 <p>Objet : {{contract.object}}</p>
                                 <p>Marque : {{contract.brand}}</p>
                                 <p>Modèle : {{contract.model}}</p>
-                                <h6>Prix par mois : {{contract.month_price}} €</h6>
+                                <h6>Prix mensuel : {{contract.month_price}} €</h6>
                             </div>
                         </div>
                     </div>

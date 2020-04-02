@@ -5,10 +5,10 @@
         <h6>Veuillez sélectionner le type de sinistre</h6>
         <div class="collection">
             <!-- <a v-on:click="setPanne()" class="collection-item">panne</a> -->
-            <a v-on:click="setCasse()" class="collection-item">casse</a>
-            <a v-on:click="setVol()" class="collection-item">vol</a>
-            <a v-on:click="setOxydation()" class="collection-item">oxydation</a>
-            <a v-on:click="setTypeSinister('autre')" class="collection-item">autre</a>
+            <a v-on:click="setCasse()" class="collection-item">Casse</a>
+            <a v-on:click="setVol()" class="collection-item">Vol</a>
+            <a v-on:click="setOxydation()" class="collection-item">Oxydation</a>
+            <a v-on:click="setTypeSinister('autre')" class="collection-item">Autre</a>
         </div>
         <Popup/>
         <div class="row">

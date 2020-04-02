@@ -2,7 +2,7 @@
 <body>
     <div class="errorContainer">
         <NavBar/>
-        <h5>acces refusé, veuillez vous identifier ou créer un compte</h5>
+        <h5>Accès refusé, veuillez vous identifier ou créer un compte</h5>
     </div>
 </body>
 </template>

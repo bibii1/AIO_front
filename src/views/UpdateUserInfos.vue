@@ -11,9 +11,9 @@
             <div class="card-stacked">
                 <div class="card-content">
                     <p>Nom : {{user.last_name}}</p>
-                    <p>Prenom : {{user.first_name}}</p>
-                    <p>Numero de contrat d'assurance : {{user.folder}}</p>
-                    <p>Telephone : {{user.phone}}</p>
+                    <p>Prénom : {{user.first_name}}</p>
+                    <p>Numéro de contrat d'assurance : {{user.folder}}</p>
+                    <p>Téléphone : {{user.phone}}</p>
                     <p>Email : {{user.email}}</p>                
                 </div>
             </div>
@@ -34,13 +34,13 @@
                     <div class="row">
                         <div class="input-field col s12">
                         <input id="fn" type="text" v-model="fn" class="validate" required>
-                        <label for="fn">Prenom</label>
+                        <label for="fn">Prénom</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s12">
                         <input id="phone" type="text" v-model="phone" class="validate" required>
-                        <label for="phone">Telephone Portable</label>
+                        <label for="phone">Téléphone Portable</label>
                         </div>
                     </div>
                     <div class="row">

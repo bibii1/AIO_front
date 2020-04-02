@@ -8,7 +8,7 @@
       <div class="row">
         <div class="input-field col s12">
           <input id="fn" type="text" v-model="fn" class="validate" required>
-          <label for="fn">Prenom</label>
+          <label for="fn">Prénom</label>
         </div>
       </div>
       <div class="row">
@@ -20,7 +20,7 @@
       <div class="row">
         <div class="input-field col s12">
           <input id="phone" type="text" v-model="phone" class="validate" required>
-          <label for="phone">Telephone Portable</label>
+          <label for="phone">Téléphone portable</label>
         </div>
       </div>
       <div class="row">

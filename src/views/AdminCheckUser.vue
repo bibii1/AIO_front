@@ -11,9 +11,9 @@
             <div class="card-stacked">
                 <div class="card-content">
                     <p>Nom : {{user.last_name}}</p>
-                    <p>Prenom : {{user.first_name}}</p>
-                    <p>Numero de contrat d'assurance : {{user.folder}}</p>
-                    <p>Telephone : {{user.phone}}</p>
+                    <p>Prénom : {{user.first_name}}</p>
+                    <p>Numéro de contrat d'assurance : {{user.folder}}</p>
+                    <p>Téléphone : {{user.phone}}</p>
                     <p>Email : {{user.email}}</p>                
                 </div>
                 <div class="card-action">

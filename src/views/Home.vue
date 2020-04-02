@@ -2,7 +2,7 @@
 <body>
   <div class="loginContainer">
     <NavBar/>
-    <h5>My-AIO login page</h5>
+    <h5>Bienvenue chez AIO. Veuillez vous connecter pour accéder à votre compte</h5>
     <LoginForm/>
   </div>
   <div class="createContainer">
@@ -36,10 +36,5 @@ h1,h2,h3,h4,h5,h6
 .loginContainer{
   text-align: center,
 }
-
-
-
-
-
 
 </style>

@@ -13,17 +13,17 @@
         <p>
           <label>
             <input type="checkbox" name="Vol" id="Vol" value="Vol" v-model="vol">
-            <span> Vol</span>
+            <span>Vol</span>
           </label>
         </p>
         <p>
         <label>
           <input type="checkbox" id="Oxydation" value="Oxydation" v-model="oxydation">
-          <span> Oxydation </span>
+          <span>Oxydation </span>
         </label>
         </p>
         <div class="row">
-        <label>Prix par mois</label>
+        <label>Prix mensuel</label>
         <div class="input-field col s12">
           <input disabled type="text" id="month_price" v-model="month_price" class="validate">
         </div>

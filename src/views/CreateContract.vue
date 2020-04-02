@@ -14,7 +14,7 @@
       <div class="row">
         <label for="category">Catégorie</label>
         <select v-model="category" required>
-          <option disabled value="">Please select one</option>
+          <option disabled value="">Sélectionner la catégorie</option>
           <option>Smartphone</option>
           <option>Ordinateur Portable</option>
           <option>Tablette</option>
@@ -25,13 +25,13 @@
       <div class="row">
         <label for="brand">Marque</label>
         <select v-model="brand" v-if=" category === 'Smartphone'" required>
-          <option disabled value="">Please select one</option>
+          <option disabled value="">Sélectionner la marque</option>
           <option>Apple</option>
           <option>Samsung</option>
           <option>Huawei</option>
         </select>
         <select v-model="brand" v-else-if=" category === 'Tablette'" required>
-          <option disabled value="">Please select one</option>
+          <option disabled value="">Sélectionner la marque</option>
           <option>Apple</option>
           <option>Samsung</option>
         </select>
@@ -39,7 +39,7 @@
         <div class="row">
           <label for="model">Modèle</label>
           <select v-model="model" v-if=" brand === 'Apple' && category==='Smartphone'" required>
-            <option disabled value="">Please select one</option>
+            <option disabled value="">Sélectionner le modèle</option>
             <option>Iphone 11 Pro Max</option>
             <option>Iphone 11 Pro</option>
             <option>Iphone 11 </option>
@@ -53,7 +53,7 @@
             <option>Iphone 7</option>
          </select>
          <select v-model="model" v-else-if=" brand === 'Samsung'&& category==='Smartphone'" required>
-            <option disabled value="">Please select one</option>
+            <option disabled value="">Sélectionner le modèle</option>
             <option>Galaxy S10+</option>
             <option>Galaxy S10</option>
             <option>Galaxy Fold</option>
@@ -62,7 +62,7 @@
             <option>Galaxy Note 8</option>
          </select>
          <select v-model="model" v-else-if=" brand === 'Huawei'&& category==='Smartphone'" required>
-            <option disabled value="">Please select one</option>
+            <option disabled value="">Sélectionner le modèle</option>
             <option>P30 Pro</option>
             <option>P30 Lite</option>
             <option>P20 Pro</option>
@@ -70,7 +70,7 @@
             <option>Nova 5T</option>
          </select>
          <select v-model="model" v-if=" brand === 'Apple' && category==='Tablette'" required>
-            <option disabled value="">Please select one</option>
+            <option disabled value="">Sélectionner le modèle</option>
             <option>Ipad Pro</option>
          </select>
          <!-- 
