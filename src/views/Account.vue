@@ -58,7 +58,7 @@
                             </label>
                             </p>
                             <p>Prix de l'appareil : {{contract.purchasePrice}}</p>
-                            <h6>Prix par mois : {{contract.month_price}} €</h6>
+                            <h6>Prix mensuel : {{contract.month_price}} €</h6>
                         </div>
                         <div class="card-action">
                             <a v-on:click="deleteContract(contract.contract_id)" v-if="contract.isSinistered===false">Supprimer le contrat</a>

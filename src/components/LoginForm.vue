@@ -14,7 +14,7 @@
         </div>
       </div>
       <div class="row">
-        <button class="btn waves-effect waves-light" type="submit" name="action">Connection</button>
+        <button class="btn waves-effect waves-light" type="submit" name="action">Connexion</button>
       </div>
     </form>
   </div>
@@ -40,7 +40,7 @@ export default {
     methods:{
       onSubmit(){
         postService.getCheckLogin({
-          email: this.email,
+          email: this.email.toLowerCase(),
           password : this.password
         })
         .then(res =>{
