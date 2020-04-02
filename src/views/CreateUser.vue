@@ -91,7 +91,7 @@ export default {
                 first_name : this.fn,
                 last_name : this.ln,
                 password : this.password1,
-                email :this.email,
+                email :this.email.toLowerCase(),
                 phone: this.phone,
                 folder : uuidv4()
             };

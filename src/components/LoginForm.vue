@@ -40,7 +40,7 @@ export default {
     methods:{
       onSubmit(){
         postService.getCheckLogin({
-          email: this.email,
+          email: this.email.toLowerCase(),
           password : this.password
         })
         .then(res =>{
