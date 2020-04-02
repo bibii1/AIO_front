@@ -5,7 +5,6 @@
       <ul id="nav-mobile" class="right">
         <li><router-link v-show="!isAuth" :to="'/'">Se connecter</router-link></li>
         <li><router-link v-show="!isAuth" :to="'/users/create'">Créer un compte</router-link></li>
-
         <li><button v-show="isAuth" v-on:click="goToSettings" class="btn waves-effect waves-light" type="submit" name="action">Paramètres</button></li>
         <li><button v-show="isAuth" v-on:click="logout" class="btn waves-effect waves-light" type="submit" name="action">Déconnexion</button></li>
         <li><button v-show="isAuth" v-on:click="logoutAll" class="btn waves-effect waves-light" type="submit" name="action">Déconnexion totale</button></li>
