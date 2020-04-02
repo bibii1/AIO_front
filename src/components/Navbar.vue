@@ -1,7 +1,12 @@
 <template>
   <nav>
     <div class="nav-wrapper">
-      <router-link to="/" class="brand-logo left">AIO</router-link>
+      <div class="logo">
+        <router-link to="/" class="brand-logo left">
+        <img src='../assets/aio.png'>
+        </router-link>
+      </div>
+      <div class="navigation">
       <ul id="nav-mobile" class="right">
         <li><router-link v-show="!isAuth" :to="'/'">Se connecter</router-link></li>
         <li><router-link v-show="!isAuth" :to="'/users/create'">Créer un compte</router-link></li>
@@ -9,6 +14,7 @@
         <li><button v-show="isAuth" v-on:click="logout" class="btn waves-effect waves-light" type="submit" name="action">Déconnexion</button></li>
         <li><button v-show="isAuth" v-on:click="logoutAll" class="btn waves-effect waves-light" type="submit" name="action">Déconnexion totale</button></li>
       </ul>
+      </div>
     </div>
   </nav>
 </template> 
@@ -17,7 +23,6 @@
 import PostService from '../PostService';
 const postService = new PostService();
 import router from '../router';
-
 
 export default {
 
@@ -66,6 +71,15 @@ export default {
 <style scoped>
 .nav-wrapper{
   background-color: #45A1D9;
+  margin: auto;
+}
+
+.logo{
+  margin: auto;
+}
+
+.navigation{
+  margin:auto;
 }
 
 .navbar {
@@ -78,8 +92,8 @@ export default {
   font-size: 16px;
   color: white;
   text-align: center;
-  padding: 14px 16px;
   text-decoration: none;
+  margin: auto;
 }
 
 
