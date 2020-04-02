@@ -17,7 +17,9 @@
                         <p>Email : {{user.email}}</p>                
                     </div>
                     <div class="card-action">
-                        <a v-on:click="updateUser()">Modifier mes informations</a>             
+                        <a v-on:click="updateUser()">Modifier mes informations</a> 
+                        <a href="/users/update/password">Modifier mon mot de passe</a>             
+            
                     </div>
                 </div>
             </div>
@@ -54,7 +56,7 @@ export default {
         }
     },
     methods : {
-        updateUser(){
+        changePwd(){
             router.push('/users/UpdateUserInfos')
         },
     },
