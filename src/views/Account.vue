@@ -41,12 +41,6 @@
                             <p>Modèle : {{contract.model}}</p>
                             <p>
                             <label>
-                            <input type="checkbox" id="Perte" disabled="disabled" value="Perte" v-model="contract.listWarranted.panne">
-                            <span>Panne</span>
-                            </label>
-                            </p>
-                            <p>
-                            <label>
                             <input type="checkbox" id="Casse" disabled="disabled" value="Casse" v-model="contract.listWarranted.casse">
                             <span>Casse</span>
                             </label>

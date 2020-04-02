@@ -85,10 +85,9 @@ export default {
             var post = {
                 folder_id : this.folder_id, 
                 contract_id:this.contract.contract_id,
-                // panne: this.contract.listWarranted.panne,
-                casse: this.contract.listWarranted.casse,
-                vol: this.contract.listWarranted.vol,
-                oxydation : this.contract.listWarranted.oxydation,
+                casse: this.casse,
+                vol: this.vol,
+                oxydation : this.oxydation,
                 month_price: this.month_price}
             postService.updateWarrented(post)
             .then(()=>{
@@ -321,7 +320,6 @@ export default {
       },
       vol: function(val){
         this.month_price = this.getMonthPrice(this.casse,val,this.oxydation,this.contract.category,this.contract.purchasePrice).toFixed(2)
-        console.log('ok')
       }
     },
     components : {
