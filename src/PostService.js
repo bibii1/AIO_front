@@ -106,6 +106,26 @@ export default class PostService {
         axios.post(`${apiBaseUrl}/users/unvalidateUser`,post);
     }
 
+    changePassword(post){
+        return axios.post(`${apiBaseUrl}/users/update/password`,post);
+    }
+
+    getSinister(folder_id,contract_id){
+        return axios.post(`${apiBaseUrl}/users/contract/getsinister`,{folder_id,contract_id})
+    }
+
+    updateSinister(sinister,folder_id){
+        return axios.post(`${apiBaseUrl}/users/contract/updatesinister`,{sinister,folder_id})
+    }
+
+    getUserByEmail(email){
+        return axios.post(`${apiBaseUrl}/users/getUserByEmail`,email)
+    }
+
+    updateUserInfos(user){
+        return axios.post(`${apiBaseUrl}/users/updateUserInfos`,user)
+    }
+
      //__________________________________________________________________________________
     //METHODES QUI AGISSENT SUR LA COLLECTION ACCOUNT
     //__________________________________________________________________________________
@@ -159,20 +179,9 @@ export default class PostService {
     sendMailUpdateWarranted(contract){
         return axios.post(`${apiBaseUrl}/mail/send/updateWarranted`,contract)
     }
-    getSinister(folder_id,contract_id){
-        return axios.post(`${apiBaseUrl}/users/contract/getsinister`,{folder_id,contract_id})
-    }
 
-    updateSinister(sinister,folder_id){
-        return axios.post(`${apiBaseUrl}/users/contract/updatesinister`,{sinister,folder_id})
-    }
-
-    getUserByEmail(email){
-        return axios.post(`${apiBaseUrl}/users/getUserByEmail`,email)
-    }
-
-    updateUserInfos(user){
-        return axios.post(`${apiBaseUrl}/users/updateUserInfos`,user)
+    sendMailPasswordModification(first_name,email){
+        return axios.post(`${apiBaseUrl}/mail/send/updatePassword`,{first_name,email})
     }
 
     sendMailContract(contract,email,name){
