@@ -42,12 +42,6 @@
                                 <p>Modèle : {{contract.model}}</p>
                                 <p>
                                 <label>
-                                <input type="checkbox" id="Perte" disabled="disabled" value="Perte" v-model="contract.listWarranted.panne">
-                                <span>Panne</span>
-                                </label>
-                                </p>
-                                <p>
-                                <label>
                                 <input type="checkbox" id="Casse" disabled="disabled" value="Casse" v-model="contract.listWarranted.casse">
                                 <span>Casse</span>
                                 </label>
@@ -69,7 +63,7 @@
                             </div>
                             <div class="card-action">
                                 <a v-on:click="deleteContract(contract.contract_id)" v-if="contract.isSinistered===false">Supprimer le contrat</a>
-                                <a v-on:click="updateContract(index)" v-if="contract.isSinistered===false">Modifier mes garanties</a>
+                                <a v-on:click="updateContract(index)" v-if="contract.isSinistered===false">Modifier les garanties</a>
                                 <a v-on:click="checkSinister(contract.contract_id)" v-if="contract.isSinistered===true">Suivi du sinistre</a>
                             </div>
                         </div>

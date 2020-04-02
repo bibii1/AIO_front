@@ -97,10 +97,9 @@ export default {
                     object : this.contract.object,
                     m : m2, //the number of the next month
                     d : d,
-                    // panne: this.contract.listWarranted.panne,
-                    casse: this.contract.listWarranted.casse,
-                    vol: this.contract.listWarranted.vol,
-                    oxydation : this.contract.listWarranted.oxydation,
+                    casse: this.casse,
+                    vol: this.vol,
+                    oxydation : this.oxydation,
                     month_price: this.month_price
                 }
                 postService.sendMailUpdateWarranted(cont)
