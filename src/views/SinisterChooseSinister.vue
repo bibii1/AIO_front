@@ -4,13 +4,10 @@
         <NavBar/>
         <h6>Veuillez sélectionner le type de sinistre</h6>
         <div class="collection">
-            <!-- <a v-on:click="setPanne()" class="collection-item">panne</a> -->
             <a v-on:click="setCasse()" class="collection-item">Casse</a>
             <a v-on:click="setVol()" class="collection-item">Vol</a>
             <a v-on:click="setOxydation()" class="collection-item">Oxydation</a>
-            <a v-on:click="setTypeSinister('autre')" class="collection-item">Autre</a>
         </div>
-        <Popup/>
         <div class="row">
             <div class="col s6">
             </div>
@@ -45,7 +42,6 @@ export default {
             folder_id : localStorage.getItem('folder_id_user'),
             index : localStorage.getItem('index'),
             warranted : { 
-                // panne: false,
                 casse: false,
                 vol: false,
                 oxydation: false
@@ -55,25 +51,12 @@ export default {
         }
     },
     methods : {
-        setTypeSinister(name){
-            this.type = name;
-        },
-        // setPanne(){
-        //     this.warranted.panne = true
-        //     var [check,typeSinister] = this.checkSinisterWarranted()
-        //     this.typeSinister = typeSinister
-        //     if(check){
-        //         router.push('/account/contract/sinister/informations')
-        //     }
-        //     else{
-        //         alert("Vous n'avez pas souscris à cette garantie")
-        //     }
-        // },
         setCasse(){
             this.warranted.casse = true
-            var [check,typeSinister] = this.checkSinisterWarranted()
+            var {check,typeSinister} = this.checkSinisterWarranted()
             this.typeSinister = typeSinister
             if(check){
+                localStorage.setItem('sinisterType',this.typeSinister)
                 router.push('/account/contract/sinister/informations')
             }
             else{
@@ -82,9 +65,10 @@ export default {
         },
         setVol(){
             this.warranted.vol = true
-            var [check,typeSinister] = this.checkSinisterWarranted()
+            var {check,typeSinister} = this.checkSinisterWarranted()
             this.typeSinister = typeSinister
             if(check){
+                localStorage.setItem('sinisterType',this.typeSinister)
                 router.push('/account/contract/sinister/informations')
             }
             else{
@@ -93,9 +77,10 @@ export default {
         },
         setOxydation(){
             this.warranted.oxydation = true
-            var [check,typeSinister] = this.checkSinisterWarranted()
+            var {check,typeSinister} = this.checkSinisterWarranted()
             this.typeSinister = typeSinister
             if(check){
+                localStorage.setItem('sinisterType',this.typeSinister)
                 router.push('/account/contract/sinister/informations')
             }
             else{
@@ -109,13 +94,7 @@ export default {
             // il faut juste comparer chacune de leur valeurs pour voir si le sinistre est le meme
             var check = false
             var typeSinister ="";
-            if(this.warranted.panne==true){
-                if(listWar.panne==true){
-                    check=true;
-                    typeSinister="panne";
-                }
-            }
-            else if(this.warranted.casse==true){
+            if(this.warranted.casse==true){
                 if(listWar.casse==true){
                     check=true;
                     typeSinister ="casse";
@@ -133,7 +112,7 @@ export default {
                     typeSinister = "oxydation";
                 }
             }
-            return [check,typeSinister]
+            return {check,typeSinister}
         }
     },
     components : {

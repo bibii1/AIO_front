@@ -91,7 +91,6 @@ export default class PostService {
     }
 
     logoutallAccount(token){
-
         const config = { headers :
             {'Authorization' : token}
         }
@@ -124,6 +123,10 @@ export default class PostService {
 
     updateUserInfos(user){
         return axios.post(`${apiBaseUrl}/users/updateUserInfos`,user)
+    }
+
+    createSinister(sinister){
+        return axios.post(`${apiBaseUrl}/users/contract/sinister/informations`,sinister)
     }
 
      //__________________________________________________________________________________
@@ -166,10 +169,6 @@ export default class PostService {
 
     updateWarrented(post){
         return axios.post(`${apiBaseUrl}/account/contract/update/warranted`,post)
-    }
-
-    createSinister(sinister){
-        return axios.post(`${apiBaseUrl}/users/contract/sinister/informations`,sinister)
     }
 
      //__________________________________________________________________________________

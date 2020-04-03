@@ -4,7 +4,7 @@
     <NavBar/>
   </div>
   <div class="row">
-    <form class="form" v-on:submit.prevent="onSubmit" enctype="multipart/form-data">
+    <form class="form" v-on:submit.prevent="onSubmit">
       <div class="row">
         <div class="input-field col s12">
           <input id="sinisterDate" type="date" v-model="sinisterDate" class="validate" min="2013-01-01" max="2020-12-31" required>
@@ -54,6 +54,7 @@ export default {
             sinisterDate: "",
             sinisterTime:"",
             sinisterCircumstances:"",
+            sinisterType: localStorage.getItem('sinisterType'),
             account: {}
         }
     },
@@ -65,7 +66,8 @@ export default {
                 contract_id: this.account.listContract[this.index].contract_id,
                 sinisterDate: this.sinisterDate,
                 sinisterTime: this.sinisterTime,
-                sinisterCircumstances:this.sinisterCircumstances
+                sinisterCircumstances:this.sinisterCircumstances,
+                sinisterType: this.sinisterType
             };
             postService.createSinister(sinister)
             .then(()=>{

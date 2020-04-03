@@ -85,18 +85,6 @@ export default {
         }
     },
     methods : {
-        deleteAll(){
-            postService.deleteAll(this.folder_id);
-            localStorage.removeItem('acces_token');
-            localStorage.removeItem('folder_id_user');
-            router.push('/');
-        },
-        deleteContract(contrat_id){
-            postService.deleteContract(this.folder_id,contrat_id)
-            .then(()=>{
-                router.push('/');
-            })
-        },
         declareSinister(index){
             //on utilisera l'index de la card pour identifier le contrat sur lequel agir
             localStorage.setItem('index',index);
