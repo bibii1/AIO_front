@@ -94,7 +94,7 @@
       <div class="row">
         <div class="input-field col s12">
           <input id="purchaseDate" type="date" v-model="purchaseDate" class="validate" min="2013-01-01" max="2020-12-31" required>
-          <label for="purchaseDate">Date d'achat</label>
+          <label for="purchaseDate">Date d'achat (JJ/MM/AAAA)</label>
         </div>
       </div>
       <div class="row">
