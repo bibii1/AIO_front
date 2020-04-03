@@ -10,9 +10,9 @@
                 </div>
                 <div class="card-stacked">
                     <div class="card-content">
+                        <p>Numéro de contrat d'assurance : {{user.folder}}</p>
                         <p>Nom : {{user.last_name}}</p>
                         <p>Prénom : {{user.first_name}}</p>
-                        <p>Numéro de contrat d'assurance : {{user.folder}}</p>
                         <p>Téléphone : {{user.phone}}</p>
                         <p>Email : {{user.email}}</p>                
                     </div>
@@ -56,7 +56,7 @@ export default {
         }
     },
     methods : {
-        changePwd(){
+        updateUser(){
             router.push('/users/UpdateUserInfos')
         },
     },
