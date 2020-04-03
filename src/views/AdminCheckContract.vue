@@ -91,6 +91,7 @@ import '../../node_modules/materialize-css/dist/js/materialize.min.js';
 //on utilisera ce token pour faire logout de la session ou logout total
 import NavBar from '../components/Navbar';
 import PostService from '../PostService';
+import router from '../router';
 const postService = new PostService();
 //import router from '../router';
 
@@ -113,8 +114,20 @@ export default {
     },
     methods : {
         updateSinister(){
+            console.log(this.sinister)
             postService.updateSinister(this.sinister,this.folder_id_user)
         },
+        updateContract(){
+            router.push('/account/contract/update/warranted')
+        },
+        deleteContract(contrat_id){
+            var text = "Êtes-vous certain de vouloir supprimer ce contract ?\n\n"
+            if(confirm(text))
+            postService.deleteContract(this.folder_id_user,contrat_id)
+            .then(()=>{
+                router.push('/adminAccount/adminCheckUser');
+            })
+        }
     },
     components : {
         NavBar
@@ -128,7 +141,7 @@ export default {
         .then(res=> {
             this.user = res.data
         })
-        postService.getSinister(this.folder_id_user,this.contrat_id)
+        postService.getSinister(this.folder_id_user,localStorage.getItem('contract_id_user'))
         .then(res=>{
             this.sinister = res.data
         })

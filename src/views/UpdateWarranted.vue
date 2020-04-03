@@ -103,7 +103,12 @@ export default {
                     month_price: this.month_price
                 }
                 postService.sendMailUpdateWarranted(cont)
-                router.push('/');
+                if(localStorage.getItem('isAdmin')===undefined){
+                  router.push('/');
+                }
+                else{
+                  router.push('/adminAccount/adminCheckUser')
+                }
             })
         },
         getMonthPrice(casse,vol,oxydation,category,price){

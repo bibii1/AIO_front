@@ -205,9 +205,7 @@ const router = new Router({
                     next('/')
                 }
                 next()
-                
             }
-
         },
         {
             path:'/adminAccount/UpdateUserInfos',
