@@ -27,19 +27,19 @@
                 <form class="form" v-on:submit.prevent="onSubmit">
                     <div class="row">
                         <div class="input-field col s12">
-                        <input id="lPwd" type="text" v-model="lPwd" class="validate" required>
+                        <input id="lPwd" type="password" v-model="lPwd" class="validate" required>
                         <label for="lPwd">Entrez votre mot de passe actuel</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s12">
-                        <input id="Pwd1" type="text" v-model="Pwd1" class="validate" required>
+                        <input id="Pwd1" type="password" v-model="Pwd1" class="validate" required>
                         <label for="Pwd1">Entrez votre nouveau mot de passe</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s12">
-                        <input id="Pwd2" type="text" v-model="Pwd2" class="validate" required>
+                        <input id="Pwd2" type="password" v-model="Pwd2" class="validate" required>
                         <label for="Pwd2">Confirmez votre nouveau mot de passe</label>
                         </div>
                     </div>

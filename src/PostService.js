@@ -97,9 +97,6 @@ export default class PostService {
         return axios.post(`${apiBaseUrl}/users/me/logoutall`,{},config)
     }
 
-    sendValidationEmail(post){
-        axios.post(`${apiBaseUrl}/mail/send/validationLink`,post);
-    }
 
     unvalidateUser(post){
         axios.post(`${apiBaseUrl}/users/unvalidateUser`,post);
@@ -127,6 +124,13 @@ export default class PostService {
 
     createSinister(sinister){
         return axios.post(`${apiBaseUrl}/users/contract/sinister/informations`,sinister)
+    }
+    updateTempPassword(tempPassword,email){
+        return axios.post(`${apiBaseUrl}/users/update/tempPassword`,{tempPassword,email})
+    }
+
+    updateResetPassword(tempPassword,new_password){
+        return axios.post(`${apiBaseUrl}/users/update/resetPassword`,{tempPassword,new_password})
     }
 
      //__________________________________________________________________________________
@@ -175,6 +179,10 @@ export default class PostService {
     //METHODES QUI AGISSENT SUR L'ENVOIE DE MAIL
     //__________________________________________________________________________________
 
+    sendValidationEmail(post){
+        axios.post(`${apiBaseUrl}/mail/send/validationLink`,post);
+    }
+
     sendMailUpdateWarranted(contract){
         return axios.post(`${apiBaseUrl}/mail/send/updateWarranted`,contract)
     }
@@ -185,5 +193,9 @@ export default class PostService {
 
     sendMailContract(contract,email,name){
         return axios.post(`${apiBaseUrl}/mail/send/createContract`,{contract,email,name})
+    }
+
+    sendMailResetPassword(email,tempPassword){
+        return axios.post(`${apiBaseUrl}/mail/send/resetLink`,{email,tempPassword})
     }
 }
