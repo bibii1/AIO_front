@@ -85,16 +85,16 @@ export default class PostService {
 
     logoutAccount(token){
         const config = { headers :
-            {'Authorization' : token}
+            {'Authorization' : 'Bearer ' +token}
         }
-        return axios.post(`${apiBaseUrl}/users/me/logout`,{},config)
+        return axios.get(`${apiBaseUrl}/users/me/logout`,config)
     }
 
     logoutallAccount(token){
         const config = { headers :
-            {'Authorization' : token}
+            {'Authorization' : 'Bearer '+token}
         }
-        return axios.post(`${apiBaseUrl}/users/me/logoutall`,{},config)
+        return axios.get(`${apiBaseUrl}/users/me/logoutall`,config)
     }
 
 
