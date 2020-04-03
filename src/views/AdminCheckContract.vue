@@ -114,7 +114,6 @@ export default {
     },
     methods : {
         updateSinister(){
-            console.log(this.sinister)
             postService.updateSinister(this.sinister,this.folder_id_user)
         },
         updateContract(){
