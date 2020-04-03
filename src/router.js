@@ -19,6 +19,7 @@ import AdminCheckContract from './views/AdminCheckContract.vue';
 import UpdateUserInfos from './views/UpdateUserInfos.vue';
 import UserSettings from './views/UserSettings.vue';
 import UpdateUserPassword from './views/UpdateUserPassword.vue';
+import UserResetPassword  from './views/UserResetPassword.vue'
 
 import axios from 'axios';
 const apiBaseUrl = 'http://localhost:3000';
@@ -251,6 +252,10 @@ const router = new Router({
                 }
                 next()
             }
+        }, 
+        {
+            path:'/users/page/resetPassword/',
+            component: UserResetPassword
         }
     ]    
 })
