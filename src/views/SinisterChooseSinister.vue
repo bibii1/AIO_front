@@ -38,7 +38,6 @@ export default {
     data: function(){
         return{
             //on pourra charger tous les dossier ici pour l'instant que le folder_id
-            isAuth: '',
             folder_id : localStorage.getItem('folder_id_user'),
             index : localStorage.getItem('index'),
             warranted : { 

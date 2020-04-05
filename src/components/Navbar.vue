@@ -31,9 +31,14 @@ export default {
     logout(){
       const token = localStorage.getItem('acces_token');
       postService.logoutAccount(token)
-      localStorage.removeItem('acces_token')
-      localStorage.removeItem('folder_id')
-      localStorage.removeItem('isAuth')
+      // localStorage.removeItem('acces_token')
+      // localStorage.removeItem('folder_id')
+      // localStorage.removeItem('isAuth')
+      // localStorage.removeItem('isAdmin')
+      // localStorage.removeItem('folder_id')
+      // localStorage.removeItem('folder_id_user')
+      // localStorage.removeItem('contract_id_user')
+      localStorage.clear()
       router.push('/');
     },
     goToSettings(){

@@ -50,7 +50,6 @@ export default {
         return{
             folder_id: localStorage.getItem('folder_id_user'),
             index: localStorage.getItem("index"),
-            isAuth: '',
             sinisterDate: "",
             sinisterTime:"",
             sinisterCircumstances:"",

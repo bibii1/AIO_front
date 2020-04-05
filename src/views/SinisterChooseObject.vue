@@ -48,7 +48,7 @@
                 </a>
             </div>
         </div>
-        <router-link v-show="!isAuth" :to="'/'">
+        <router-link :to="'/'">
             <button class="btn waves-effect waves-light">Mon compte</button>
         </router-link>
     </div>
@@ -78,7 +78,6 @@ export default {
     data: function(){
         return{
             //on pourra charger tous les dossier ici pour l'instant que le folder_id
-            isAuth: '',
             folder_id : localStorage.getItem('folder_id_user'),
             contract_id : localStorage.getItem('contract_id'),
             account: {}
