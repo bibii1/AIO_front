@@ -64,6 +64,14 @@ export default {
         }
     },
     methods : {
+        logoutAll(){
+            const token = localStorage.getItem('acces_token');
+            postService.logoutallAccount(token);
+            localStorage.removeItem('isAuth')
+            localStorage.removeItem('acces_token')
+            localStorage.removeItem('folder_id')
+            router.push('/');
+        },
         onSubmit(){
             if(this.Pwd1==this.Pwd2){
                 const tempPwd = this.tempPwd;
@@ -71,6 +79,7 @@ export default {
                 postService.updateResetPassword(tempPwd,new_password)
                 .then(()=>{
                     alert("le mot de passe a été changé")
+                    this.logoutAll()
                     router.push('/')
                 })
                 .catch(()=>alert("mot de passe provisoire invalide"))

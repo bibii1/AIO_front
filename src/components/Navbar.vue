@@ -8,7 +8,6 @@
 
         <li><button v-show="isAuth" v-on:click="goToSettings" class="btn waves-effect waves-light" type="submit" name="action">Paramètres</button></li>
         <li><button v-show="isAuth" v-on:click="logout" class="btn waves-effect waves-light" type="submit" name="action">Déconnexion</button></li>
-        <li><button v-show="isAuth" v-on:click="logoutAll" class="btn waves-effect waves-light" type="submit" name="action">Déconnexion totale</button></li>
       </ul>
     </div>
   </nav>
@@ -35,16 +34,6 @@ export default {
       localStorage.removeItem('acces_token')
       localStorage.removeItem('folder_id')
       localStorage.removeItem('isAuth')
-      router.push('/');
-      
-      
-    },
-    logoutAll(){
-      const token = localStorage.getItem('acces_token');
-      postService.logoutallAccount(token);
-      localStorage.removeItem('isAuth')
-      localStorage.removeItem('acces_token')
-      localStorage.removeItem('folder_id')
       router.push('/');
     },
     goToSettings(){

@@ -85,6 +85,14 @@ export default {
         }
     },
     methods : {
+        logoutAll(){
+            const token = localStorage.getItem('acces_token');
+            postService.logoutallAccount(token);
+            localStorage.removeItem('isAuth')
+            localStorage.removeItem('acces_token')
+            localStorage.removeItem('folder_id')
+            router.push('/');
+        },
         onSubmit(){
             if(this.Pwd1==this.Pwd2){
                 if(this.Pwd1!=this.lPwd){
@@ -96,6 +104,7 @@ export default {
                     postService.changePassword(post)
                     .then(()=>{
                         postService.sendMailPasswordModification(this.user.first_name,this.user.email)
+                        this.logoutAll()
                         router.push('/')
                     })
                     .catch(()=>{
