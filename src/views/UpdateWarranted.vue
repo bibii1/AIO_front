@@ -103,7 +103,6 @@ export default {
                     month_price: this.month_price
                 }
                 postService.sendMailUpdateWarranted(cont)
-                console.log(localStorage.getItem('isAdmin'))
                 if(localStorage.getItem('isAdmin')==='false' || localStorage.getItem('isAdmin')===undefined){
                   router.push('/');
                 }
