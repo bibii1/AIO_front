@@ -14,7 +14,7 @@
         </div>
       </div>
       <div class="row">
-        <button class="btn waves-effect waves-light btn-large" type="submit" name="action">Connexion</button>
+        <button class="btn waves-effect waves-light rounded" type="submit" name="action">Connexion</button>
       </div>
     </form>
   </div>

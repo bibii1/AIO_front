@@ -8,14 +8,14 @@
   </div>
   <div class="accountContainer">
     <div class="row">
-      <div
+      <v-col
         class="cols10"
         v-for="(contract,index) in account.listContract"
         v-bind:item="contract"
         v-bind:index="index"
         v-bind:key="contract.contract_id"
       >
-        <v-card max-width="730" outlined>
+        <v-card>
           <div class="card-image">
             <img
               src="../assets/img/Apple/Smartphone/Iphone-X.png"
@@ -118,7 +118,7 @@
             </v-card-text>
             <v-card>
               <div class="card2">
-                <v-card-title class="cardInfo">Vos garanties</v-card-title>
+                <v-card-subtitle>Vos garanties</v-card-subtitle>
                 <div class="card-content">
                   <p>
                     <label>
@@ -158,7 +158,7 @@
                     </label>
                   </p>
                   <div class="tarifs">
-                    <p>Prix de l'appareil : {{contract.purchasePrice}}</p>
+                    <v-card-text>Prix de l'appareil : {{contract.purchasePrice}}</v-card-text>
                     <h5>Prix mensuel : {{contract.month_price}} €</h5>
                   </div>
                 </div>
@@ -167,24 +167,21 @@
 
             <div class="card-action">
               <v-btn
-                color="orange"
                 v-on:click="deleteContract(contract.contract_id)"
                 v-if="contract.isSinistered===false"
               >Supprimer le contrat</v-btn>
               <v-btn
-                color="orange"
                 v-on:click="updateContract(index)"
                 v-if="contract.isSinistered===false"
               >Modifier mes garanties</v-btn>
               <v-btn
-                color="orange"
                 v-on:click="checkSinister(contract.contract_id)"
                 v-if="contract.isSinistered===true"
               >Suivi du sinistre</v-btn>
             </div>
           </div>
         </v-card>
-      </div>
+      </v-col>
     </div>
   </div>
   <div class="createAndDeclare">
@@ -265,16 +262,84 @@ export default {
 </script>
 
 <style scoped>
+.v-card {
+  display: ruby-text-container;
+  max-width: 100%;
+  height: 100%;
+  max-height: 1500px;
+  text-decoration: none;
+  transition-property: box-shadow, opacity;
+  overflow-wrap: break-word;
+  position: sticky;
+  white-space: normal;
+  transition: box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: auto;
+  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2),
+    0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+}
+
+
+.v-card__title {
+  font-size: 1.25rem;
+  font-weight: 750;
+  letter-spacing: 0.0125em;
+  padding: 16px 24px 10px;
+  background-color: #45a1d9;
+  color: white;
+  max-width: 100%;
+  text-align: center;
+  margin: 20px;
+  border-radius: 30px;
+  opacity: 0.7;
+}
+
+.v-card__subtitle {
+  padding: 0 24px 20px;
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: 0.0125em;
+  padding: 16px 24px 10px;
+  background-color: #45a1d9;
+  color: white;
+  max-width: 100%;
+  text-align: center;
+  margin: 20px;
+  border-radius: 30px;
+  opacity: 0.7;
+}
+
+.v-card__text {
+  padding: 15px 15px;
+  font-size: 1.25rem;
+  font-weight: 500;
+  letter-spacing: 0.0125em;
+  max-width: 100%;
+  text-align: center;
+  margin: 20px;
+}
+
+.v-card:not(.v-sheet--tile):not(.v-card--shaped) {
+  border-radius: 30px;
+}
+
+
 .title {
   text-align: center;
 }
 
 .accountContainer {
-  text-align: center;
+  text-align: justify;
+  text-anchor: center;
+}
+
+.row{
+  text-align: justify;
+  text-anchor: center;
 }
 
 .createAndDeclare {
   text-align: center;
+  padding: 20px;
 }
 
 .card-stacked {
@@ -333,5 +398,17 @@ export default {
 
 .tarifs {
   margin: 30px;
+}
+
+.v-btn {
+  border-radius: 5px;
+  margin: 10px;
+  width: 40%;
+  height: 20px;
+  color: white;
+  background-color: rgb(81,164,154);
+  border-color: rgb(81,164,154);
+  cursor: pointer;
+  block-size: 40px;
 }
 </style>
