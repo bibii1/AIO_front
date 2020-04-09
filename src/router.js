@@ -144,24 +144,6 @@ const router = new Router({
         {
             path:'/users/create',
             component : CreateUser,
-            beforeEnter: (to,from,next)=>{
-                const tokenTemp  = localStorage.getItem('acces_token')
-                const post  =  {
-                    token: tokenTemp
-                }
-                //le post est different de mon token initial
-                axios.post(`${apiBaseUrl}/users/checkToken/`,post)
-                //res = nombre de fois ou le token est present dans la bdd
-                .then(res=>{
-                    if(res.data==1){
-                        next()
-                    }
-                    else{
-                        next('/error')
-                    }
-                })
-                next()
-            }
         },
         {
             path:'/error',
