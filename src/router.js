@@ -3,9 +3,7 @@ import Router from 'vue-router';
 
 import Home from './views/Home.vue';
 import Account from './views/Account.vue';
-import Validation from './views/Validation.vue';
 import CreateUser from './views/CreateUser.vue';
-import About from './views/About.vue';
 import ErrorVue from './views/Error.vue';
 import CreateContract from './views/CreateContract.vue';
 import SinisterChooseObject from './views/SinisterChooseObject.vue';
@@ -17,7 +15,9 @@ import AdminCheckUser from './views/AdminCheckUser.vue';
 import UpdateWarranted from './views/UpdateWarranted.vue';
 import AdminCheckContract from './views/AdminCheckContract.vue';
 import UpdateUserInfos from './views/UpdateUserInfos.vue';
-import UserSettings from './views/UserSettings.vue'
+import UserSettings from './views/UserSettings.vue';
+import UpdateUserPassword from './views/UpdateUserPassword.vue';
+import UserResetPassword  from './views/UserResetPassword.vue'
 
 import axios from 'axios';
 const apiBaseUrl = 'http://localhost:3000';
@@ -101,10 +101,21 @@ const router = new Router({
             path: '/adminAccount/adminCheckUser',
             component: AdminCheckUser,
             beforeEnter: (to,from,next)=>{
-                if(localStorage.getItem('isAuth')!='true')
-                {
-                    next('/')
+                const tokenTemp  = localStorage.getItem('acces_token')
+                const post  =  {
+                    token: tokenTemp
                 }
+                //le post est different de mon token initial
+                axios.post(`${apiBaseUrl}/users/checkToken/`,post)
+                //res = nombre de fois ou le token est present dans la bdd
+                .then(res=>{
+                    if(res.data==1){
+                        next()
+                    }
+                    else{
+                        next('/error')
+                    }
+                })
                 next()
             }
         },
@@ -112,110 +123,201 @@ const router = new Router({
             path: '/adminAccount/adminCheckContract',
             component: AdminCheckContract,
             beforeEnter: (to,from,next)=>{
-                if(localStorage.getItem('isAuth')!='true')
-                {
-                    next('/')
+                const tokenTemp  = localStorage.getItem('acces_token')
+                const post  =  {
+                    token: tokenTemp
                 }
+                //le post est different de mon token initial
+                axios.post(`${apiBaseUrl}/users/checkToken/`,post)
+                //res = nombre de fois ou le token est present dans la bdd
+                .then(res=>{
+                    if(res.data==1){
+                        next()
+                    }
+                    else{
+                        next('/error')
+                    }
+                })
                 next()
             }
         },
         {
             path:'/users/create',
             component : CreateUser,
-        },
-        {
-            path:'/users/emailValidation/:id',
-            component : Validation,
-        },
-        {
-            path:'/about',
-            component : About
+            beforeEnter: (to,from,next)=>{
+                const tokenTemp  = localStorage.getItem('acces_token')
+                const post  =  {
+                    token: tokenTemp
+                }
+                //le post est different de mon token initial
+                axios.post(`${apiBaseUrl}/users/checkToken/`,post)
+                //res = nombre de fois ou le token est present dans la bdd
+                .then(res=>{
+                    if(res.data==1){
+                        next()
+                    }
+                    else{
+                        next('/error')
+                    }
+                })
+                next()
+            }
         },
         {
             path:'/error',
-            component : ErrorVue
+            component : ErrorVue,
         },
         {
             path:'/account/contract/create',
             component : CreateContract,
             beforeEnter: (to,from,next)=>{
-                if(localStorage.getItem('isAuth')!='true')
-                {
-                    next('/')
+                const tokenTemp  = localStorage.getItem('acces_token')
+                const post  =  {
+                    token: tokenTemp
                 }
+                //le post est different de mon token initial
+                axios.post(`${apiBaseUrl}/users/checkToken/`,post)
+                //res = nombre de fois ou le token est present dans la bdd
+                .then(res=>{
+                    if(res.data==1){
+                        next()
+                    }
+                    else{
+                        next('/error')
+                    }
+                })
                 next()
-
             }
         },
         {
             path:'/account/contract/sinister/chooseObject',
             component : SinisterChooseObject,
             beforeEnter: (to,from,next)=>{
-                if(localStorage.getItem('isAuth')!='true')
-                {
-                    next('/')
+                const tokenTemp  = localStorage.getItem('acces_token')
+                const post  =  {
+                    token: tokenTemp
                 }
+                //le post est different de mon token initial
+                axios.post(`${apiBaseUrl}/users/checkToken/`,post)
+                //res = nombre de fois ou le token est present dans la bdd
+                .then(res=>{
+                    if(res.data==1){
+                        next()
+                    }
+                    else{
+                        next('/error')
+                    }
+                })
                 next()
-                
             }
         },
         {
             path:'/account/contract/sinister/chooseSinister',
             component : SinisterChooseSinister,
             beforeEnter: (to,from,next)=>{
-                if(localStorage.getItem('isAuth')!='true')
-                {
-                    next('/')
+                const tokenTemp  = localStorage.getItem('acces_token')
+                const post  =  {
+                    token: tokenTemp
                 }
+                //le post est different de mon token initial
+                axios.post(`${apiBaseUrl}/users/checkToken/`,post)
+                //res = nombre de fois ou le token est present dans la bdd
+                .then(res=>{
+                    if(res.data==1){
+                        next()
+                    }
+                    else{
+                        next('/error')
+                    }
+                })
                 next()
-                
             }
         },
         {
             path:'/account/contract/sinister/informations',
             component : SinisterInfos,
             beforeEnter: (to,from,next)=>{
-                if(localStorage.getItem('isAuth')!='true')
-                {
-                    next('/')
+                const tokenTemp  = localStorage.getItem('acces_token')
+                const post  =  {
+                    token: tokenTemp
                 }
+                //le post est different de mon token initial
+                axios.post(`${apiBaseUrl}/users/checkToken/`,post)
+                //res = nombre de fois ou le token est present dans la bdd
+                .then(res=>{
+                    if(res.data==1){
+                        next()
+                    }
+                    else{
+                        next('/error')
+                    }
+                })
                 next()
-                
             }
         },
         {
             path:'/account/contract/sinister/progress',
             component : SinisterProgress,
             beforeEnter: (to,from,next)=>{
-                if(localStorage.getItem('isAuth')!='true')
-                {
-                    next('/')
+                const tokenTemp  = localStorage.getItem('acces_token')
+                const post  =  {
+                    token: tokenTemp
                 }
+                //le post est different de mon token initial
+                axios.post(`${apiBaseUrl}/users/checkToken/`,post)
+                //res = nombre de fois ou le token est present dans la bdd
+                .then(res=>{
+                    if(res.data==1){
+                        next()
+                    }
+                    else{
+                        next('/error')
+                    }
+                })
                 next()
-                
             }
         },
         {
             path:'/account/contract/update/warranted',
             component : UpdateWarranted,
             beforeEnter: (to,from,next)=>{
-                if(localStorage.getItem('isAuth')!='true')
-                {
-                    next('/')
+                const tokenTemp  = localStorage.getItem('acces_token')
+                const post  =  {
+                    token: tokenTemp
                 }
+                //le post est different de mon token initial
+                axios.post(`${apiBaseUrl}/users/checkToken/`,post)
+                //res = nombre de fois ou le token est present dans la bdd
+                .then(res=>{
+                    if(res.data==1){
+                        next()
+                    }
+                    else{
+                        next('/error')
+                    }
+                })
                 next()
-                
             }
-
         },
         {
             path:'/adminAccount/UpdateUserInfos',
             component:UpdateUserInfos,
             beforeEnter: (to,from,next)=>{
-                if(localStorage.getItem('isAuth')!='true')
-                {
-                    next('/')
+                const tokenTemp  = localStorage.getItem('acces_token')
+                const post  =  {
+                    token: tokenTemp
                 }
+                //le post est different de mon token initial
+                axios.post(`${apiBaseUrl}/users/checkToken/`,post)
+                //res = nombre de fois ou le token est present dans la bdd
+                .then(res=>{
+                    if(res.data==1){
+                        next()
+                    }
+                    else{
+                        next('/error')
+                    }
+                })
                 next()
             }
         },
@@ -223,22 +325,70 @@ const router = new Router({
             path:'/users/UpdateUserInfos',
             component:UpdateUserInfos,
             beforeEnter: (to,from,next)=>{
-                if(localStorage.getItem('isAuth')!='true')
-                {
-                    next('/')
+                const tokenTemp  = localStorage.getItem('acces_token')
+                const post  =  {
+                    token: tokenTemp
                 }
+                //le post est different de mon token initial
+                axios.post(`${apiBaseUrl}/users/checkToken/`,post)
+                //res = nombre de fois ou le token est present dans la bdd
+                .then(res=>{
+                    if(res.data==1){
+                        next()
+                    }
+                    else{
+                        next('/error')
+                    }
+                })
                 next()
             }
         },{
             path:'/users/settings',
             component:UserSettings,
             beforeEnter: (to,from,next)=>{
-                if(localStorage.getItem('isAuth')!='true')
-                {
-                    next('/')
+                const tokenTemp  = localStorage.getItem('acces_token')
+                const post  =  {
+                    token: tokenTemp
                 }
+                //le post est different de mon token initial
+                axios.post(`${apiBaseUrl}/users/checkToken/`,post)
+                //res = nombre de fois ou le token est present dans la bdd
+                .then(res=>{
+                    if(res.data==1){
+                        next()
+                    }
+                    else{
+                        next('/error')
+                    }
+                })
                 next()
             }
+        },
+        {
+            path:'/users/update/password',
+            component:UpdateUserPassword,
+            beforeEnter: (to,from,next)=>{
+                const tokenTemp  = localStorage.getItem('acces_token')
+                const post  =  {
+                    token: tokenTemp
+                }
+                //le post est different de mon token initial
+                axios.post(`${apiBaseUrl}/users/checkToken/`,post)
+                //res = nombre de fois ou le token est present dans la bdd
+                .then(res=>{
+                    if(res.data==1){
+                        next()
+                    }
+                    else{
+                        next('/error')
+                    }
+                })
+                next()
+            }
+        }, 
+        {
+            path:'/users/page/resetPassword/',
+            component: UserResetPassword
         }
     ]    
 })

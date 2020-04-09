@@ -12,7 +12,6 @@
         <li><router-link v-show="!isAuth" :to="'/users/create'">Créer un compte</router-link></li>
         <li><button v-show="isAuth" v-on:click="goToSettings" class="btn waves-effect waves-light" type="submit" name="action">Paramètres</button></li>
         <li><button v-show="isAuth" v-on:click="logout" class="btn waves-effect waves-light" type="submit" name="action">Déconnexion</button></li>
-        <li><button v-show="isAuth" v-on:click="logoutAll" class="btn waves-effect waves-light" type="submit" name="action">Déconnexion totale</button></li>
       </ul>
       </div>
     </div>
@@ -33,18 +32,17 @@ export default {
     }
   },
   methods : {
-    logout(token=localStorage.getItem('acces_token')){
-      postService.logoutAccount(token);
-      localStorage.removeItem('acces_token')
-      localStorage.removeItem('folder_id')
-      localStorage.removeItem('isAuth')
-      router.push('/');
-    },
-    logoutAll(token=localStorage.getItem('acces_token')){
-      postService.logoutallAccount(token);
-      localStorage.removeItem('isAuth')
-      localStorage.removeItem('acces_token')
-      localStorage.removeItem('folder_id')
+    logout(){
+      const token = localStorage.getItem('acces_token');
+      postService.logoutAccount(token)
+      // localStorage.removeItem('acces_token')
+      // localStorage.removeItem('folder_id')
+      // localStorage.removeItem('isAuth')
+      // localStorage.removeItem('isAdmin')
+      // localStorage.removeItem('folder_id')
+      // localStorage.removeItem('folder_id_user')
+      // localStorage.removeItem('contract_id_user')
+      localStorage.clear()
       router.push('/');
     },
     goToSettings(){

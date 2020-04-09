@@ -17,14 +17,15 @@
         </div>
         <div class="card-stacked">
           <div class="card-content">
+            <p>Numéro de contrat d'assurance : {{user.folder}}</p>
             <p>Nom : {{user.last_name}}</p>
             <p>Prénom : {{user.first_name}}</p>
-            <p>Numéro de contrat d'assurance : {{user.folder}}</p>
             <p>Téléphone : {{user.phone}}</p>
             <p>Email : {{user.email}}</p>
           </div>
           <div class="card-action">
             <a v-on:click="updateUser()">Modifier mes informations</a>
+            <a href="/users/update/password">Modifier mon mot de passe</a>
           </div>
         </div>
       </div>
@@ -52,7 +53,6 @@ export default {
   name: "UserSettings",
   data: function() {
     return {
-      isAuth: "",
       folder_id: localStorage.getItem("folder_id_user"),
       account: {},
       dialog: false,
@@ -89,7 +89,7 @@ p {
 
 .accountContainer {
   text-align: left;
-  width: 60%;
+  width: 80%;
   max-width: 730px;
   padding: 0 20px;
   margin: auto;

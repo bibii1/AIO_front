@@ -14,7 +14,7 @@
         </div>
       </div>
       <div class="row">
-        <button class="btn waves-effect waves-light" type="submit" name="action">Connexion</button>
+        <button class="btn waves-effect waves-light btn-large" type="submit" name="action">Connexion</button>
       </div>
     </form>
   </div>
@@ -43,24 +43,33 @@ export default {
           email: this.email.toLowerCase(),
           password: this.password
         })
-        .then(res => {
-          if (res.data.userTemp.emailValidation == true) {
-            const token = res.data.token;
-            const folder_id = res.data.userTemp.folder;
-            localStorage.setItem("acces_token", token);
-            localStorage.setItem("isAuth", true);
-            if (this.email.includes("@aio.fr")) {
-              localStorage.setItem("isAdmin", true);
-              localStorage.setItem("folder_id", folder_id);
-              router.push("/adminAccount");
-            } else {
-              localStorage.setItem("isAdmin", false);
-              localStorage.setItem("folder_id_user", folder_id);
-              router.push("account");
+        .then(res =>{
+          if(res.data!='No users with these credentials'){
+            if(res.data.userTemp.emailValidation == true){
+              const token = res.data.token
+              const folder_id = res.data.userTemp.folder
+              localStorage.setItem('acces_token',token)
+              localStorage.setItem('isAuth',true)
+              if(this.email.includes('@aio.fr'))
+              {
+                localStorage.setItem('isAdmin',true)
+                localStorage.setItem('folder_id',folder_id)
+                router.push('/adminAccount')
+              }
+              else
+              {
+                localStorage.setItem('isAdmin',false)
+                localStorage.setItem('folder_id_user',folder_id)
+                router.push('account')
+              }
             }
-          } else
-            alert("L'email n'a pas été validé. Véfifiez votre boite mail.");
-        });
+            else
+              alert("L'email n'a pas été validé. Véfifiez votre boite mail.")
+          }
+          else{
+            alert('Votre email ou mot de passe est invalide.')
+          }
+        })
     }
   }
 };

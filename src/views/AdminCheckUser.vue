@@ -55,7 +55,6 @@ export default {
     name : "AdminCheckUser",
     data: function(){
         return{
-            isAuth: '',
             folder_id : localStorage.getItem('folder_id'),
             superuser :" " ,
             account: {},

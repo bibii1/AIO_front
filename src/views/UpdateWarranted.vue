@@ -56,7 +56,6 @@ export default {
     data: function(){
         return{
             //on pourra charger tous les dossier ici pour l'instant que le folder_id
-            isAuth: '',
             index :'',
             folder_id : localStorage.getItem('folder_id_user'),
             user :'' ,
@@ -97,14 +96,18 @@ export default {
                     object : this.contract.object,
                     m : m2, //the number of the next month
                     d : d,
-                    // panne: this.contract.listWarranted.panne,
-                    casse: this.contract.listWarranted.casse,
-                    vol: this.contract.listWarranted.vol,
-                    oxydation : this.contract.listWarranted.oxydation,
+                    casse: this.casse,
+                    vol: this.vol,
+                    oxydation : this.oxydation,
                     month_price: this.month_price
                 }
                 postService.sendMailUpdateWarranted(cont)
-                router.push('/');
+                if(localStorage.getItem('isAdmin')==='false' || localStorage.getItem('isAdmin')===undefined){
+                  router.push('/');
+                }
+                else{
+                  router.push('/adminAccount/adminCheckUser')
+                }
             })
         },
         getMonthPrice(casse,vol,oxydation,category,price){

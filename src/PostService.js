@@ -85,25 +85,52 @@ export default class PostService {
 
     logoutAccount(token){
         const config = { headers :
-            {'Authorization' : token}
+            {'Authorization' : 'Bearer ' +token}
         }
-        return axios.post(`${apiBaseUrl}/users/me/logout`,{},config)
+        return axios.get(`${apiBaseUrl}/users/me/logout`,config)
     }
 
     logoutallAccount(token){
-
         const config = { headers :
-            {'Authorization' : token}
+            {'Authorization' : 'Bearer '+token}
         }
-        return axios.post(`${apiBaseUrl}/users/me/logoutall`,{},config)
+        return axios.get(`${apiBaseUrl}/users/me/logoutall`,config)
     }
 
-    sendValidationEmail(post){
-        axios.post(`${apiBaseUrl}/mail/send/validationLink`,post);
-    }
 
     unvalidateUser(post){
         axios.post(`${apiBaseUrl}/users/unvalidateUser`,post);
+    }
+
+    changePassword(post){
+        return axios.post(`${apiBaseUrl}/users/update/password`,post);
+    }
+
+    getSinister(folder_id,contract_id){
+        return axios.post(`${apiBaseUrl}/users/contract/getsinister`,{folder_id,contract_id})
+    }
+
+    updateSinister(sinister,folder_id){
+        return axios.post(`${apiBaseUrl}/users/contract/updatesinister`,{sinister,folder_id})
+    }
+
+    getUserByEmail(email){
+        return axios.post(`${apiBaseUrl}/users/getUserByEmail`,email)
+    }
+
+    updateUserInfos(user){
+        return axios.post(`${apiBaseUrl}/users/updateUserInfos`,user)
+    }
+
+    createSinister(sinister){
+        return axios.post(`${apiBaseUrl}/users/contract/sinister/informations`,sinister)
+    }
+    updateTempPassword(tempPassword,email){
+        return axios.post(`${apiBaseUrl}/users/update/tempPassword`,{tempPassword,email})
+    }
+
+    updateResetPassword(tempPassword,new_password){
+        return axios.post(`${apiBaseUrl}/users/update/resetPassword`,{tempPassword,new_password})
     }
 
      //__________________________________________________________________________________
@@ -148,34 +175,27 @@ export default class PostService {
         return axios.post(`${apiBaseUrl}/account/contract/update/warranted`,post)
     }
 
-    createSinister(sinister){
-        return axios.post(`${apiBaseUrl}/users/contract/sinister/informations`,sinister)
-    }
-
      //__________________________________________________________________________________
     //METHODES QUI AGISSENT SUR L'ENVOIE DE MAIL
     //__________________________________________________________________________________
 
+    sendValidationEmail(post){
+        axios.post(`${apiBaseUrl}/mail/send/validationLink`,post);
+    }
+
     sendMailUpdateWarranted(contract){
         return axios.post(`${apiBaseUrl}/mail/send/updateWarranted`,contract)
     }
-    getSinister(folder_id,contract_id){
-        return axios.post(`${apiBaseUrl}/users/contract/getsinister`,{folder_id,contract_id})
-    }
 
-    updateSinister(sinister,folder_id){
-        return axios.post(`${apiBaseUrl}/users/contract/updatesinister`,{sinister,folder_id})
-    }
-
-    getUserByEmail(email){
-        return axios.post(`${apiBaseUrl}/users/getUserByEmail`,email)
-    }
-
-    updateUserInfos(user){
-        return axios.post(`${apiBaseUrl}/users/updateUserInfos`,user)
+    sendMailPasswordModification(first_name,email){
+        return axios.post(`${apiBaseUrl}/mail/send/updatePassword`,{first_name,email})
     }
 
     sendMailContract(contract,email,name){
         return axios.post(`${apiBaseUrl}/mail/send/createContract`,{contract,email,name})
+    }
+
+    sendMailResetPassword(email,tempPassword){
+        return axios.post(`${apiBaseUrl}/mail/send/resetLink`,{email,tempPassword})
     }
 }

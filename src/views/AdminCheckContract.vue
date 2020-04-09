@@ -42,12 +42,6 @@
                                 <p>Modèle : {{contract.model}}</p>
                                 <p>
                                 <label>
-                                <input type="checkbox" id="Perte" disabled="disabled" value="Perte" v-model="contract.listWarranted.panne">
-                                <span>Panne</span>
-                                </label>
-                                </p>
-                                <p>
-                                <label>
                                 <input type="checkbox" id="Casse" disabled="disabled" value="Casse" v-model="contract.listWarranted.casse">
                                 <span>Casse</span>
                                 </label>
@@ -69,7 +63,7 @@
                             </div>
                             <div class="card-action">
                                 <a v-on:click="deleteContract(contract.contract_id)" v-if="contract.isSinistered===false">Supprimer le contrat</a>
-                                <a v-on:click="updateContract(index)" v-if="contract.isSinistered===false">Modifier mes garanties</a>
+                                <a v-on:click="updateContract(index)" v-if="contract.isSinistered===false">Modifier les garanties</a>
                                 <a v-on:click="checkSinister(contract.contract_id)" v-if="contract.isSinistered===true">Suivi du sinistre</a>
                             </div>
                         </div>
@@ -97,6 +91,7 @@ import '../../node_modules/materialize-css/dist/js/materialize.min.js';
 //on utilisera ce token pour faire logout de la session ou logout total
 import NavBar from '../components/Navbar';
 import PostService from '../PostService';
+import router from '../router';
 const postService = new PostService();
 //import router from '../router';
 
@@ -105,7 +100,6 @@ export default {
     name : "AdminCheckContract",
     data: function(){
         return{
-            isAuth: '',
             folder_id : localStorage.getItem('folder_id'),
             superuser :" " ,
             account: {},
@@ -121,6 +115,17 @@ export default {
         updateSinister(){
             postService.updateSinister(this.sinister,this.folder_id_user)
         },
+        updateContract(){
+            router.push('/account/contract/update/warranted')
+        },
+        deleteContract(contrat_id){
+            var text = "Êtes-vous certain de vouloir supprimer ce contract ?\n\n"
+            if(confirm(text))
+            postService.deleteContract(this.folder_id_user,contrat_id)
+            .then(()=>{
+                router.push('/adminAccount/adminCheckUser');
+            })
+        }
     },
     components : {
         NavBar
@@ -134,7 +139,7 @@ export default {
         .then(res=> {
             this.user = res.data
         })
-        postService.getSinister(this.folder_id_user,this.contrat_id)
+        postService.getSinister(this.folder_id_user,localStorage.getItem('contract_id_user'))
         .then(res=>{
             this.sinister = res.data
         })

@@ -16,6 +16,7 @@
     "core-js": "^3.3.2",
     "dns": "^0.2.2",
     "emailjs-com": "^2.4.1",
+    "generate-password": "^1.5.1",
     "gridfs-stream": "^1.1.1",
     "i": "^0.3.6",
     "materialize-css": "^1.0.0-rc.2",

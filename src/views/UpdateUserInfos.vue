@@ -17,50 +17,21 @@
         </div>
         <div class="card-stacked">
           <div class="card-content">
-            <p>Nom : {{user.last_name}}</p>
-            <p>Prénom : {{user.first_name}}</p>
-            <p>Numéro de contrat d'assurance : {{user.folder}}</p>
-            <p>Téléphone : {{user.phone}}</p>
-            <p>Email : {{user.email}}</p>
+            <form class="form" v-on:submit.prevent="onSubmit">
+              <p>Numéro de contrat d'assurance : {{user.folder}}</p>
+              <label for="ln">Nom</label>
+              <input type="text" name="ln" v-model="ln" value="user.last_name" required />
+              <label for="fn">Prénom</label>
+              <input type="text" name="fn" v-model="fn" value="user.first_name" required />
+              <label for="phone">Numéro de Téléphone</label>
+              <input type="text" name="phone" v-model="phone" value="user.phone" required />
+              <label for="email">Email</label>
+              <input type="text" name="email" v-model="email" value="user.email" required />
+              <div class="row">
+                <button class="btn waves-effect waves-light" type="submit" name="action">Valider</button>
+              </div>
+            </form>
           </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="col s12 m7">
-      <div class="card horizontal">
-        <div class="card-stacked">
-          <h5>Nouvelles informations</h5>
-          <p>Les informations à ne pas changer doivent être remplies avec leur valeur actuelle</p>
-          <form class="form" v-on:submit.prevent="onSubmit">
-            <div class="row">
-              <div class="input-field col s12">
-                <input id="ln" type="text" v-model="ln" class="validate" required />
-                <label for="ln">Nom</label>
-              </div>
-            </div>
-            <div class="row">
-              <div class="input-field col s12">
-                <input id="fn" type="text" v-model="fn" class="validate" required />
-                <label for="fn">Prénom</label>
-              </div>
-            </div>
-            <div class="row">
-              <div class="input-field col s12">
-                <input id="phone" type="text" v-model="phone" class="validate" required />
-                <label for="phone">Téléphone Portable</label>
-              </div>
-            </div>
-            <div class="row">
-              <div class="input-field col s12">
-                <input id="email" type="email" v-model="email" class="validate" required />
-                <label for="email">Email</label>
-              </div>
-            </div>
-            <div class="row">
-              <button class="btn waves-effect waves-light" type="submit" name="action">Valider</button>
-            </div>
-          </form>
         </div>
       </div>
     </div>
@@ -131,6 +102,14 @@ export default {
             } else {
               alert("Un compte est déjà associé à cet email");
             }
+          } else {
+            postService.updateUserInfos(post);
+            alert("Vos informations ont bien été modifiées.");
+            if (this.user.isSuperUser !== undefined) {
+              router.push("/adminAccount/UpdateUserInfos");
+            } else {
+              router.push("/users/settings");
+            }
           }
         });
       }
@@ -143,10 +122,15 @@ export default {
     this.folder = localStorage.getItem("folder_id_user");
     postService.getUser(this.folder).then(res => {
       this.user = res.data;
+      this.fn = this.user.first_name;
+      this.ln = this.user.last_name;
+      this.phone = this.user.phone;
+      this.email = this.user.email;
     });
   }
 };
 </script>
+
 
 <style scoped>
 .card-stacked {
