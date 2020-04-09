@@ -11,7 +11,6 @@ import './assets/css/styles.css'
 import router from './router';
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import Vuetify from 'vuetify'
-import 'vuetify/dist/vuetify.min.css'
 
 Vue.use(Vuetify)
 Vue.use(BootstrapVue)

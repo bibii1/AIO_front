@@ -2,12 +2,11 @@
 <body>
   <div class="navbar"><NavBar/></div>
   <div class="createContainer">
-  </div>
-  <div class="row">
+  <div class="rowGlobal">
     <form class="form" v-on:submit.prevent="onSubmit" enctype="multipart/form-data">
       <div class="row">
         <div class="input-field col s12">
-          <input id="object" type="text" v-model="object" class="validate" required>
+          <input id="object" type="text" v-model="object" required>
           <label for="object">Nom de votre objet</label>
         </div>
       </div>
@@ -81,26 +80,26 @@
         </div>
         <div class="row">
           <div class="input-field col s12">
-            <input id="serialNumber" type="text" v-model="serialNumber" class="validate" required>
+            <input id="serialNumber" type="text" v-model="serialNumber" required>
             <label for="serialNumber">Numéro de série</label>
           </div>
         </div>
         <div class="row">
         <div class="input-field col s12">
-          <input id="purschasePrice" type="number" v-model="purchasePrice" class="validate" min="100" max="1999" required>
+          <input id="purschasePrice" type="number" v-model="purchasePrice" min="100" max="1999" required>
           <label for="purchasePrice">Prix d'achat</label>
         </div>
       </div>
       <div class="row">
         <div class="input-field col s12">
-          <input id="purchaseDate" type="date" v-model="purchaseDate" class="validate" min="2013-01-01" max="2020-12-31" required>
+          <input id="purchaseDate" type="date" v-model="purchaseDate" min="2013-01-01" max="2020-12-31" required>
           <label for="purchaseDate">Date d'achat</label>
         </div>
       </div>
       <div class="row">
         <label>Facture d'achat</label>
         <div class="input-field col s12">
-          <input type="file" id="file" ref="file" v-on:change="handleFileUpload()" class="validate" required>
+          <input type="file" id="file" ref="file" v-on:change="handleFileUpload()" required>
         </div>
       </div>
       <div class="row">
@@ -127,13 +126,14 @@
       <div class="row">
         <label>Prix par mois</label>
         <div class="input-field col s12">
-          <input disabled type="text" id="month_price" v-model="month_price" class="validate">
+          <input disabled type="text" id="month_price" v-model="month_price">
         </div>
       </div>
       <div class="row">
         <button class="btn waves-effect waves-light" type="submit" name="action">Enregistrer l'appareil</button>
       </div>
     </form>
+  </div>
   </div>
 </body>
 </template>
@@ -431,7 +431,7 @@ export default {
 
 </script>
 
-<style scoped>
+<style>
 .input-field col s12{
   color: aliceblue
 }
@@ -450,4 +450,15 @@ input{
 cursor:pointer;
 }
 
+.createContainer {
+  text-align: right;
+  width: 80%;
+  max-width: 730px;
+  padding: 0 20px;
+  margin: auto;
+  transition: all 0.4s;
+}
+.rowGlobal{
+  text-align: left;
+}
 </style>

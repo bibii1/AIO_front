@@ -68,6 +68,7 @@ export default {
   }
 }
 </script>
+
 <style scoped>
 .nav-wrapper{
   background-color: #45A1D9;
