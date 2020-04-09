@@ -431,7 +431,7 @@ export default {
 
 </script>
 
-<style>
+<style scoped>
 .input-field col s12{
   color: aliceblue
 }
