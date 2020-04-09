@@ -1,5 +1,6 @@
 <template>
 <body>
+    <div class="navbar"><NavBar/></div>
     <div>
         <h3>Merci, votre compte a bien été validé</h3>
     </div>

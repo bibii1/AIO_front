@@ -1,7 +1,7 @@
 <template>
 <body>
+  <div class="navbar"><NavBar/></div>
     <div class="accountContainer">
-        <NavBar/>
         <h5> Bonjour {{user.first_name}}, </h5>
         <h7> Votre appareil '{{contract.object}}' est actuellement assuré pour : </h7>
         <p>

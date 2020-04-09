@@ -1,8 +1,8 @@
 <template>
 <body>
+    <div class="navbar"><NavBar/></div>
+    <div class="title"><h5>Bienvenue {{user.first_name}}</h5></div>
     <div class="accountContainer">
-        <NavBar/>
-        <h5>Bienvenue {{user.first_name}}</h5>
         <div class="row">
             <div class="col s10" v-for="(contract,index) in account.listContract"
                 v-bind:item="contract"

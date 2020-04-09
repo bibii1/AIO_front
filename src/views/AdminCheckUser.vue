@@ -1,7 +1,7 @@
 <template>
 <body>
+    <div class="navbar"><NavBar/></div>
     <div class="accountContainer">
-        <NavBar/>
         <h5>Fiche client</h5>
         <div class="col s12 m7">
             <div class="card horizontal">

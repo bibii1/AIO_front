@@ -1,8 +1,6 @@
 <template>
 <body>
-  <div class="navbar">
-    <NavBar />
-  </div>
+<div class="navbar"><NavBar/></div>
   <div class="title">
     <h5>Bienvenue chez AIO !</h5>
     <p>Veuillez vous connecter pour accéder à votre compte</p>

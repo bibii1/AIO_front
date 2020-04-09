@@ -1,7 +1,7 @@
 <template>
 <body>
+    <div class="navbar"><NavBar/></div>
     <div class="accountContainer">
-        <NavBar/>
         <h5>Bienvenue {{superuser.first_name}}</h5>
         <input type="text" id="myInput" v-on:keyup="searchByEmail" placeholder="Search for email">
         <b-table id="myTable" striped hover :items="users" :fields="fields" :bordered="true" @row-clicked="myRowClickHandler">

@@ -1,7 +1,7 @@
 <template>
 <body>
+    <div class="navbar"><NavBar/></div>
     <div class="sinisterContainer">
-        <NavBar/>
         <h5>Veuillez choisir l'objet sinistré</h5>
         <div class="row">
             <div class="col s10" v-for="(contract,index) in account.listContract"

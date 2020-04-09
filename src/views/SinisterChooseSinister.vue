@@ -1,7 +1,7 @@
 <template>
 <body>
+    <div class="navbar"><NavBar/></div>
     <div class="sinisterContainer">
-        <NavBar/>
         <h6>Veuillez sélectionner le type de sinistre</h6>
         <div class="collection">
             <!-- <a v-on:click="setPanne()" class="collection-item">panne</a> -->

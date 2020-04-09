@@ -1,7 +1,7 @@
 <template>
 <body>
+  <div class="navbar"><NavBar/></div>
   <div class="createContainer">
-    <NavBar/>
   </div>
   <div class="row">
     <form class="form" v-on:submit.prevent="onSubmit" enctype="multipart/form-data">

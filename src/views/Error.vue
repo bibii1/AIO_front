@@ -1,7 +1,7 @@
 <template>
 <body>
+    <div class="navbar"><NavBar/></div>
     <div class="errorContainer">
-        <NavBar/>
         <h5>Accès refusé, veuillez vous identifier ou créer un compte</h5>
     </div>
 </body>
