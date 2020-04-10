@@ -266,7 +266,7 @@ export default {
   display: ruby-text-container;
   max-width: 100%;
   height: 100%;
-  max-height: 1500px;
+  max-height: fit-content;
   text-decoration: none;
   transition-property: box-shadow, opacity;
   overflow-wrap: break-word;
@@ -274,10 +274,9 @@ export default {
   white-space: normal;
   transition: box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
   will-change: auto;
-  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2),
-    0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+  box-shadow: 1px 3px 1px -1px rgba(0, 0, 0, 0.1),
+    0px 1px 1px 0px rgba(0, 0, 0, 0.1), 1px 1px 1px 0px rgba(0, 0, 0, 0.1);
 }
-
 
 .v-card__title {
   font-size: 1.25rem;
@@ -322,7 +321,6 @@ export default {
   border-radius: 30px;
 }
 
-
 .title {
   text-align: center;
 }
@@ -332,14 +330,10 @@ export default {
   text-anchor: center;
 }
 
-.row{
-  text-align: justify;
-  text-anchor: center;
-}
-
 .createAndDeclare {
   text-align: center;
   padding: 20px;
+  margin-bottom: 50px;
 }
 
 .card-stacked {
@@ -368,7 +362,7 @@ export default {
 }
 
 .row {
-  text-align: center;
+  text-align: justify;
   text-anchor: middle;
   margin: 20px;
 }
@@ -406,8 +400,8 @@ export default {
   width: 40%;
   height: 20px;
   color: white;
-  background-color: rgb(81,164,154);
-  border-color: rgb(81,164,154);
+  background-color: rgb(81, 164, 154);
+  border-color: rgb(81, 164, 154);
   cursor: pointer;
   block-size: 40px;
 }

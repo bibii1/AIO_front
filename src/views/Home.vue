@@ -118,6 +118,8 @@ h6 {
   max-width: 730px;
   padding: 0 20px;
   margin: auto;
+  margin-top: 70px;
+  margin-bottom: 70px;
   transition: all 0.4s;
 }
 

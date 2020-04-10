@@ -43,7 +43,7 @@
             <label for="password2">Confirmez votre mot de passe</label>
           </div>
         </div>
-        <div class="row">
+        <div class="rowRegister">
           <button
             class="btn waves-effect waves-light"
             type="submit"
@@ -128,5 +128,12 @@ export default {
   padding: 0 20px;
   margin: auto;
   transition: all 0.4s;
+}
+
+.rowRegister {
+  margin-bottom: 100px;
+  margin-top: 50px;
+  text-align: center;
+  text-anchor: center;
 }
 </style>
