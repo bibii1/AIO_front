@@ -123,9 +123,9 @@
         </label>
         </p>
       </div>
-      <div class="row">
+      <div class="rowMensualPrice">
         <label>Prix par mois</label>
-        <div class="input-field col s12">
+        <div class="input-fieldcols12">
           <input disabled type="text" id="month_price" v-model="month_price">
         </div>
       </div>
@@ -450,6 +450,15 @@ input{
 cursor:pointer;
 }
 
+.rowMensualPrice{
+  max-width: 100px;
+  margin-bottom: 25px;
+}
+
+.input-fieldcols12{
+  cursor: none;
+  width: 100%;
+}
 .createContainer {
   text-align: right;
   width: 80%;

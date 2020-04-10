@@ -9,10 +9,10 @@
       <div class="navigation">
         <ul id="nav-mobile" class="right">
           <li>
-            <router-link v-show="!isAuth" :to="'/'">Se connecter</router-link>
+              <router-link v-show="!isAuth" :to="'/'">Se connecter</router-link>
           </li>
           <li>
-            <router-link v-show="!isAuth" :to="'/users/create'">Créer un compte</router-link>
+              <router-link v-show="!isAuth" :to="'/users/create'">Créer un compte</router-link>
           </li>
           <li>
             <button
