@@ -29,7 +29,6 @@ export default {
             //on pourra charger tous les dossier ici pour l'instant que le folder_id
             mySteps : ['Déclaration','Validation','Fin'],
             currentStep : 0,
-            isAuth: '',
             folder_id : localStorage.getItem('folder_id_user'),
             contract_id : localStorage.getItem('contract_id'),
             user : ""

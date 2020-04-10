@@ -107,7 +107,7 @@ export default {
               postService.initAccount(post.folder)
               postService.postUser(post)
             }
-            localStorage.removeItem('acces-token');
+            localStorage.removeItem('acces_token');
             localStorage.removeItem('folder_id_user');
             postService.sendValidationEmail(post);
             //lorsque l'on crée un nouvel utilisateur on remove de localStorage les anciennes données

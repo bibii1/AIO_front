@@ -100,7 +100,6 @@ export default {
     name : "AdminCheckContract",
     data: function(){
         return{
-            isAuth: '',
             folder_id : localStorage.getItem('folder_id'),
             superuser :" " ,
             account: {},

@@ -32,12 +32,12 @@
                 </div>
             </div>
         </div>
-        <router-link v-show="!isAuth" :to="'/account/contract/create'">
+        <router-link :to="'/account/contract/create'">
             <button class="btn waves-effect waves-light">Ajouter un appareil à assurer</button>
         </router-link>
         <br/>
         <br/>
-        <router-link v-show="!isAuth" :to="'/account/contract/sinister/chooseObject'">
+        <router-link :to="'/account/contract/sinister/chooseObject'">
             <button class="btn waves-effect waves-light">Déclarer un sinistre</button>
         </router-link>
     </div>
@@ -66,7 +66,6 @@ export default {
     data: function(){
         return{
             //on pourra charger tous les dossier ici pour l'instant que le folder_id
-            isAuth: '',
             folder_id : localStorage.getItem('folder_id_user'),
             account: {},
             dialog: false

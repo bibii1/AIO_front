@@ -88,9 +88,9 @@ export default {
         logoutAll(){
             const token = localStorage.getItem('acces_token');
             postService.logoutallAccount(token);
-            localStorage.removeItem('isAuth')
-            localStorage.removeItem('acces_token')
-            localStorage.removeItem('folder_id')
+            // localStorage.removeItem('acces_token')
+            // localStorage.removeItem('folder_id')
+            localStorage.clear()
             router.push('/');
         },
         onSubmit(){

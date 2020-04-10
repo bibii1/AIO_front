@@ -48,7 +48,6 @@ export default {
     name : "UserSettings",
     data: function(){
         return{
-            isAuth: '',
             folder_id : localStorage.getItem('folder_id_user'),
             account: {},
             dialog: false,
