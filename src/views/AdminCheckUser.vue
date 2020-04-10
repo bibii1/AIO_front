@@ -1,7 +1,7 @@
 <template>
 <body>
+    <div class="navbar"><NavBar/></div>
     <div class="accountContainer">
-        <NavBar/>
         <h5>Fiche client</h5>
         <div class="col s12 m7">
             <div class="card horizontal">
@@ -159,7 +159,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .b-table{
 cursor:pointer;
 }

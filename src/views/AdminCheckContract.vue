@@ -1,7 +1,9 @@
 <template>
 <body>
+    <div class="navbar"><NavBar/></div>
     <div class="accountContainer">
         <NavBar/>
+        <h5>Bienvenue {{superuser.first_name}}</h5>
         <h5>Appareil {{user.last_name}} {{user.first_name}} </h5>
         <div class="row">
             <div class="col s10" v-for="(contract,index) in account.listContract"
@@ -152,5 +154,5 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 </style>
