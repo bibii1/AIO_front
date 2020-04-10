@@ -4,7 +4,9 @@
     <NavBar />
   </div>
   <div class="accountContainer">
-    <h5>Informations actuelles</h5>
+    <div class="title">
+      <h5>Informations actuelles</h5>
+    </div>
     <div class="cols12m7">
       <div class="card horizontal">
         <div class="card-image">
@@ -149,15 +151,19 @@ export default {
   transition: all 0.4s;
 }
 
-.header{
+.header {
   margin-bottom: 20px;
 }
 
-.row{
+.row {
   margin-top: 40px;
 }
 
-.cols12m7{
+.cols12m7 {
   margin-top: 40px;
+}
+
+.title{
+  text-align: center;
 }
 </style>
