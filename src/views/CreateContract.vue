@@ -3,138 +3,141 @@
   <div class="createContainer">
     <NavBar/>
   </div>
-  <div class="row">
-    <form class="form" v-on:submit.prevent="onSubmit" enctype="multipart/form-data">
-      <div class="row">
-        <div class="input-field col s12">
-          <input id="object" type="text" v-model="object" class="validate" required>
-          <label for="object">Nom de votre objet</label>
-        </div>
-      </div>
-      <div class="row">
-        <label for="category">Catégorie</label>
-        <select v-model="category" required>
-          <option disabled value="">Sélectionner la catégorie</option>
-          <option>Smartphone</option>
-          <option>Ordinateur Portable</option>
-          <option>Tablette</option>
-          <option>Photo et Optique</option>
-          <option>Consoles</option>
-        </select>
-      </div>
-      <div class="row">
-        <label for="brand">Marque</label>
-        <select v-model="brand" v-if=" category === 'Smartphone'" required>
-          <option disabled value="">Sélectionner la marque</option>
-          <option>Apple</option>
-          <option>Samsung</option>
-          <option>Huawei</option>
-        </select>
-        <select v-model="brand" v-else-if=" category === 'Tablette'" required>
-          <option disabled value="">Sélectionner la marque</option>
-          <option>Apple</option>
-          <option>Samsung</option>
-        </select>
-      </div>
-        <div class="row">
-          <label for="model">Modèle</label>
-          <select v-model="model" v-if=" brand === 'Apple' && category==='Smartphone'" required>
-            <option disabled value="">Sélectionner le modèle</option>
-            <option>Iphone 11 Pro Max</option>
-            <option>Iphone 11 Pro</option>
-            <option>Iphone 11 </option>
-            <option>Iphone XS Max</option>
-            <option>Iphone XS</option>
-            <option>Iphone X</option>
-            <option>Iphone XR</option>
-            <option>Iphone 8 Plus</option>
-            <option>Iphone 8</option>
-            <option>Iphone 7 Plus</option>
-            <option>Iphone 7</option>
-         </select>
-         <select v-model="model" v-else-if=" brand === 'Samsung'&& category==='Smartphone'" required>
-            <option disabled value="">Sélectionner le modèle</option>
-            <option>Galaxy S10+</option>
-            <option>Galaxy S10</option>
-            <option>Galaxy Fold</option>
-            <option>Galaxy Note 10</option>
-            <option>Galaxy Note 9</option>
-            <option>Galaxy Note 8</option>
-         </select>
-         <select v-model="model" v-else-if=" brand === 'Huawei'&& category==='Smartphone'" required>
-            <option disabled value="">Sélectionner le modèle</option>
-            <option>P30 Pro</option>
-            <option>P30 Lite</option>
-            <option>P20 Pro</option>
-            <option>P20 Lite</option>
-            <option>Nova 5T</option>
-         </select>
-         <select v-model="model" v-if=" brand === 'Apple' && category==='Tablette'" required>
-            <option disabled value="">Sélectionner le modèle</option>
-            <option>Ipad Pro</option>
-         </select>
-         <!-- 
-           
-         Continuer a ajouter les options / trouver le moyen de les recup depuis une database
-         
-         -->
-        </div>
+  <div class="container">
+    <div class="row">
+      <form class="form" v-on:submit.prevent="onSubmit" enctype="multipart/form-data">
         <div class="row">
           <div class="input-field col s12">
-            <input id="serialNumber" type="text" v-model="serialNumber" class="validate" required>
-            <label for="serialNumber">Numéro de série</label>
+            <input id="object" type="text" v-model="object" class="validate" required>
+            <label for="object">Nom de votre objet</label>
           </div>
         </div>
         <div class="row">
-        <div class="input-field col s12">
-          <input id="purschasePrice" type="number" v-model="purchasePrice" class="validate" min="100" max="1999" required>
-          <label for="purchasePrice">Prix d'achat</label>
+          <label for="category">Catégorie</label>
+          <select v-model="category" required>
+            <option disabled value="">Sélectionner la catégorie</option>
+            <option>Smartphone</option>
+            <option>Ordinateur Portable</option>
+            <option>Tablette</option>
+            <option>Photo et Optique</option>
+            <option>Consoles</option>
+          </select>
         </div>
-      </div>
-      <div class="row">
-        <div class="input-field col s12">
-          <input id="purchaseDate" type="date" v-model="purchaseDate" class="validate" min="2013-01-01" max="2020-12-31" required>
-          <label for="purchaseDate">Date d'achat</label>
+        <div class="row">
+          <label for="brand">Marque</label>
+          <select v-model="brand" v-if=" category === 'Smartphone'" required>
+            <option disabled value="">Sélectionner la marque</option>
+            <option>Apple</option>
+            <option>Samsung</option>
+            <option>Huawei</option>
+          </select>
+          <select v-model="brand" v-else-if=" category === 'Tablette'" required>
+            <option disabled value="">Sélectionner la marque</option>
+            <option>Apple</option>
+            <option>Samsung</option>
+          </select>
         </div>
-      </div>
-      <div class="row">
-        <label>Facture d'achat</label>
-        <div class="input-field col s12">
-          <input type="file" id="file" ref="file" v-on:change="handleFileUpload()" class="validate" required>
+          <div class="row">
+            <label for="model">Modèle</label>
+            <select v-model="model" v-if=" brand === 'Apple' && category==='Smartphone'" required>
+              <option disabled value="">Sélectionner le modèle</option>
+              <option>Iphone 11 Pro Max</option>
+              <option>Iphone 11 Pro</option>
+              <option>Iphone 11 </option>
+              <option>Iphone XS Max</option>
+              <option>Iphone XS</option>
+              <option>Iphone X</option>
+              <option>Iphone XR</option>
+              <option>Iphone 8 Plus</option>
+              <option>Iphone 8</option>
+              <option>Iphone 7 Plus</option>
+              <option>Iphone 7</option>
+          </select>
+          <select v-model="model" v-else-if=" brand === 'Samsung'&& category==='Smartphone'" required>
+              <option disabled value="">Sélectionner le modèle</option>
+              <option>Galaxy S10+</option>
+              <option>Galaxy S10</option>
+              <option>Galaxy Fold</option>
+              <option>Galaxy Note 10</option>
+              <option>Galaxy Note 9</option>
+              <option>Galaxy Note 8</option>
+          </select>
+          <select v-model="model" v-else-if=" brand === 'Huawei'&& category==='Smartphone'" required>
+              <option disabled value="">Sélectionner le modèle</option>
+              <option>P30 Pro</option>
+              <option>P30 Lite</option>
+              <option>P20 Pro</option>
+              <option>P20 Lite</option>
+              <option>Nova 5T</option>
+          </select>
+          <select v-model="model" v-if=" brand === 'Apple' && category==='Tablette'" required>
+              <option disabled value="">Sélectionner le modèle</option>
+              <option>Ipad Pro</option>
+          </select>
+          <!-- 
+            
+          Continuer a ajouter les options / trouver le moyen de les recup depuis une database
+          
+          -->
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <input id="serialNumber" type="text" v-model="serialNumber" class="validate" required>
+              <label for="serialNumber">Numéro de série</label>
+            </div>
+          </div>
+          <div class="row">
+          <div class="input-field col s12">
+            <input id="purschasePrice" type="number" v-model="purchasePrice" class="validate" min="100" max="1999" required>
+            <label for="purchasePrice">Prix d'achat</label>
+          </div>
         </div>
-      </div>
-      <div class="row">
-        <label>Liste des garanties souhaitées</label>
-        <p>
-        <label>
-          <input type="checkbox" id="Casse" value="Casse" v-model="casse">
-          <span>Casse</span>
-        </label>
-        </p>
-        <p>
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="purchaseDate" type="date" v-model="purchaseDate" class="validate" min="2013-01-01" max="2020-12-31" required>
+            <label for="purchaseDate">Date d'achat</label>
+          </div>
+        </div>
+        <div class="row">
+          <label>Facture d'achat</label>
+          <div class="input-field col s12">
+            <input type="file" id="file" ref="file" v-on:change="handleFileUpload()" class="validate" required>
+          </div>
+        </div>
+        <div class="row">
+          <label>Liste des garanties souhaitées</label>
+          <p>
           <label>
-            <input type="checkbox" name="Vol" id="Vol" value="Vol" v-model="vol">
-            <span> Vol</span>
+            <input type="checkbox" id="Casse" value="Casse" v-model="casse">
+            <span>Casse</span>
           </label>
-        </p>
-        <p>
-        <label>
-          <input type="checkbox" id="Oxydation" value="Oxydation" v-model="oxydation">
-          <span> Oxydation </span>
-        </label>
-        </p>
-      </div>
-      <div class="row">
-        <label>Prix par mois</label>
-        <div class="input-field col s12">
-          <input disabled type="text" id="month_price" v-model="month_price" class="validate">
+          </p>
+          <p>
+            <label>
+              <input type="checkbox" name="Vol" id="Vol" value="Vol" v-model="vol">
+              <span> Vol</span>
+            </label>
+          </p>
+          <p>
+          <label>
+            <input type="checkbox" id="Oxydation" value="Oxydation" v-model="oxydation">
+            <span> Oxydation </span>
+          </label>
+          </p>
         </div>
-      </div>
-      <div class="row">
-        <button class="btn waves-effect waves-light" type="submit" name="action">Enregistrer l'appareil</button>
-      </div>
-    </form>
+        <div class="row">
+          <label>Prix par mois</label>
+          <div class="input-field col s12">
+            <input disabled type="text" id="month_price" v-model="month_price" class="validate">
+          </div>
+        </div>
+        <div class="row">
+          <button class="btn waves-effect waves-light" type="submit" name="action">Enregistrer l'appareil</button>
+        </div>
+      </form>
+    </div>
   </div>
+  
 </body>
 </template>
 

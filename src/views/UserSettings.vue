@@ -18,8 +18,8 @@
                     </div>
                     <div class="card-action">
                         <a v-on:click="updateUser()">Modifier mes informations</a> 
-                        <a href="/users/update/password">Modifier mon mot de passe</a>             
-            
+                        <a href="/users/update/password">Modifier mon mot de passe</a> 
+                        <a v-on:click="logoutAll()">Déconnection de tous les appareils</a>             
                     </div>
                 </div>
             </div>
@@ -57,6 +57,14 @@ export default {
     methods : {
         updateUser(){
             router.push('/users/UpdateUserInfos')
+        },
+        logoutAll(){
+            const token = localStorage.getItem('acces_token');
+            postService.logoutallAccount(token);
+            localStorage.removeItem('isAuth')
+            localStorage.removeItem('acces_token')
+            localStorage.removeItem('folder_id')
+            router.push('/');
         },
     },
     components : {

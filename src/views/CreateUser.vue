@@ -3,7 +3,8 @@
   <div class="createContainer">
     <NavBar/>
   </div>
-  <div class="row">
+  <div class="container">
+    <div class="row">
     <form class="form" v-on:submit.prevent="onSubmit">
       <div class="row">
         <div class="input-field col s12">
@@ -46,6 +47,8 @@
       </div>
     </form>
   </div>
+  </div>
+  
 </body>
 </template>
 
