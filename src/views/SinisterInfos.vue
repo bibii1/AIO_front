@@ -2,7 +2,6 @@
 <body>
   <div class="navbar"><NavBar/></div>
   <div class="createContainer">
-  </div>
   <div class="row">
     <form class="form" v-on:submit.prevent="onSubmit">
       <div class="row">
@@ -22,13 +21,15 @@
         <div class="input-field col s12">
           <label for="sinisterCircumstances">Circonstances du sinistre *</label>
           <br><br>
-          <input id="sinisterCircumstances" type="textarea" v-model="sinisterCircumstances" class="validate" required>
+          <textarea id="sinisterCircumstances" v-model="sinisterCircumstances" class="form-control" rows="3" required/>
+
         </div>
       </div>
-      <div class="row">
+      <div class="rowContinue">
         <button class="btn waves-effect waves-light" type="submit" name="action">Je continue</button>
       </div>
     </form>
+  </div>
   </div>
 </body>
 </template>
@@ -105,18 +106,22 @@ export default {
   color: aliceblue
 }
 
-select {
-    display: block;
-    width: 200px;
- }
-
-input[type="checkbox"]{
-  position: static !important;
-  -webkit-appearance:checkbox;
+.sinisterCircumstances{
+  max-width: 500px;
+  width: 100%;
 }
 
-input{
-cursor:pointer;
+.createContainer {
+  text-align: left;
+  width: 60%;
+  max-width: 730px;
+  padding: 0 20px;
+  margin: auto;
+  margin-top: 40px;
+  transition: all 0.4s;
 }
 
+.rowContinue{
+  text-align: center;
+}
 </style>
