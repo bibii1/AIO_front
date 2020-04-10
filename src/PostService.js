@@ -198,4 +198,8 @@ export default class PostService {
     sendMailResetPassword(email,tempPassword){
         return axios.post(`${apiBaseUrl}/mail/send/resetLink`,{email,tempPassword})
     }
+
+    sendMailSinister(sinister,email){
+        return axios.post(`${apiBaseUrl}/mail/send/sinister`,{sinister,email})
+    }
 }

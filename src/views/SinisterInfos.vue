@@ -48,26 +48,38 @@ export default {
     },
     data(){
         return{
-            folder_id: localStorage.getItem('folder_id_user'),
+            folder_id_user: localStorage.getItem('folder_id_user'),
             index: localStorage.getItem("index"),
             sinisterDate: "",
             sinisterTime:"",
             sinisterCircumstances:"",
             sinisterType: localStorage.getItem('sinisterType'),
-            account: {}
+            account: {},
+            user: ""
         }
     },
     methods:{
       //Transferer les infos a la base de données
         onSubmit(){
             const sinister={
-                folder_id : this.folder_id,
+                folder_id : this.folder_id_user,
                 contract_id: this.account.listContract[this.index].contract_id,
                 sinisterDate: this.sinisterDate,
                 sinisterTime: this.sinisterTime,
                 sinisterCircumstances:this.sinisterCircumstances,
                 sinisterType: this.sinisterType
             };
+            const infosToforward = {
+              object: this.account.listContract[this.index].object,
+              sinisterDate: this.sinisterDate,
+              sinisterTime: this.sinisterTime,
+              sinisterCircumstances:this.sinisterCircumstances,
+              sinisterType: this.sinisterType
+            }
+            postService.sendMailSinister(infosToforward,this.user.email)
+            .then(()=>{
+              console.log('Email sent')
+            })
             postService.createSinister(sinister)
             .then(()=>{
               router.push('/');
@@ -75,9 +87,13 @@ export default {
         }
     },
     created(){
-        postService.getAccount(this.folder_id)
+        postService.getAccount(this.folder_id_user)
         .then(res=>{
-            this.account = res.data
+          this.account = res.data
+        })
+        postService.getUser(this.folder_id_user)
+        .then(res=>{
+          this.user = res.data
         })
     }
   }

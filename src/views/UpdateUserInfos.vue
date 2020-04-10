@@ -71,7 +71,7 @@ export default {
                 phone: this.phone,
                 folder: this.user.folder
             };
-            if(confirm('Êtes-vous certain de vouloir modifier ces informations ?\nCette action est irréversible.'))
+            if(confirm('Êtes-vous certain de vouloir modifier ces informations ?'))
             {
                 postService.checkExist(this.email).then(res=> {
                     this.exist = res.data
@@ -82,8 +82,8 @@ export default {
                             postService.sendValidationEmail(post)
                             alert("Vous avez changer l'email associé à ce compte.\nUn email de validation vous à été envoyé sur cette nouvelle adresse.\nVous allez maintenant être redirigé vers la page d'accueil.")
                             const token = localStorage.getItem('acces_token')
-                            postService.logoutAccount(token);
                             postService.unvalidateUser({folder:this.folder});
+                            postService.logoutallAccount(token)
                             if(this.user.isSuperUser!==undefined){
                                 router.push('/adminAccount/AdminCheckUser');
                             }

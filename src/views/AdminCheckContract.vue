@@ -2,7 +2,7 @@
 <body>
     <div class="accountContainer">
         <NavBar/>
-        <h5>Bienvenue {{superuser.first_name}}</h5>
+        <h5>Appareil {{user.last_name}} {{user.first_name}} </h5>
         <div class="row">
             <div class="col s10" v-for="(contract,index) in account.listContract"
                 v-bind:item="contract"
@@ -37,6 +37,7 @@
                         </div>
                         <div class="card-stacked">
                             <div class="card-content">
+                                <p v-bind:item="folder_id_user">Folder Id : {{folder_id_user}}</p>
                                 <p>Objet : {{contract.object}}</p>
                                 <p>Marque : {{contract.brand}}</p>
                                 <p>Modèle : {{contract.model}}</p>
