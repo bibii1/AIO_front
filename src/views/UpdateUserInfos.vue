@@ -5,7 +5,7 @@
   </div>
   <div class="accountContainer">
     <h5>Informations actuelles</h5>
-    <div class="col s12 m7">
+    <div class="cols12m7">
       <div class="card horizontal">
         <div class="card-image">
           <img
@@ -18,7 +18,9 @@
         <div class="card-stacked">
           <div class="card-content">
             <form class="form" v-on:submit.prevent="onSubmit">
-              <p>Numéro de contrat d'assurance : {{user.folder}}</p>
+              <div class="header">
+                <p>Numéro de contrat d'assurance : {{user.folder}}</p>
+              </div>
               <label for="ln">Nom</label>
               <input type="text" name="ln" v-model="ln" value="user.last_name" required />
               <label for="fn">Prénom</label>
@@ -141,10 +143,21 @@ export default {
 
 .accountContainer {
   text-align: left;
-  width: 60%;
   max-width: 730px;
   padding: 0 20px;
   margin: auto;
   transition: all 0.4s;
+}
+
+.header{
+  margin-bottom: 20px;
+}
+
+.row{
+  margin-top: 40px;
+}
+
+.cols12m7{
+  margin-top: 40px;
 }
 </style>

@@ -4,7 +4,9 @@
     <NavBar />
   </div>
   <div class="accountContainer">
+    <div class="title">
     <h5>Mes informations</h5>
+    </div>
     <div class="col s12 m7">
       <div class="card horizontal">
         <div class="card-image">
@@ -89,10 +91,20 @@ p {
 
 .accountContainer {
   text-align: left;
-  width: 80%;
-  max-width: 730px;
+  max-width: 900px;
+  width: 100%;
   padding: 0 20px;
   margin: auto;
   transition: all 0.4s;
+}
+
+.title{
+  text-align: center;
+  margin-bottom: 80px;
+}
+
+.card-action{
+  cursor: pointer;
+  max-width: fit-content;
 }
 </style>
